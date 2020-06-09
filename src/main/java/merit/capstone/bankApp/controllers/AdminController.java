@@ -1,6 +1,6 @@
 package merit.capstone.bankApp.controllers;
 
-import javax.validation.Valid;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
 
 
 
@@ -29,14 +30,14 @@ public class AdminController {
 	@CrossOrigin
 	@PostMapping("Admin/NewCustomer")
 	@ResponseStatus(HttpStatus.CREATED)
-	public User createCustomer( @RequestBody @Valid User user) {
+	public User createCustomer( @RequestBody User user) {
 		
 		
 		
 		
 		
 		
-		userRepository.save(user);
+		//userRepository.save(user);
 		
 		
 		return user;
