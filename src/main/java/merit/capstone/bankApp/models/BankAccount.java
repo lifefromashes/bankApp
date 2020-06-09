@@ -6,10 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 
 
 @Entity
@@ -29,6 +28,8 @@ public abstract class BankAccount {
     private Date accountOpenedOn;
     
     private int term;
+    
+    private CDOffering cdOfferings;
 
 	public BankAccount() {
 		this.accountOpenedOn = new Date();
@@ -80,4 +81,49 @@ public abstract class BankAccount {
 		if(years == 0) { return this.balance; }
 		return futureValue(years - 1) * (1 + this.interestRate);
 	}
+    
+    
+    
+
+	public long getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public double getInterestRate() {
+		return interestRate;
+	}
+
+	public void setInterestRate(double interestRate) {
+		this.interestRate = interestRate;
+	}
+
+	public Date getAccountOpenedOn() {
+		return accountOpenedOn;
+	}
+
+	public void setAccountOpenedOn(Date accountOpenedOn) {
+		this.accountOpenedOn = accountOpenedOn;
+	}
+
+	public int getTerm() {
+		return term;
+	}
+
+	public void setTerm(int term) {
+		this.term = term;
+	}
+    
+    
 }

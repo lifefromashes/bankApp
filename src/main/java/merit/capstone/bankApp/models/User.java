@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.sun.tools.javac.code.Type;
+
 /**
  * 
  * This model class represents an individual bank customer or employee
@@ -18,15 +20,15 @@ import javax.persistence.Id;
  */
 @Entity
 public class User {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	private String username;
-	
+
 	private String password;
-	
+
 	private String authority;
 
 	private String firstName;
@@ -51,78 +53,198 @@ public class User {
 
 	private double balance;
 
-	public User(){}
-
-	public User(String username, String password, String authority) {
-		this.username = username;
-		this.password = password;
-		this.authority = authority;
+	public User() {
 	}
 
-	public User(String username, String password, String authority, String firstName, String lastName, String ssn) {
-		this.username = username;
-		this.password = password;
-		this.authority = authority;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.ssn = ssn;
-	}
-
-	public User(String firstName, String lastName, String ssn, String phone, String email,
-				String address, String city, String state, String zip){
-					this.firstName = firstName;
-					this.lastName = lastName;
-					this.ssn = ssn;
-					this.email = email;
-					this.address = address;
-					this.phone = phone;
-					this.city = city;
-					this.state = state;
-					this.zip = zip;
-	}
-
-	public BankAccount addBankAccount(double openingBalance){ //add throws NegAmtException and others
-		if(openingBalance < 0) {
-			System.out.println("Can't Deposit Negative Amount"); //add exception
+	public BankAccount addBankAccount(BankAccount bankAccount) { // add throws NegAmtException and others
+		if (bankAccount.getBalance() < 0) {
+			System.out.println("Can't Deposit Negative Amount"); // add exception
 		}
-		//add correct code
-		return null;
+		bankAccounts.add(bankAccount);
+		return bankAccount;
 	}
 
 	public List<BankAccount> getCheckingAccounts() {
 		List<BankAccount> accounts = new ArrayList<>();
-		for(BankAccount b : this.bankAccounts){
-		  if(b instanceof CheckingAccount){
-			accounts.add(b);
-		  }
+		for (BankAccount b : this.bankAccounts) {
+			if (b instanceof CheckingAccount) {
+				accounts.add(b);
+			}
 		}
 		return accounts;
-	  }
+	}
 
-	  public List<BankAccount> getSavingsAccount() {
+	public List<BankAccount> getDBACheckingAccounts() {
 		List<BankAccount> accounts = new ArrayList<>();
-		for(BankAccount b : this.bankAccounts){
-		  if(b instanceof SavingsAccount){
-			accounts.add(b);
-		  }
+		for (BankAccount b : this.bankAccounts) {
+			if (b instanceof DBACheckingAccount) {
+				accounts.add(b);
+			}
 		}
 		return accounts;
-	  }
+	}
 
-	  public List<BankAccount> getCDAccount() {
+	public List<BankAccount> getSavingsAccount() {
 		List<BankAccount> accounts = new ArrayList<>();
-		for(BankAccount b : this.bankAccounts){
-		  if(b instanceof CDAccount) {
-			accounts.add(b);
-		  }
+		for (BankAccount b : this.bankAccounts) {
+			if (b instanceof SavingsAccount) {
+				accounts.add(b);
+			}
 		}
 		return accounts;
-	  }
+	}
 
-	 
+	public List<BankAccount> getCDAccount() {
+		List<BankAccount> accounts = new ArrayList<>();
+		for (BankAccount b : this.bankAccounts) {
+			if (b instanceof CDAccount) {
+				accounts.add(b);
+			}
+		}
+		return accounts;
+	}
 
+	public double getBalanceByType(BankAccount type) {
+		double sum = 0;
+		for (BankAccount b : bankAccounts) {
+			if (b.getClass() == type.getClass()) {
+				sum += b.getBalance();
+			}
+		}
+		return sum;
+	}
 
-	
-	
+	public double getCombinedBalance() {
+
+		double sum = 0;
+		sum += getBalanceByType(new CheckingAccount());
+		sum += getBalanceByType(new SavingsAccount());
+		sum += getBalanceByType(new CDAccount());
+		sum += getBalanceByType(new DBACheckingAccount());
+		return sum;
+	}
+
+	// getAvailBalance()
+	// updateContactInfo()
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public List<BankAccount> getBankAccounts() {
+		return bankAccounts;
+	}
+
+	public void setBankAccounts(List<BankAccount> bankAccounts) {
+		this.bankAccounts = bankAccounts;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
 
 }
