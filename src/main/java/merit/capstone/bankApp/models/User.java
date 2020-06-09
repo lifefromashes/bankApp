@@ -119,29 +119,7 @@ public class User {
 		return accounts;
 	  }
 
-	  public void withdraw(double amount) {
-		  if(amount > this.balance) {
-			  //throw new ExceedsAvailableBalanceException("Exceeds Available Balance");
-			  System.out.println("Unable to withdraw");
-		  } 
-		   if(amount < 0) {
-			  //throw new NegativeAmountException("Unable to process");
-			  System.out.println("Unable to process");
-		  }
-		  this.balance -= amount;
-	  }
-
-	  public void deposit(double amount) {
-		if(amount > this.balance) {
-			//throw new ExceedsAvailableBalanceException("Exceeds Available Balance");
-			System.out.println("Unable to withdraw");
-		} 
-		 if(amount < 0) {
-			//throw new NegativeAmountException("Unable to process");
-			System.out.println("Unable to process");
-		}
-		this.balance += amount;
-	  }
+	 
 
 
 	
