@@ -1,5 +1,7 @@
 package merit.capstone.bankApp.models;
 
-public class CDOffering {
+import javax.persistence.Entity;
+
+public class CDOffering extends BankAccount {
 
 }

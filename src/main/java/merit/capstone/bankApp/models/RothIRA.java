@@ -1,5 +1,8 @@
 package merit.capstone.bankApp.models;
 
-public class RothIRA {
+import javax.persistence.Entity;
+
+@Entity
+public class RothIRA extends BankAccount {
     
 }

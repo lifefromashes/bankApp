@@ -31,7 +31,9 @@ public abstract class BankAccount {
     
     private int term;
     
-    private CDOffering cdOfferings;
+    private long userId;
+    
+    //private CDOffering cdOfferings;
 
 	public BankAccount() {
 		this.accountOpenedOn = new Date();
@@ -126,6 +128,15 @@ public abstract class BankAccount {
 	public void setTerm(int term) {
 		this.term = term;
 	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	
     
     
 }

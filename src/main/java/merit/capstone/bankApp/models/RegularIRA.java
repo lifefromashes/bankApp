@@ -1,5 +1,8 @@
 package merit.capstone.bankApp.models;
 
-public class RegularIRA {
+import javax.persistence.Entity;
+
+@Entity
+public class RegularIRA extends BankAccount {
     
 }

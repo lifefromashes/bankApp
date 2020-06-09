@@ -1,7 +1,9 @@
 package merit.capstone.bankApp.models;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 
+@Entity
 public class CDAccount extends BankAccount{
 	
 	

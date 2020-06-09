@@ -1,5 +1,8 @@
 package merit.capstone.bankApp.models;
 
-public class RolloverIRA {
+import javax.persistence.Entity;
+
+@Entity
+public class RolloverIRA extends BankAccount {
     
 }

@@ -1,11 +1,13 @@
 package merit.capstone.bankApp.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import merit.capstone.bankApp.models.User;
+import merit.capstone.bankApp.models.BankUser;
 
 
-public interface UserRepository extends JpaRepository <User, Long>{
+public interface BankUserRepository extends JpaRepository <BankUser, Long>{
 	
-	User findByUsername(String username);
+	BankUser findByUsername(String username);
+	
+	BankUser findById(long id);
 
 }

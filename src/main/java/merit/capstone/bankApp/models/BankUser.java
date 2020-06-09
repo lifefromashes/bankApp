@@ -3,11 +3,13 @@ package merit.capstone.bankApp.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 
@@ -19,7 +21,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class User {
+public class BankUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,12 +50,12 @@ public class User {
 	private String state;
 
 	private String zip;
-
+	
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<BankAccount> bankAccounts;
 
-	private double balance;
-
-	public User() {
+	public BankUser() {
+		bankAccounts = new ArrayList<>();
 	}
 
 	public BankAccount addBankAccount(BankAccount bankAccount) { // add throws NegAmtException and others
@@ -239,12 +241,6 @@ public class User {
 		this.bankAccounts = bankAccounts;
 	}
 
-	public double getBalance() {
-		return balance;
-	}
 
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
 
 }
