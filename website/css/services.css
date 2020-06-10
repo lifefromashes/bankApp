@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
   font-family: Century Gothic;
+  box-sizing: border-box;
+  /*THE TRANSITIONS ARENT WORKING!*/
 }
 
 header{
@@ -25,7 +27,6 @@ ul li a{
   padding: 5px 20px;
   border: 1px solid transparent;
   transition: 0.6s ease;
-
 }
 ul li a:hover{
   background-color: #fff;
@@ -40,6 +41,96 @@ ul li.services a{
   width: 300px;
   height: 100px;
 }
+.main{
+  max-width: 2000px;
+  margin: auto;
+}
+
+.services-section{
+  width: 1500px;
+  height: 700px;
+  background-color: #3294bc;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,-55%);
+  padding:0 0px;
+}
+
+.inner-width{
+  width: 100%;
+  max-width: 2000px;
+  margin: auto;
+  padding: 25px 100px 75px 100px;
+  overflow: hidden;
+}
+.section-title{
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  /*font-size: 30px; WE CAN DO WITHOUT*/
+}
+
+.border{
+  width: 160px;
+  height: 4px;
+  background: #fff;
+  margin: 40px auto;
+}
+.services-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.service-box{
+  max-width: 33.33%;
+  padding:10px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}
+.service-icon{
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  border: 3px solid #fff;
+  color: #fff;
+  transform: rotate(45deg);
+  margin-bottom: 30px;
+  margin-top: 16px;
+  transition: 0.3s linear;
+}
+.service-icon i{
+  line-height: 70px;
+  transform: rotate(-45deg);
+  font-size: 26px;
+}
+.service-box:hover .service-icon{
+  background: #bee5ed;
+  color: #fff;
+}
+.service-title{
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.service-desc{
+  font-xize:14px;
+}
+@media screen and (max-width: 960px){
+  .servicebox{
+    max-width: 100%;
+  }
+}
+
+
+
+
+
+
+/* PREVIOUS (simple) LAYOUT FOR SERVICES
 .main{
   max-width: 2000px;
   margin: auto;
@@ -59,4 +150,4 @@ ul li.services a{
   color: #fff;
   font-size: 25px;
   font-weight: bold;
-}
+} */
