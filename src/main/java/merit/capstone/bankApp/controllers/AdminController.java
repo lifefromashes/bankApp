@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import merit.capstone.bankApp.exceptions.ExceedsCombinedBalanceLimitException;
+import merit.capstone.bankApp.exceptions.MaxAccountsReachedException;
+import merit.capstone.bankApp.exceptions.NotFoundException;
+import merit.capstone.bankApp.exceptions.UsernameAlreadyExistsException;
 import merit.capstone.bankApp.models.BankAccount;
 import merit.capstone.bankApp.models.CheckingAccount;
 import merit.capstone.bankApp.models.DBACheckingAccount;
@@ -54,59 +58,52 @@ public class AdminController {
 	
 	@PostMapping("Admin/{id}/CDAccount")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankAccount addCDAccount(@PathVariable(name = "id") long id, @RequestBody @Valid CDAccount a) {
-				//throws NotFoundException, ExceedsCombinedBalanceLimitException {
+	public BankAccount addCDAccount(@PathVariable(name = "id") long id, @RequestBody @Valid CDAccount a)
+				throws NotFoundException, ExceedsCombinedBalanceLimitException, MaxAccountsReachedException {
 		return createAccount(id, a);
 	}
 	@PostMapping("Admin/{id}/CheckingAccount")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankAccount addCheckingAccount(@PathVariable(name = "id") long id, @RequestBody @Valid CheckingAccount a) {
-				//throws NotFoundException, ExceedsCombinedBalanceLimitException {
+	public BankAccount addCheckingAccount(@PathVariable(name = "id") long id, @RequestBody @Valid CheckingAccount a)
+				throws NotFoundException, ExceedsCombinedBalanceLimitException, MaxAccountsReachedException {
 		return createAccount(id, a);
 	}
 	@PostMapping("Admin/{id}/DBACheckingAccount")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankAccount addDBACheckingAccount(@PathVariable(name = "id") long id, @RequestBody @Valid DBACheckingAccount a) {
-				//throws NotFoundException, ExceedsCombinedBalanceLimitException {
+	public BankAccount addDBACheckingAccount(@PathVariable(name = "id") long id, @RequestBody @Valid DBACheckingAccount a)
+				throws NotFoundException, ExceedsCombinedBalanceLimitException, MaxAccountsReachedException {
 		return createAccount(id, a);
 	}
 	@PostMapping("Admin/{id}/RegularIRA")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankAccount addRegularIRA(@PathVariable(name = "id") long id, @RequestBody @Valid RegularIRA a) {
-				//throws NotFoundException, ExceedsCombinedBalanceLimitException {
+	public BankAccount addRegularIRA(@PathVariable(name = "id") long id, @RequestBody @Valid RegularIRA a)
+				throws NotFoundException, ExceedsCombinedBalanceLimitException, MaxAccountsReachedException {
 		return createAccount(id, a);
 	}
 	@PostMapping("Admin/{id}/RolloverIRA")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankAccount addRolloverIRA(@PathVariable(name = "id") long id, @RequestBody @Valid RolloverIRA a) {
-				//throws NotFoundException, ExceedsCombinedBalanceLimitException {
+	public BankAccount addRolloverIRA(@PathVariable(name = "id") long id, @RequestBody @Valid RolloverIRA a)
+				throws NotFoundException, ExceedsCombinedBalanceLimitException, MaxAccountsReachedException {
 		return createAccount(id, a);
 	}
 	@PostMapping("Admin/{id}/RothIRA")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankAccount addRothIRA(@PathVariable(name = "id") long id, @RequestBody @Valid RothIRA a) {
-				//throws NotFoundException, ExceedsCombinedBalanceLimitException {
+	public BankAccount addRothIRA(@PathVariable(name = "id") long id, @RequestBody @Valid RothIRA a)
+				throws NotFoundException, ExceedsCombinedBalanceLimitException, MaxAccountsReachedException {
 		return createAccount(id, a);
 	}
 	@PostMapping("Admin/{id}/SavingsAccount")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankAccount addCheckingAccount(@PathVariable(name = "id") long id, @RequestBody @Valid SavingsAccount a) {
-				//throws NotFoundException, ExceedsCombinedBalanceLimitException {
+	public BankAccount addCheckingAccount(@PathVariable(name = "id") long id, @RequestBody @Valid SavingsAccount a)
+				throws NotFoundException, ExceedsCombinedBalanceLimitException, MaxAccountsReachedException {
 		return createAccount(id, a);
 	}
 	
-	/*
-	@GetMapping("Admin/{id}/CheckingAccounts")
-	public List<BankAccount> getCheckingAccounts(@PathVariable(name = "id") long id) { 
-				// throws NotFoundException {
-		return getBankAccounts(id, new CheckingAccount());
-	}
-	*/
 
 	
 	@GetMapping("Admin/{id}/{t}")
-	public List<BankAccount> getSavingsAccounts(@PathVariable(name = "id") long id, @PathVariable(name = "t") String t) { 
-				// throws NotFoundException {
+	public List<BankAccount> getSavingsAccounts(@PathVariable(name = "id") long id, @PathVariable(name = "t") String t) 
+			throws NotFoundException, IllegalArgumentException {
 		
 		switch(t) {
 			case "CDAccount": return getBankAccounts(id, new CDAccount());
@@ -116,10 +113,9 @@ public class AdminController {
 			case "RolloverIRA": return getBankAccounts(id, new RolloverIRA());
 			case "RothIRA": return getBankAccounts(id, new RothIRA());
 			case "SavingsAccount": return getBankAccounts(id, new SavingsAccount());
-			default: // throw something
+			default: throw new IllegalArgumentException();
 		}
 		
-		return getBankAccounts(id, new SavingsAccount()); // TODO: change this line to a throw
 	}
 	
 	
@@ -130,7 +126,7 @@ public class AdminController {
 	
 
 	
-	private BankAccount createAccount(long id, BankAccount a) { //throws
+	private BankAccount createAccount(long id, BankAccount a) throws NotFoundException {
 		BankUser user = bankUserRepository.findById(id);
 		ControllerUtil.enforceFound(user);
 		a.setUserId(id);
@@ -140,7 +136,7 @@ public class AdminController {
 		return a;
 	}
 	
-	private List<BankAccount> getBankAccounts(long id, BankAccount t){ //throws
+	private List<BankAccount> getBankAccounts(long id, BankAccount t) throws NotFoundException { 
 		
 		BankUser user = bankUserRepository.findById(id);
 		ControllerUtil.enforceFound(user);

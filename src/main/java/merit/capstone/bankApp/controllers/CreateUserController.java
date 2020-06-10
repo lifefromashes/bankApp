@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import merit.capstone.bankApp.exceptions.NotFoundException;
+import merit.capstone.bankApp.exceptions.UsernameAlreadyExistsException;
 import merit.capstone.bankApp.models.BankUser;
 import merit.capstone.bankApp.repos.BankUserRepository;
 
@@ -33,11 +35,10 @@ public class CreateUserController {
 	
 	@PostMapping("Admin/NewUser")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankUser createCustomer(@Valid @RequestBody BankUser user) {
+	public BankUser createCustomer(@Valid @RequestBody BankUser user) throws UsernameAlreadyExistsException {
 		
 		if( bankUserRepository.findByUsername(user.getUsername()) != null ) { 
-			//throw new UsernameAlreadyExistsException();
-			return null;
+			throw new UsernameAlreadyExistsException();
 		}
 		
 		bankUserRepository.save(user);
@@ -53,7 +54,7 @@ public class CreateUserController {
 	}
 	
 	@GetMapping(value = "Admin/Users/{id}")
-	public BankUser getAccountHolderByID(@Valid @PathVariable (name = "id") long id) { // throws NotFoundException {
+	public BankUser getAccountHolderByID(@Valid @PathVariable (name = "id") long id) throws NotFoundException {
 		BankUser user = bankUserRepository.findById(id);
 		ControllerUtil.enforceFound(user);
 		return user;
