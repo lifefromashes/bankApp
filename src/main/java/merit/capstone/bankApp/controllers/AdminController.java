@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import merit.capstone.bankApp.exceptions.ExceedsCombinedBalanceLimitException;
 import merit.capstone.bankApp.exceptions.MaxAccountsReachedException;
 import merit.capstone.bankApp.exceptions.NotFoundException;
-import merit.capstone.bankApp.exceptions.UsernameAlreadyExistsException;
 import merit.capstone.bankApp.models.BankAccount;
 import merit.capstone.bankApp.models.CheckingAccount;
 import merit.capstone.bankApp.models.DBACheckingAccount;
@@ -30,8 +30,10 @@ import merit.capstone.bankApp.models.RothIRA;
 import merit.capstone.bankApp.models.SavingsAccount;
 import merit.capstone.bankApp.models.BankUser;
 import merit.capstone.bankApp.models.CDAccount;
+import merit.capstone.bankApp.models.CDOffering;
 import merit.capstone.bankApp.repos.BankAccountRepository;
 import merit.capstone.bankApp.repos.BankUserRepository;
+import merit.capstone.bankApp.repos.CDOfferingRepository;
 
 /**
  * 
@@ -48,8 +50,21 @@ public class AdminController {
 	
 	@Autowired private BankUserRepository bankUserRepository;
 	@Autowired private BankAccountRepository bankAccountRepository;
+	@Autowired private CDOfferingRepository cdOfferingRepository;
 	
 	
+	
+	@PostMapping("Admin/CDOfferings")
+	@ResponseStatus(HttpStatus.CREATED)
+	public CDOffering createCDOffering(@RequestBody CDOffering a) {
+		cdOfferingRepository.save(a);
+		return a;
+	}
+	
+	@GetMapping("CDOfferings")
+	public List<CDOffering> getCDOfferings() throws NotFoundException {
+		return cdOfferingRepository.findAll();
+	}
 	
 	
 	
