@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import javassist.expr.Instanceof;
+
 
 
 /**
@@ -115,7 +117,20 @@ public class BankUser {
 		return sum;
 	}
 
-	// getAvailBalance()
+	//can't withdraw from IRA or CD accounts so don't include here.
+	public double getAvailableBalanceByType(BankAccount type) {
+		double sum = 0;
+
+		for(BankAccount b : bankAccounts) {
+			//****clean up the if statement. Maybe do switch or something?????
+			if(b instanceof CDAccount || b instanceof RegularIRA || b instanceof RolloverIRA || b instanceof RothIRA){
+				System.out.println("Can not access available balance for type of account");
+			} else if (b.getClass() == type.getClass()){
+				sum += b.getBalance();
+			}
+		}
+		return sum;
+	}
 	// updateContactInfo()
 
 	public long getId() { return id; }
