@@ -1,8 +1,8 @@
 package merit.capstone.bankApp.models;
 
-
-
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +33,7 @@ public abstract class BankAccount {
     
     private long userId;
     
-    //private CDOffering cdOfferings;
+    private List<CDOffering> cdOfferings;
 
 	public BankAccount() {
 		this.accountOpenedOn = new Date();
@@ -85,10 +85,25 @@ public abstract class BankAccount {
 		if(years == 0) { return this.balance; }
 		return futureValue(years - 1) * (1 + this.interestRate);
 	}
-    
-    
-    
 
+	//Do we want this in this class?
+	public CDOffering getBestCDOffering(double depositAmount){
+		double bestValue = 0;
+		int bestIndex = -1;
+
+		for(int i = 0; i < cdOfferings.size(); i++) {
+			if (cdOfferings.get(i).getInterestRate() > bestValue) {
+				bestValue = cdOfferings.get(i).getInterestRate();
+				bestIndex = i;
+			}
+		}
+		return cdOfferings.get(bestIndex);
+	}
+
+	public CDOffering cdOfferings() {
+		return cdOfferings();
+	}
+    
 	public long getAccountNumber() {
 		return accountNumber;
 	}

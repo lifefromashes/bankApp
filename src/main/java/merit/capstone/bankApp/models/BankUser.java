@@ -133,13 +133,12 @@ public class BankUser {
 	}
 
 	// updateContactInfo()
-	//****Do we need any other items here? */
-	public void updateContactInfo(BankUser user) {
-		user.setAddress(address);
-		user.setCity(city);
-		user.setZip(zip);
-		user.setPhone(phone);
-		user.setEmail(email);
+	public void updateContactInfo(BankUser temp) {
+		this.address = temp.getAddress();
+		this.city = temp.getCity();
+		this.zip = temp.getZip();
+		this.phone = temp.getPhone();
+		this.email = temp.getEmail();
 	}
 
 	public long getId() { return id; }
