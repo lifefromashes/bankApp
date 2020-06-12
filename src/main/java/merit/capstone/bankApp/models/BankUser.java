@@ -122,7 +122,7 @@ public class BankUser {
 		double sum = 0;
 
 		for(BankAccount b : bankAccounts) {
-			//****clean up the if statement. Maybe do switch or something?????
+			//****clean up the if statement. Maybe do switch or something, throw exception?????
 			if(b instanceof CDAccount || b instanceof RegularIRA || b instanceof RolloverIRA || b instanceof RothIRA){
 				System.out.println("Can not access available balance for type of account");
 			} else if (b.getClass() == type.getClass()){
@@ -131,7 +131,16 @@ public class BankUser {
 		}
 		return sum;
 	}
+
 	// updateContactInfo()
+	//****Do we need any other items here? */
+	public void updateContactInfo(BankUser user) {
+		user.setAddress(address);
+		user.setCity(city);
+		user.setZip(zip);
+		user.setPhone(phone);
+		user.setEmail(email);
+	}
 
 	public long getId() { return id; }
 	public void setId(long id) { this.id = id; }
