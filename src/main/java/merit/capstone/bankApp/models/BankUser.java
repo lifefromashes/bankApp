@@ -11,7 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Check;
+
 import javassist.expr.Instanceof;
+import merit.capstone.bankApp.exceptions.MaxAccountsReachedException;
 
 
 
@@ -45,17 +48,35 @@ public class BankUser {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<BankAccount> bankAccounts;
 
+	
+
 	public BankUser() {
 		bankAccounts = new ArrayList<>();
 	}
 
-	public BankAccount addBankAccount(BankAccount bankAccount) { // add throws NegAmtException and others
+	public BankAccount addBankAccount(BankAccount bankAccount) throws MaxAccountsReachedException { // add throws NegAmtException and others
+
 		if (bankAccount.getBalance() < 0) {
 			System.out.println("Can't Deposit Negative Amount"); // add exception
-		}
+		}		
+		if(getNumberOfAccountsByType(bankAccount) <= bankAccount.getMaxAccounts()){
+			throw new MaxAccountsReachedException();
+		}		
 		bankAccounts.add(bankAccount);
 		return bankAccount;
 	}
+
+	public int getNumberOfAccountsByType(BankAccount type) {
+		int sum = 0;
+		for(BankAccount b : this.bankAccounts) {
+			if(b.getClass() == type.getClass()) {
+				sum++;
+			}
+		}
+		return sum;
+	}
+
+	
 
 	public List<BankAccount> getCheckingAccounts() {
 		List<BankAccount> accounts = new ArrayList<>();

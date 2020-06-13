@@ -11,6 +11,9 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 
+import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
+import merit.capstone.bankApp.exceptions.NegativeAmountException;
+
 
 @Entity
 public abstract class BankAccount {
@@ -33,7 +36,9 @@ public abstract class BankAccount {
     
     private long userId;
     
-    private List<CDOffering> cdOfferings;
+	private List<CDOffering> cdOfferings;
+	
+	private int maxAccounts = 0;
 
 	public BankAccount() {
 		this.accountOpenedOn = new Date();
@@ -50,31 +55,27 @@ public abstract class BankAccount {
 	}
 
 
-    public void withdraw(double amount) {
+    public void withdraw(double amount) throws ExceedsAvailableBalanceException, NegativeAmountException {
         if(amount > this.balance) {
-            //throw new ExceedsAvailableBalanceException("Exceeds Available Balance");
-            System.out.println("Unable to withdraw");
+            throw new ExceedsAvailableBalanceException("Exceeds Available Balance");
         } 
          if(amount < 0) {
-            //throw new NegativeAmountException("Unable to process");
-            System.out.println("Unable to process");
+            throw new NegativeAmountException("Unable to process");
         }
         this.balance -= amount;
     }
 
-    public void deposit(double amount) {
+    public void deposit(double amount) throws ExceedsAvailableBalanceException, NegativeAmountException {
       if(amount > this.balance) {
-          //throw new ExceedsAvailableBalanceException("Exceeds Available Balance");
-          System.out.println("Unable to withdraw");
+          throw new ExceedsAvailableBalanceException("Exceeds Available Balance");
       } 
        if(amount < 0) {
-          //throw new NegativeAmountException("Unable to process");
-          System.out.println("Unable to process");
+          throw new NegativeAmountException("Unable to process");
       }
       this.balance += amount;
     }
 
-    public BankAccount closeAccount(BankAccount closingAccount, BankAccount receivingAccount) {
+    public BankAccount closeAccount(BankAccount closingAccount, BankAccount receivingAccount) throws ExceedsAvailableBalanceException, NegativeAmountException{
         double amount = closingAccount.balance;
         closingAccount.withdraw(amount);
         closingAccount.deposit(amount);
@@ -86,19 +87,7 @@ public abstract class BankAccount {
 		return futureValue(years - 1) * (1 + this.interestRate);
 	}
 
-	//Do we want this in this class?
-	public CDOffering getBestCDOffering(double depositAmount){
-		double bestValue = 0;
-		int bestIndex = -1;
-
-		for(int i = 0; i < cdOfferings.size(); i++) {
-			if (cdOfferings.get(i).getInterestRate() > bestValue) {
-				bestValue = cdOfferings.get(i).getInterestRate();
-				bestIndex = i;
-			}
-		}
-		return cdOfferings.get(bestIndex);
-	}
+	
 
 	public CDOffering cdOfferings() {
 		return cdOfferings();
@@ -150,6 +139,22 @@ public abstract class BankAccount {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	public List<CDOffering> getCdOfferings() {
+		return cdOfferings;
+	}
+
+	public void setCdOfferings(List<CDOffering> cdOfferings) {
+		this.cdOfferings = cdOfferings;
+	}
+
+	public int getMaxAccounts() {
+		return maxAccounts;
+	}
+
+	public void setMaxAccounts(int maxAccounts) {
+		this.maxAccounts = maxAccounts;
 	}
 	
     

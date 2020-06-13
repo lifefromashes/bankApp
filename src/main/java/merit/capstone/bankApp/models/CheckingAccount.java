@@ -12,6 +12,8 @@ public class CheckingAccount extends BankAccount{
 		super(); 
 		super.setInterestRate(DEFAULT_INTEREST_RATE);
 	}
+
+	
 	
     
 }
