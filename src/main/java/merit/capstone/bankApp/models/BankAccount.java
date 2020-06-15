@@ -36,7 +36,7 @@ public abstract class BankAccount {
     
     private long userId;
     
-	private List<CDOffering> cdOfferings;
+	
 	
 	private int maxAccounts = 0;
 
@@ -141,13 +141,7 @@ public abstract class BankAccount {
 		this.userId = userId;
 	}
 
-	public List<CDOffering> getCdOfferings() {
-		return cdOfferings;
-	}
-
-	public void setCdOfferings(List<CDOffering> cdOfferings) {
-		this.cdOfferings = cdOfferings;
-	}
+	
 
 	public int getMaxAccounts() {
 		return maxAccounts;

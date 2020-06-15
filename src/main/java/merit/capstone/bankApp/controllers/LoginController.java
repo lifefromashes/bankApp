@@ -12,5 +12,4 @@ public class LoginController {
 	private Logger log = LoggerFactory.getLogger(this.getClass() );
 	
 	
-
 }

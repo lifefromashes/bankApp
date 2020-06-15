@@ -141,7 +141,7 @@ public class AdminController {
 	
 
 	
-	private BankAccount createAccount(long id, BankAccount a) throws NotFoundException {
+	private BankAccount createAccount(long id, BankAccount a) throws NotFoundException, MaxAccountsReachedException {
 		BankUser user = bankUserRepository.findById(id);
 		ControllerUtil.enforceFound(user);
 		a.setUserId(id);
