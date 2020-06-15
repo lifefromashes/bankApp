@@ -41,6 +41,8 @@ public class CreateUserController {
 			throw new UsernameAlreadyExistsException();
 		}
 		
+		if(user.getAuthority() == null) { user.setAuthority("USER"); } // maybe remove if front handles
+		
 		bankUserRepository.save(user);
 		
 		return user;
