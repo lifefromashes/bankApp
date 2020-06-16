@@ -36,8 +36,6 @@ public abstract class BankAccount {
     
     private long userId;
     
-	
-	
 	private int maxAccounts = 0;
 
 	public BankAccount() {

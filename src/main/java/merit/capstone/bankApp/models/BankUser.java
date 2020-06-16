@@ -139,11 +139,14 @@ public class BankUser {
 	}
 
 	//can't withdraw from IRA or CD accounts so don't include here.
-	public double getAvailableBalanceByType(BankAccount type) {
+	public double getAvailableBalanceByType(BankAccount type) throws MaxAccountsReachedException {
 		double sum = 0;
 
 		for(BankAccount b : bankAccounts) {
 			//****clean up the if statement. Maybe do switch or something, throw exception?????
+			// if(b.getMaxAccounts() != 0 && b.getMaxAccounts() >= type.getMaxAccounts()) {
+			// 	throw new MaxAccountsReachedException();
+			// }
 			if(b instanceof CDAccount || b instanceof RegularIRA || b instanceof RolloverIRA || b instanceof RothIRA){
 				System.out.println("Can not access available balance for type of account");
 			} else if (b.getClass() == type.getClass()){
@@ -152,8 +155,9 @@ public class BankUser {
 		}
 		return sum;
 	}
+	
+	
 
-	// updateContactInfo()
 	public void updateContactInfo(BankUser temp) {
 		this.address = temp.getAddress();
 		this.city = temp.getCity();
