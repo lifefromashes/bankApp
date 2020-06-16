@@ -21,11 +21,13 @@ public class Transaction {
 
     @OneToOne(cascade = CascadeType.ALL)
     private BankAccount targeAccount;
-    
+
     private Date transactionDate;
     private double amount;
     private String transactionMemo;
     private boolean transactionSuccess;
+
+    private double balanceAfterTransaction;
 
     public Transaction() {}
 
@@ -83,6 +85,14 @@ public class Transaction {
 
     public void setTransactionSuccess(boolean transactionSuccess) {
         this.transactionSuccess = transactionSuccess;
+    }
+
+    public double getBalanceAfterTransaction() {
+        return balanceAfterTransaction;
+    }
+
+    public void setBalanceAfterTransaction(double balanceAfterTransaction) {
+        this.balanceAfterTransaction = balanceAfterTransaction;
     }
 
     

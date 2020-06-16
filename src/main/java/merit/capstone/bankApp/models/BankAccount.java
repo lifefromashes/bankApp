@@ -13,6 +13,8 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 
+import org.springframework.security.access.method.P;
+
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
 
@@ -41,7 +43,7 @@ public abstract class BankAccount {
 	private int maxAccounts = 0;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Transaction> transactions;
+	protected List<Transaction> transactions;
 
 	public BankAccount() {
 		this.accountOpenedOn = new Date();
@@ -58,12 +60,49 @@ public abstract class BankAccount {
 	}
 
 	public Transaction processTransaction(Transaction t) {
+		if(t.getTargeAccount().equals(t.getSourceAccount())){
+			t = singleAccountTransaction(t);
+		} else {
+			t = multipleAccountTransaction(t);
+		}
+
+		t.setBalanceAfterTransaction(this.getBalance());
+		transactions.add(t);
+
+		return t;
+	}
+
+	protected Transaction singleAccountTransaction(Transaction t) {
 		try {
 			if(t.getAmount()> 0){
 				this.deposit(t.getAmount());
 			}
+			if(t.getAmount() < 0) {
+				this.withdraw(t.getAmount());
+			}
+			
+			t.setTransactionSuccess(true);
+
 		} catch (Exception e) {
-			//TODO: handle exception
+			t.setTransactionSuccess(false);
+		}
+
+		return t;
+	}
+
+	protected Transaction multipleAccountTransaction(Transaction t) {
+		boolean madeWithdraw = false;
+		try {
+			this.withdraw(t.getAmount());
+			madeWithdraw = true;
+			t.getTargeAccount().deposit(t.getAmount());
+			t.setTransactionSuccess(true);
+		} catch (Exception e) {
+			if(madeWithdraw) {
+				this.setBalance(this.getBalance() + t.getAmount());
+			}
+			t.setTransactionSuccess(false);
+
 		}
 
 		return t;

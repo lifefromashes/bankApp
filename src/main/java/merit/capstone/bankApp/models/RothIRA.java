@@ -41,4 +41,16 @@ public class RothIRA extends BankAccount {
          super.setBalance(super.getBalance() - amountWithPenalty);
 
     }
+
+    @Override
+    public Transaction processTransaction(Transaction t) {
+		if(t.getTargeAccount().equals(t.getSourceAccount())){
+			t = singleAccountTransaction(t);
+		} 
+
+		t.setBalanceAfterTransaction(this.getBalance());
+		transactions.add(t);
+
+		return t;
+	}
 }
