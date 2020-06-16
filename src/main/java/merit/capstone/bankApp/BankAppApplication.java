@@ -12,12 +12,7 @@ public class BankAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BankAppApplication.class, args);
 
-		CheckingAccount c = new CheckingAccount();
-		c.setBalance(100);
-		Transaction t = new Transaction();
-		t.setTargeAccount(c);
-		t.setAmount(100);
-		c.processTransaction(t);
+	
 		
 	}
 
