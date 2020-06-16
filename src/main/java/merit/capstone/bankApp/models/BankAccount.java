@@ -3,10 +3,12 @@ package merit.capstone.bankApp.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
@@ -38,6 +40,9 @@ public abstract class BankAccount {
     
 	private int maxAccounts = 0;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Transaction> transactions;
+
 	public BankAccount() {
 		this.accountOpenedOn = new Date();
 	}
@@ -50,6 +55,18 @@ public abstract class BankAccount {
 	public BankAccount(double balance, double interestRate) {
 		this.balance = balance;
 		this.interestRate = interestRate;
+	}
+
+	public Transaction processTransaction(Transaction t) {
+		try {
+			if(t.getAmount()> 0){
+				this.deposit(t.getAmount());
+			}
+		} catch (Exception e) {
+			//TODO: handle exception
+		}
+
+		return t;
 	}
 
 
@@ -147,6 +164,14 @@ public abstract class BankAccount {
 
 	public void setMaxAccounts(int maxAccounts) {
 		this.maxAccounts = maxAccounts;
+	}
+
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 	
     

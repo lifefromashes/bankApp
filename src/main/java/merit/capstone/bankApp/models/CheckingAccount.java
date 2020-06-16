@@ -14,6 +14,11 @@ public class CheckingAccount extends BankAccount{
 		super.setMaxAccounts(1);
 	}
 
+	@Override
+	public void deposit(double amount) {
+		System.out.println("deposited");
+	}
+
 	
 	
     
