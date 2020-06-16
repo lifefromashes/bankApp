@@ -47,5 +47,17 @@ public class RegularIRA extends BankAccount {
 
     }
 
+    @Override
+    public Transaction processTransaction(Transaction t) {
+		if(t.getTargeAccount().equals(t.getSourceAccount())){
+			t = singleAccountTransaction(t);
+		} 
+
+		t.setBalanceAfterTransaction(this.getBalance());
+		transactions.add(t);
+
+		return t;
+	}
+
     
 }
