@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -30,6 +31,7 @@ import merit.capstone.bankApp.models.RegularIRA;
 import merit.capstone.bankApp.models.RolloverIRA;
 import merit.capstone.bankApp.models.RothIRA;
 import merit.capstone.bankApp.models.SavingsAccount;
+import merit.capstone.bankApp.models.Transaction;
 import merit.capstone.bankApp.repos.BankAccountRepository;
 import merit.capstone.bankApp.repos.BankUserRepository;
 import merit.capstone.bankApp.repos.TransactionRepository;
@@ -185,11 +187,6 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 	
 	
 	
-	
-	
-	
-	
-	
 	private BankUser findUser(String auth) throws NotFoundException {
 		String jwt = auth.substring(7);
 		String username = jwtUtil.extractUsername(jwt);
@@ -197,6 +194,32 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		ControllerUtil.enforceFound(user);
 		return user;
 	}
+	
+	
+	@CrossOrigin
+	@PutMapping(value = "/User/Transaction")
+	public Transaction inputTransaction(@RequestHeader("Authorization") String auth, @RequestBody @Valid Transaction transaction) throws NotFoundException {
+		
+		BankUser user = findUser(auth);
+		ControllerUtil.enforceFound(user);
+		
+		BankAccount a = transaction.getSourceAccount();
+		ControllerUtil.enforceFound(a);
+		
+		a.processTransaction(transaction);
+		
+		bankAccountRepository.save(a);
+        transactionRepository.save(transaction);
+		return transaction;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
 
