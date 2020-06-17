@@ -117,7 +117,7 @@ public class AdminController {
 
 	
 	@GetMapping("Admin/{id}/{t}")
-	public List<BankAccount> getSavingsAccounts(@PathVariable(name = "id") long id, @PathVariable(name = "t") String t) 
+	public List<BankAccount> getAnyBankAccounts(@PathVariable(name = "id") long id, @PathVariable(name = "t") String t) 
 			throws NotFoundException, IllegalArgumentException {
 		
 		switch(t) {

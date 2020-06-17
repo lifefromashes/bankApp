@@ -10,6 +10,8 @@ import merit.capstone.bankApp.models.BankAccount;
 
 public interface BankAccountRepository extends JpaRepository <BankAccount, Long>{
 	
-	BankAccount findByUserId(long id);
+	BankAccount findById(long id);
+	
+	List<BankAccount> findByUserId(long id);
 
 }
