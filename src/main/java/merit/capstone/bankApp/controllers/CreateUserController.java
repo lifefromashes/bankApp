@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,7 +63,13 @@ public class CreateUserController {
 		return user;
 	}
 	
-	
+	//front should pre-load the text fields with existing info by calling GET Admin/Users/ID 
+	@PutMapping(value = "/Admin/UserInfo/{id}")
+	public BankUser changeAccountHolderInfoByID(@PathVariable (name = "id") long id, @RequestBody BankUser newInfo) throws NotFoundException {
+		BankUser user = bankUserRepository.findById(id);
+		user.updateContactInfo(newInfo);
+		return user;
+	}
 	
 	
 }
