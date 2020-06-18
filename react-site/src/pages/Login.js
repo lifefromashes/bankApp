@@ -1,20 +1,88 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import Hero from '../components/Hero';
 import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
+import axios from "axios";
 
-const Login = () =>{
-  return (
-    <>
-    <Hero hero="accountsHero">
-      <Banner title="Login">
-        <Link to="/"  className="btn-primary">
-        I NEED TO DO SOMETHING HERE.
-      </Link>
-    </Banner>
-  </Hero>
-  </>
-);
-};
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
 
-export default Login;
+    this.state = {
+      email: "",
+      password: "",
+      loginErrors: ""
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    const { email, password } = this.state;
+
+    axios
+      .post(
+        "http://localhost:3000/sessions",
+        {
+          user: {
+            email: email,
+            password: password
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        if (response.data.logged_in) {
+          this.props.handleSuccessfulAuth(response.data);
+        }
+      })
+      .catch(error => {
+        console.log("login error", error);
+      });
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <>
+      <Hero hero="accountsHero">
+        <Banner title="Login">
+          <Link to="/register" className="btn-primary">
+          JOIN US
+          </Link>
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+
+              <button type="submit">Login</button>
+            </form>
+          </div>
+        </Banner>
+      </Hero>
+      </>
+    );
+  }
+}
