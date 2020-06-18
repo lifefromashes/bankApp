@@ -3,11 +3,14 @@ import Hero from '../components/Hero';
 import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
 
-export default class Login extends Component{
-  render() {
-    return (
-      <div>  Hello from Login page
-      </div>
-    )
-  }
-}
+const Login = () =>{
+  return <Hero hero="accountsHero">
+    <Banner title="Login">
+      <Link to="/"  className="btn-primary">
+      I NEED TO DO SOMETHING HERE.
+      </Link>
+    </Banner>
+  </Hero>;
+};
+
+export default Login;

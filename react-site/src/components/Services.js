@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {FaGlobe, FaUserShield, FaBriefcase, FaHandHoldingUsd, FaHeadset} from "react-icons/fa";
+import {FaGlobe, FaUserShield, FaHandHoldingUsd, FaHeadset} from "react-icons/fa";
 import Title from './Title';
+
 
 export default class Services extends Component {
   state = {
