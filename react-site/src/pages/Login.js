@@ -4,13 +4,17 @@ import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
 
 const Login = () =>{
-  return <Hero hero="accountsHero">
-    <Banner title="Login">
-      <Link to="/"  className="btn-primary">
-      I NEED TO DO SOMETHING HERE.
+  return (
+    <>
+    <Hero hero="accountsHero">
+      <Banner title="Login">
+        <Link to="/"  className="btn-primary">
+        I NEED TO DO SOMETHING HERE.
       </Link>
     </Banner>
-  </Hero>;
+  </Hero>
+  </>
+);
 };
 
 export default Login;

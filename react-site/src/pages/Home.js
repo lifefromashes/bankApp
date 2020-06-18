@@ -6,7 +6,7 @@ import Services from '../components/Services';
 import FeaturedAccounts from '../components/FeaturedAccounts';
 
 
-export default function Home() {
+const Home = () => {
   return(
     <>
     <Hero>
@@ -20,7 +20,8 @@ export default function Home() {
     <FeaturedAccounts />
     </>
 
-
 );
 
-}
+};
+
+export default Home;

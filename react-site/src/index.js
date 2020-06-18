@@ -3,22 +3,20 @@ import ReactDOM from 'react-dom';
 //import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
-import {AccountsProvider} from './context';
+import {AccountProvider} from './context';
 
 
 ReactDOM.render(
-  <AccountsProvider>
-    <Router>
+  <AccountProvider>
+    <BrowserRouter>
 
       <App />
 
-    </Router>
-  </AccountsProvider>
-
-
-  ,document.getElementById('root')
+    </BrowserRouter>
+  </AccountProvider>,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

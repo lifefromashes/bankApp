@@ -166,7 +166,7 @@ align-items: center;
 justify-content: center;
 }
 .accountsHero {
-background-image: url("images/services.jpg");
+background-image: url("images/logo.jpg");
 min-height: 60vh;
 }
 /* End of Hero */
@@ -271,7 +271,7 @@ min-height: 60vh;
   }
 }
 /*end of services */
-/* featured rooms */
+/* featured acct */
 
 .featured-accounts {
   padding: 5rem 0;
@@ -296,8 +296,8 @@ min-height: 60vh;
     max-width: 1170px;
   }
 }
-/* end pf featured rooms */
-/* room */
+/* end pf featured acct */
+/* acct */
 .account {
   box-shadow: var(--lightShadow);
   transition: var(--mainTransition);
@@ -359,4 +359,156 @@ min-height: 60vh;
   font-weight: 700;
   letter-spacing: var(--mainSpacing);
 }
-/* end of room  */
+/* end of acct  */
+/* checking account*/
+
+.checking-account {
+  padding: 5rem 0 0 0;
+}
+.checking-account-images {
+  width: 80vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 50px;
+}
+.checking-account-images img {
+  width: 100%;
+  display: block;
+}
+.checking-account-info {
+  width: 80vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 2rem auto;
+}
+.desc,
+.info {
+  margin: 1rem 0;
+}
+.desc h3 {
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+}
+.desc p {
+  line-height: 1.5;
+}
+.info h3,
+.info h6 {
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+}
+
+.info h6 {
+  font-weight: 300;
+}
+.account-extras {
+  width: 80vw;
+  margin: 0 auto 3rem auto;
+}
+.account-extras h6 {
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+}
+.extras {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-column-gap: 2rem;
+  grid-row-gap: 1rem;
+}
+@media screen and (min-width: 992px) {
+  .checking-account-images,
+  .checking-account-info,
+  .account-extras {
+    width: 95vw;
+    max-width: 1170px;
+  }
+  .checking-account-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2rem;
+  }
+  .info {
+    padding-left: 3rem;
+  }
+}
+/* end of single room*/
+/* roomlist */
+.accountslist {
+  padding: 5rem 0;
+}
+.accountslist-center {
+  width: 80vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 30px;
+}
+
+@media screen and (min-width: 776px) {
+  .accountslist-center {
+    width: 90vw;
+  }
+}
+@media screen and (min-width: 992px) {
+  .accountslist-center {
+    width: 95vw;
+    max-width: 1170px;
+  }
+}
+/* end of roomlist */
+/*  rooms fitler*/
+.filter-container {
+  padding: 5rem 0;
+}
+.filter-form {
+  width: 60vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
+  grid-row-gap: 2rem;
+  grid-column-gap: 40px;
+}
+.form-group {
+  text-transform: capitalize;
+}
+.form-group label {
+  display: block;
+  letter-spacing: var(--mainSpacing);
+  margin-bottom: 0.5rem;
+}
+.form-control {
+  width: 100%;
+  background: transparent;
+  font-size: 1rem;
+}
+.size-inputs {
+  display: flex;
+}
+.size-input {
+  width: 40%;
+  padding: 0.2rem;
+  border: 1px solid var(--mainBlack);
+  border-radius: 0.3rem;
+  margin-right: 0.3rem;
+}
+.single-extra label {
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+@media screen and (min-width: 776px) {
+  .filter-form {
+    width: 70vw;
+  }
+}
+@media screen and (min-width: 992px) {
+  .filter-form {
+    width: 95vw;
+    max-width: 1170px;
+  }
+}
+/* end of rooms fitler*/
