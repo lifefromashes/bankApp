@@ -1,5 +1,6 @@
 package merit.capstone.bankApp.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,18 +47,11 @@ public abstract class BankAccount {
 	protected List<Transaction> transactions;
 
 	public BankAccount() {
+		this.balance = 0;
 		this.accountOpenedOn = new Date();
+		transactions = new ArrayList<Transaction>();
 	}
 
-	public BankAccount(double balance, double interestRate, long accountNumber, Date accountOpenedOn) {
-		this.balance = balance;
-		this.interestRate = interestRate;
-	}
-
-	public BankAccount(double balance, double interestRate) {
-		this.balance = balance;
-		this.interestRate = interestRate;
-	}
 
 	public Transaction processTransaction(Transaction t) {
 		if(t.getTargeAccount().equals(t.getSourceAccount())){
@@ -67,18 +61,18 @@ public abstract class BankAccount {
 		}
 
 		t.setBalanceAfterTransaction(this.getBalance());
-		transactions.add(t);
+		this.transactions.add(t);
 
 		return t;
 	}
 
 	protected Transaction singleAccountTransaction(Transaction t) {
 		try {
-			if(t.getAmount()> 0){
+			if(t.getAmount() > 0){
 				this.deposit(t.getAmount());
 			}
 			if(t.getAmount() < 0) {
-				this.withdraw(t.getAmount());
+				this.withdraw(-1 * t.getAmount());
 			}
 			
 			t.setTransactionSuccess(true);
@@ -120,9 +114,7 @@ public abstract class BankAccount {
     }
 
     public void deposit(double amount) throws ExceedsAvailableBalanceException, NegativeAmountException {
-      if(amount > this.balance) {
-          throw new ExceedsAvailableBalanceException("Exceeds Available Balance");
-      } 
+      
        if(amount < 0) {
           throw new NegativeAmountException("Unable to process");
       }
