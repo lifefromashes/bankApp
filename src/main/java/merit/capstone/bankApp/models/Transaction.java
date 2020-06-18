@@ -31,69 +31,22 @@ public class Transaction {
 
     public Transaction() {}
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public BankAccount getSourceAccount() {
-        return sourceAccount;
-    }
-
-    public void setSourceAccount(BankAccount sourceAccount) {
-        this.sourceAccount = sourceAccount;
-    }
-
-    public BankAccount getTargeAccount() {
-        return targeAccount;
-    }
-
-    public void setTargeAccount(BankAccount targeAccount) {
-        this.targeAccount = targeAccount;
-    }
-
-    public Date getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(Date transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public String getTransactionMemo() {
-        return transactionMemo;
-    }
-
-    public void setTransactionMemo(String transactionMemo) {
-        this.transactionMemo = transactionMemo;
-    }
-
-    public boolean isTransactionSuccess() {
-        return transactionSuccess;
-    }
-
-    public void setTransactionSuccess(boolean transactionSuccess) {
-        this.transactionSuccess = transactionSuccess;
-    }
-
-    public double getBalanceAfterTransaction() {
-        return balanceAfterTransaction;
-    }
-
-    public void setBalanceAfterTransaction(double balanceAfterTransaction) {
-        this.balanceAfterTransaction = balanceAfterTransaction;
-    }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+    public BankAccount getSourceAccount() { return sourceAccount; }
+    public void setSourceAccount(BankAccount sourceAccount) { this.sourceAccount = sourceAccount; }
+    public BankAccount getTargeAccount() { return targeAccount; }
+    public void setTargeAccount(BankAccount targeAccount) { this.targeAccount = targeAccount; }
+    public Date getTransactionDate() { return transactionDate; }
+    public void setTransactionDate(Date transactionDate) { this.transactionDate = transactionDate; }
+    public double getAmount() { return amount; }
+    public void setAmount(double amount) { this.amount = amount; }
+    public String getTransactionMemo() { return transactionMemo; }
+    public void setTransactionMemo(String transactionMemo) { this.transactionMemo = transactionMemo; }
+    public boolean isTransactionSuccess() { return transactionSuccess; }
+    public void setTransactionSuccess(boolean transactionSuccess) { this.transactionSuccess = transactionSuccess; }
+    public double getBalanceAfterTransaction() { return balanceAfterTransaction; }
+    public void setBalanceAfterTransaction(double balanceAfterTransaction) { this.balanceAfterTransaction = balanceAfterTransaction; }
 
     
 
