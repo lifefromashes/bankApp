@@ -1,21 +1,16 @@
-import React from "react";
-import Hero from '../components/Hero'
+import React, {Component} from 'react';
+import Hero from '../components/Hero';
 import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
 
-
-
-
-
-
-const Accounts = () =>{
+const Login = () =>{
   return <Hero hero="accountsHero">
-    <Banner title="Accounts">
+    <Banner title="Login">
       <Link to="/"  className="btn-primary">
-      Return Home
+      I NEED TO DO SOMETHING HERE.
       </Link>
     </Banner>
   </Hero>;
 };
 
-export default Accounts;
+export default Login;

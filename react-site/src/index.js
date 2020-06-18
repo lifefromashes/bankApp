@@ -5,13 +5,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router} from 'react-router-dom';
 
+import {AccountsProvider} from './context';
+
 
 ReactDOM.render(
-  <Router>
+  <AccountsProvider>
+    <Router>
 
-<App />
+      <App />
 
-  </Router>
+    </Router>
+  </AccountsProvider>
 
 
   ,document.getElementById('root')
