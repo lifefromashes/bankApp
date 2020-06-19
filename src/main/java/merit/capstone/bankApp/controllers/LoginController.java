@@ -9,6 +9,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,8 @@ import merit.capstone.bankApp.security.AuthenticationResponse;
 import merit.capstone.bankApp.security.JwtUtil;
 import merit.capstone.bankApp.security.MyUserDetailsService;
 
-
-@RestController
 @CrossOrigin
+@RestController
 public class LoginController {
 	
 private Logger log = LoggerFactory.getLogger(this.getClass() );
@@ -34,8 +34,16 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 	@Autowired private JwtUtil jwtUtil;
 	@Autowired private BankUserRepository bankUserRepository;
 	
+	@CrossOrigin
+	@GetMapping(value = "/test")
+	public String testController() {
+		return "Hello";
+	}
+	
+	@CrossOrigin
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+		
 		
 		try {
 			authenticationManager.authenticate(
@@ -54,6 +62,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "/direct", method = RequestMethod.GET)
 	public String directByRole(@RequestHeader("Authorization") String auth) {
 		
