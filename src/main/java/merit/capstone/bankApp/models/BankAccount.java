@@ -16,6 +16,7 @@ import javax.validation.constraints.Min;
 
 import org.springframework.security.access.method.P;
 
+import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
 
@@ -46,10 +47,13 @@ public abstract class BankAccount {
 	@OneToMany(cascade = CascadeType.ALL)
 	protected List<Transaction> transactions;
 
+	private boolean isActive;
+
 	public BankAccount() {
 		this.balance = 0;
 		this.accountOpenedOn = new Date();
 		transactions = new ArrayList<Transaction>();
+		this.isActive = true;
 	}
 
 
@@ -121,11 +125,13 @@ public abstract class BankAccount {
       this.balance += amount;
     }
 
-    public BankAccount closeAccount(BankAccount closingAccount, BankAccount receivingAccount) throws ExceedsAvailableBalanceException, NegativeAmountException{
-        double amount = closingAccount.balance;
-        closingAccount.withdraw(amount);
-        closingAccount.deposit(amount);
-        return closingAccount;
+    public BankAccount closeAccount(BankUser user) throws ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{
+		BankAccount targetAccount = user.getSingleSavingsAccount();
+		
+		double amount = this.balance;
+        withdraw(amount);
+        targetAccount.deposit(amount);
+        return this;
     }
 
     public double futureValue(int years) {
@@ -203,6 +209,14 @@ public abstract class BankAccount {
 
 	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
     

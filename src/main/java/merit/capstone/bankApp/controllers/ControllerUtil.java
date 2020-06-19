@@ -14,15 +14,20 @@ public class ControllerUtil {
 	
 	public static void enforceFound(BankAccount a) throws NotFoundException {
 		if(a == null) { throw new NotFoundException(); }
+		if(!a.isActive()) { throw new NotFoundException(); }
 	}
 	
 	public static void enforceFound(BankUser a) throws NotFoundException {
 		if(a == null) { throw new NotFoundException(); }
+		if(!a.isActive()) { throw new NotFoundException(); }
+
 	}
 	
 	public static void enforceFound(List<?> a) throws NotFoundException {
 		if(a == null) { throw new NotFoundException(); }
 	}
+
+	
 	
 	//public static void enforceFound(CDOffering a) throws NotFoundException {
 	//	if(a == null) { throw new NotFoundException(); }

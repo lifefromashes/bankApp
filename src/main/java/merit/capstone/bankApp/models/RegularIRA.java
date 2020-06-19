@@ -2,6 +2,7 @@ package merit.capstone.bankApp.models;
 
 import javax.persistence.Entity;
 
+import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
 
@@ -46,6 +47,13 @@ public class RegularIRA extends BankAccount {
          super.setBalance(super.getBalance() - amountWithPenalty);
 
     }
+
+    @Override
+    public BankAccount closeAccount(BankUser user) throws ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{
+        setBalance(getBalance() * .8);
+        return super.closeAccount(user);
+    }
+
 
     @Override
     public Transaction processTransaction(Transaction t) {

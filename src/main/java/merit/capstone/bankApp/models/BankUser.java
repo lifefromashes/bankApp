@@ -44,6 +44,8 @@ public class BankUser {
 	private String city;
 	private String state;
 	private String zip;
+
+	private boolean isActive;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<BankAccount> bankAccounts;
@@ -52,7 +54,12 @@ public class BankUser {
 
 	public BankUser() {
 		bankAccounts = new ArrayList<>();
+		SavingsAccount s = new SavingsAccount();
+		bankAccounts.add(s);
+		this.isActive = true;
 	}
+
+	
 
 	public BankAccount addBankAccount(BankAccount bankAccount) throws MaxAccountsReachedException { // add throws NegAmtException and others
 
@@ -108,6 +115,10 @@ public class BankUser {
 		return accounts;
 	}
 
+	public BankAccount getSingleSavingsAccount() {
+		return getSavingsAccount().get(0);
+	}
+
 	public List<BankAccount> getCDAccount() {
 		List<BankAccount> accounts = new ArrayList<>();
 		for (BankAccount b : this.bankAccounts) {
@@ -142,17 +153,10 @@ public class BankUser {
 	public double getAvailableBalanceByType(BankAccount type) throws MaxAccountsReachedException {
 		double sum = 0;
 
-		for(BankAccount b : bankAccounts) {
-			//****clean up the if statement. Maybe do switch or something, throw exception?????
-			// if(b.getMaxAccounts() != 0 && b.getMaxAccounts() >= type.getMaxAccounts()) {
-			// 	throw new MaxAccountsReachedException();
-			// }
-			if(b instanceof CDAccount || b instanceof RegularIRA || b instanceof RolloverIRA || b instanceof RothIRA){
-				System.out.println("Can not access available balance for type of account");
-			} else if (b.getClass() == type.getClass()){
-				sum += b.getBalance();
-			}
-		}
+		sum += getBalanceByType(new CheckingAccount());
+		sum += getBalanceByType(new SavingsAccount());
+		sum += getBalanceByType(new DBACheckingAccount());
+		
 		return sum;
 	}
 	
@@ -194,6 +198,14 @@ public class BankUser {
 	public void setZip(String zip) { this.zip = zip; }
 	public List<BankAccount> getBankAccounts() { return bankAccounts; }
 	public void setBankAccounts(List<BankAccount> bankAccounts) { this.bankAccounts = bankAccounts; }
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 
 
 

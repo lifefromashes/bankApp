@@ -72,6 +72,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		String jwt = auth.substring(7);
 		String username = jwtUtil.extractUsername(jwt);
 		BankUser ua = bankUserRepository.findByUsername(username);
+		if(!ua.isActive()) { return "/error"; }
 		if(ua.getAuthority().equals("ADMIN")) { 
 			log.info("Directing " + jwtUtil.extractUsername(jwt) + " to admin.html");
 			return "/admin"; 

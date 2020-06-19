@@ -65,8 +65,7 @@ public class AdminController {
 	public List<CDOffering> getCDOfferings() throws NotFoundException {
 		return cdOfferingRepository.findAll();
 	}
-	
-	
+		
 	
 	
 	
@@ -158,7 +157,7 @@ public class AdminController {
 		List<BankAccount> a = bankAccountRepository.findByUserId(user.getId());
 		List<BankAccount> matching = new ArrayList<>();
 		for(BankAccount b : a) {
-			if(b.getClass() == t.getClass()) {
+			if(b.getClass() == t.getClass() && b.isActive()) {
 				matching.add(b);
 			}
 		}
