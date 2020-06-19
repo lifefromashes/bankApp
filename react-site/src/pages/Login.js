@@ -69,6 +69,8 @@ export default class Login extends Component {
           console.log(req.status);
           //bad user / pass combo code goes here
 
+          document.getElementById("loginOutput").innerHTML = "<p>~~~~Invalid Username Password~~~~</p>";
+
 
         }
 
@@ -79,6 +81,7 @@ export default class Login extends Component {
     //console.log(body);
 
   }
+
 
 
 
@@ -146,8 +149,16 @@ export default class Login extends Component {
               <button onClick={this.loginRequest}>Login</button>
             {/* </form> */}
           </div>
+
+          
+          
+          
+
+
         </Banner>
+        
       </Hero>
+      <div id="loginOutput"></div>
       </>
     );
   }

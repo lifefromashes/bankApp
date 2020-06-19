@@ -14,6 +14,26 @@ export default class Login extends Component {
         password: "",
         loginErrors: ""
     };
+
+
+
+    var req = new XMLHttpRequest();
+    var urlString = "http://localHost:8080/User";
+    req.open('GET', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    var jwt = readCookie("jwt");
+    setCookieHeader(req);
+    req.send();
+    req.addEventListener('load', () => {
+      if(req.status >= 200 && req.status < 400){
+        //document.getElementById("userTitle").title = JSON.parse(req.responseText).username;
+        var t = document.getElementById("userTitle");
+        t.innerHTML = "<p>" + JSON.parse(req.responseText).username + "</p>";
+
+      }
+    })
+
+
   }
 
 
@@ -31,7 +51,8 @@ export default class Login extends Component {
     return (
       <>
       <Hero hero="accountsHero">
-        <Banner title="this should be the actual user's name, eventually">
+        <Banner title="Account View">
+        <div id="userTitle"></div>
           
           <div>
             
