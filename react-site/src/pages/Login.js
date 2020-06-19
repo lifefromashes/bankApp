@@ -42,7 +42,7 @@ export default class Login extends Component {
           //console.log(req.responseText);
 
           saveTokenInCookie(req);
-          //console.log("!: " + readCookie("jwt"));
+          console.log("!: " + readCookie("jwt"));
 
 
           //use our newly saved cookie to request a reditect from the server
