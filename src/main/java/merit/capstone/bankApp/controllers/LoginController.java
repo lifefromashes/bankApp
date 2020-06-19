@@ -66,16 +66,18 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 	@RequestMapping(value = "/direct", method = RequestMethod.GET)
 	public String directByRole(@RequestHeader("Authorization") String auth) {
 		
+		log.info("~~~~~~~");
+		
 		
 		String jwt = auth.substring(7);
 		String username = jwtUtil.extractUsername(jwt);
 		BankUser ua = bankUserRepository.findByUsername(username);
 		if(ua.getAuthority().equals("ADMIN")) { 
 			log.info("Directing " + jwtUtil.extractUsername(jwt) + " to admin.html");
-			return "admin.html"; 
+			return "/admin"; 
 		}
 		log.info("Directing " + jwtUtil.extractUsername(jwt) + " to user.html");
-		return "user.html";
+		return "/user";
 	}
 	
 	

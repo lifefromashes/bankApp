@@ -39,19 +39,30 @@ export default class Login extends Component {
       console.log("got response");
 
         if(req.status >= 200 && req.status < 400){
-          console.log(req.responseText);
+          //console.log(req.responseText);
 
           saveTokenInCookie(req);
+          //console.log("!: " + readCookie("jwt"));
 
-          console.log("!: " + readCookie("jwt"));
 
-          //var cvalue = JSON.parse(req.responseText).jwt;
-			    //var d = new Date();
-			    //d.setTime(d.getTime() + (1 * 60 * 60 * 1000));
-			    //var expires = "; expires=";
-			    //var cookie = "jwt=" + cvalue + "; " + expires + d + '; path=/';
-			    //document.cookie = cookie;
-			    //var c = document.cookie;
+          //use our newly saved cookie to request a reditect from the server
+          var req2 = new XMLHttpRequest();
+          urlString = "http://localHost:8080/direct";
+          req2.open('GET', urlString);
+          req2.setRequestHeader('Content-Type', 'application/json');
+          var jwt = readCookie("jwt");
+          setCookieHeader(req2);
+          req2.send();
+
+          req2.addEventListener('load', () => {
+            if(req.status >= 200 && req.status < 400){
+              window.location = req2.responseText;
+            }
+          })
+
+
+
+
 
 
         } else {
