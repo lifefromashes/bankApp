@@ -2,6 +2,9 @@ package merit.capstone.bankApp.controllers;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -50,10 +53,23 @@ public class CreateUserController {
 	}
 	
 	
-	@GetMapping(value = "/Admin/Users")
-	public Iterable<BankUser> getAccountHolders(){
+	@GetMapping(value = "/Admin/AllUsers")
+	public Iterable<BankUser> getAllBankUsers(){
 		log.info("account holders queried");
 		return bankUserRepository.findAll();
+	}
+	
+	@GetMapping(value = "/Admin/Users")
+	public Iterable<BankUser> getAccountHolders(){
+		List<BankUser> bu = bankUserRepository.findAll();
+		List<BankUser> ah = new ArrayList<>();
+		for(BankUser b : bu) {
+			if(!b.getAuthority().equals("ADMIN")) {
+				b.setTotalValue(b.getCombinedBalance());
+				ah.add(b);
+			}
+		}
+		return ah;
 	}
 	
 	@GetMapping(value = "Admin/Users/{id}")

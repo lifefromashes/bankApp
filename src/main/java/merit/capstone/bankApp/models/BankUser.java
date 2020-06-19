@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Check;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javassist.expr.Instanceof;
 import merit.capstone.bankApp.exceptions.MaxAccountsReachedException;
 
@@ -44,6 +46,8 @@ public class BankUser {
 	private String city;
 	private String state;
 	private String zip;
+	
+	private double totalValue;
 
 	private boolean isActive;
 	
@@ -114,7 +118,8 @@ public class BankUser {
 		}
 		return accounts;
 	}
-
+	
+	@JsonIgnore
 	public BankAccount getSingleSavingsAccount() {
 		return getSavingsAccount().get(0);
 	}
@@ -146,6 +151,9 @@ public class BankUser {
 		sum += getBalanceByType(new SavingsAccount());
 		sum += getBalanceByType(new CDAccount());
 		sum += getBalanceByType(new DBACheckingAccount());
+		sum += getBalanceByType(new RegularIRA());
+		sum += getBalanceByType(new RothIRA());
+		sum += getBalanceByType(new RolloverIRA());
 		return sum;
 	}
 
@@ -206,6 +214,20 @@ public class BankUser {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+
+
+
+	public double getTotalValue() {
+		return totalValue;
+	}
+
+
+
+	public void setTotalValue(double totalValue) {
+		this.totalValue = totalValue;
+	}
+	
+	
 
 
 

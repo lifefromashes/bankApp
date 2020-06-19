@@ -50,7 +50,6 @@ export default class Login extends Component {
           urlString = "http://localHost:8080/direct";
           req2.open('GET', urlString);
           req2.setRequestHeader('Content-Type', 'application/json');
-          var jwt = readCookie("jwt");
           setCookieHeader(req2);
           req2.send();
 
@@ -149,6 +148,8 @@ export default class Login extends Component {
               <button onClick={this.loginRequest}>Login</button>
             {/* </form> */}
           </div>
+
+          
 
           
           

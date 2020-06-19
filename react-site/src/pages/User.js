@@ -28,7 +28,7 @@ export default class Login extends Component {
       if(req.status >= 200 && req.status < 400){
         //document.getElementById("userTitle").title = JSON.parse(req.responseText).username;
         var t = document.getElementById("userTitle");
-        t.innerHTML = "<p>" + JSON.parse(req.responseText).username + "</p>";
+        t.innerHTML = "<p>" + JSON.parse(req.responseText).firstName + "</p>";
 
       }
     })
