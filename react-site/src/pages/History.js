@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import Hero from '../components/Hero';
+import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
 
-export default class User extends Component {
+export default class History extends Component {
   constructor(props) {
     super(props);
 
@@ -35,18 +37,19 @@ export default class User extends Component {
         al.innerHTML = parseAccounts(req);
 
         var accts = JSON.parse(req.responseText).bankAccounts.length;
-        //if(b != null){
-          for(let i=0; i<accts; i++){
+        //if(b != null){ 
+          for(var i=0; i<accts; i++){
             let b = document.getElementById("accountID" + i);
             this.state.accounts[this.state.accountIndex] = b;
             this.state.accountIndex ++;
             b.addEventListener('click', () => {
-
-              window.location = "history/" + JSON.parse(req.responseText).bankAccounts[i].accountNumber;
+              
+              console.log(b.id);
+              //console.log(this.state.accounts[this.state.accountIndex - 1].id);
             });
-
+            
           }
-        //}
+        //} 
 
       }
     })
@@ -63,16 +66,17 @@ export default class User extends Component {
     });
   }
 
-
+  
 
   render() {
     return (
       <>
-
+      <Hero hero="accountsHero">
+        <Banner title="Transaction History">
         <div id="userTitle"></div>
-
+          
           <div>
-
+            
               <input
                 type="sample"
                 name="sample"
@@ -82,13 +86,15 @@ export default class User extends Component {
                 required
               />
 
-
+            
 
               {/*<button onClick={this.loginRequest}>Login</button>*/}
-
+            
           </div>
-
-
+          
+        </Banner>
+        
+      </Hero>
       <div id="accountList"></div>
       </>
     );
