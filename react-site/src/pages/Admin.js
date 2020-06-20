@@ -6,7 +6,7 @@ import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieU
 import {parseBankUser, parseUserByID} from "../parseBankUser";
 import {createNewAccount} from "../adminFeedback";
 
-export default class Login extends Component {
+export default class Admin extends Component {
   constructor(props) {
     super(props);
 

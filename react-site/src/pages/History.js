@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
 
-export default class User extends Component {
+export default class History extends Component {
   constructor(props) {
     super(props);
 
@@ -38,13 +38,14 @@ export default class User extends Component {
 
         var accts = JSON.parse(req.responseText).bankAccounts.length;
         //if(b != null){ 
-          for(let i=0; i<accts; i++){
+          for(var i=0; i<accts; i++){
             let b = document.getElementById("accountID" + i);
             this.state.accounts[this.state.accountIndex] = b;
             this.state.accountIndex ++;
             b.addEventListener('click', () => {
               
-              window.location = "history/" + JSON.parse(req.responseText).bankAccounts[i].accountNumber;
+              console.log(b.id);
+              //console.log(this.state.accounts[this.state.accountIndex - 1].id);
             });
             
           }
@@ -71,7 +72,7 @@ export default class User extends Component {
     return (
       <>
       <Hero hero="accountsHero">
-        <Banner title="Account View">
+        <Banner title="Transaction History">
         <div id="userTitle"></div>
           
           <div>
