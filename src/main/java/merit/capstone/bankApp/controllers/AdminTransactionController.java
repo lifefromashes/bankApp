@@ -33,7 +33,7 @@ public class AdminTransactionController {
     @PostMapping(value = "Admin/Transaction/{id}")
 	public Transaction inputTransaction(@Valid @PathVariable (name = "id") long id, @RequestBody @Valid Transaction transaction) throws NotFoundException {
         
-    	BankAccount ba = transaction.getSourceAccount();
+    	BankAccount ba = bankAccountRepository.findById( transaction.getSourceAccount() );
     	ControllerUtil.enforceFound(ba);
     	
     	BankUser user = bankUserRepository.findById(ba.getUserId());

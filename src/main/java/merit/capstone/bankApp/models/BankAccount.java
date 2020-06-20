@@ -10,15 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
 
 import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
+import merit.capstone.bankApp.repos.BankAccountRepository;
 
 
 @Entity
@@ -57,11 +60,15 @@ public abstract class BankAccount {
 		this.accountOpenedOn = new Date();
 		transactions = new ArrayList<Transaction>();
 		this.isActive = true;
+		
 	}
+	
+	@Transient
+	@Autowired private BankAccountRepository bankAccountRepository;
 
 
 	public Transaction processTransaction(Transaction t) {
-		if(t.getTargeAccount().equals(t.getSourceAccount())){
+		if(t.getTargeAccount() == t.getSourceAccount()){
 			t = singleAccountTransaction(t);
 		} else {
 			t = multipleAccountTransaction(t);
@@ -93,10 +100,13 @@ public abstract class BankAccount {
 
 	protected Transaction multipleAccountTransaction(Transaction t) {
 		boolean madeWithdraw = false;
+		
 		try {
 			this.withdraw(t.getAmount());
 			madeWithdraw = true;
-			t.getTargeAccount().deposit(t.getAmount());
+			BankAccount a = bankAccountRepository.findById(t.getTargeAccount());
+			a.deposit(t.getAmount());
+			//t.getTargeAccount().deposit(t.getAmount());
 			t.setTransactionSuccess(true);
 		} catch (Exception e) {
 			if(madeWithdraw) {
@@ -106,8 +116,11 @@ public abstract class BankAccount {
 
 		}
 
+		
 		return t;
 	}
+	
+	
 
 
     public void withdraw(double amount) throws ExceedsAvailableBalanceException, NegativeAmountException {
@@ -143,6 +156,10 @@ public abstract class BankAccount {
 	}
 
 	
+    
+    public void addTransaction(Transaction t) {
+    	this.transactions.add(t);
+    }
 
 	public CDOffering cdOfferings() {
 		return cdOfferings();

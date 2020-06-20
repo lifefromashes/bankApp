@@ -60,7 +60,10 @@ public class BankUser {
 		bankAccounts = new ArrayList<>();
 		SavingsAccount s = new SavingsAccount();
 		bankAccounts.add(s);
+		
 		this.isActive = true;
+		
+		
 	}
 
 	
@@ -72,7 +75,9 @@ public class BankUser {
 		}		
 		if(bankAccount.getMaxAccounts() > 0 && getNumberOfAccountsByType(bankAccount) >= bankAccount.getMaxAccounts()){
 			throw new MaxAccountsReachedException();
-		}		
+		}
+		
+		
 		bankAccounts.add(bankAccount);
 		return bankAccount;
 	}

@@ -1,6 +1,6 @@
 package merit.capstone.bankApp.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,11 +16,11 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private BankAccount sourceAccount;
+    //@OneToOne(cascade = CascadeType.ALL)
+    private long sourceAccount;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private BankAccount targeAccount;
+    //@OneToOne(cascade = CascadeType.ALL)
+    private long targeAccount;
 
     private Date transactionDate;
     private double amount;
@@ -29,14 +29,17 @@ public class Transaction {
 
     private double balanceAfterTransaction;
 
-    public Transaction() {}
+    public Transaction() {
+    	this.transactionDate = new Date();
+    	this.amount = 0;
+    }
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
-    public BankAccount getSourceAccount() { return sourceAccount; }
-    public void setSourceAccount(BankAccount sourceAccount) { this.sourceAccount = sourceAccount; }
-    public BankAccount getTargeAccount() { return targeAccount; }
-    public void setTargeAccount(BankAccount targeAccount) { this.targeAccount = targeAccount; }
+    public long getSourceAccount() { return sourceAccount; }
+    public void setSourceAccount(long sourceAccount) { this.sourceAccount = sourceAccount; }
+    public long getTargeAccount() { return targeAccount; }
+    public void setTargeAccount(long targeAccount) { this.targeAccount = targeAccount; }
     public Date getTransactionDate() { return transactionDate; }
     public void setTransactionDate(Date transactionDate) { this.transactionDate = transactionDate; }
     public double getAmount() { return amount; }

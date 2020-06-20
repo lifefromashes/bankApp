@@ -44,6 +44,7 @@ public class RothIRA extends BankAccount {
 
     }
 
+    /*
     @Override
     public Transaction processTransaction(Transaction t) {
 		if(t.getTargeAccount().equals(t.getSourceAccount())){
@@ -55,6 +56,7 @@ public class RothIRA extends BankAccount {
 
 		return t;
     }
+    */
     
     @Override
     public BankAccount closeAccount(BankUser user) throws ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{

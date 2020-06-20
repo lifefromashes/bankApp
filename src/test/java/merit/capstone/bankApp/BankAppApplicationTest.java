@@ -29,8 +29,8 @@ public class BankAppApplicationTest {
 		a.setBalance(0);
 		
 		Transaction t = new Transaction();
-		t.setSourceAccount(a);
-		t.setTargeAccount(a);
+		t.setSourceAccount(a.getAccountNumber());
+		t.setTargeAccount(a.getAccountNumber());
 		t.setAmount(100);
 		
 		a.processTransaction(t);
