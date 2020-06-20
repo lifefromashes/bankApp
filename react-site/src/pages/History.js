@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Hero from '../components/Hero';
-import Banner from "../components/Banner";
+//import Hero from '../components/Hero';
+//import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts, parseHistory} from "../parseBankUser";
@@ -76,8 +76,8 @@ export default class History extends Component {
   render() {
     return (
       <>
-      <Hero hero="accountsHero">
-        <Banner title="Transaction History">
+      <div>
+        <div title="Transaction History">
         <div id="userTitle"></div>
           
           <div>
@@ -97,9 +97,9 @@ export default class History extends Component {
             
           </div>
           
-        </Banner>
+        </div>
         
-      </Hero>
+      </div>
       <div id="historyList"></div>
       </>
     );
