@@ -25,6 +25,7 @@ public class RegularIRA extends BankAccount {
         super();
         super.setInterestRate(DEFAULT_INTEREST_RATE);
         super.setMaxAccounts(1);
+        setAccountName("IRA Account");
     }
 
     //override withdraw

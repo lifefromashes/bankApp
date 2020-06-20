@@ -48,6 +48,8 @@ public abstract class BankAccount {
 	protected List<Transaction> transactions;
 
 	private boolean isActive;
+	
+	private String accountName;
 
 	public BankAccount() {
 		this.maxAccounts = 0;
@@ -218,6 +220,16 @@ public abstract class BankAccount {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+
+	public String getAccountName() {
+		return accountName;
+	}
+
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 	
     

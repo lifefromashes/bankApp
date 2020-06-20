@@ -21,6 +21,7 @@ public class RothIRA extends BankAccount {
         super();
         super.setInterestRate(DEFAULT_INTEREST_RATE);
         super.setMaxAccounts(1);
+        setAccountName("Roth IRA Account");
     }
     //override withdraw
     @Override

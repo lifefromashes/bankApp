@@ -10,6 +10,7 @@ public class CDAccount extends BankAccount{
 	
 	public CDAccount() {
 		super();
+		setAccountName("CD Account");
 	}
 	
 	@Override

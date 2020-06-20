@@ -33,9 +33,13 @@ export const parseUserByID = (req) => {
     s += obj.firstName + " " + obj.lastName;
     s += " <br> ";
 
-    for(var i=0; i<obj.bankAccounts; i++){
-        s += obj.bankAccounts[i].accountNumber + " ";
+    for(var i=0; i<obj.bankAccounts.length; i++){
+        s += "act num: ";
+        s += obj.bankAccounts[i].accountNumber;
+        s += " " + obj.bankAccounts[i].accountName;
+        s += " $"
         s += obj.bankAccounts[i].balance;
+        s += " <br> ";
     }
 
 

@@ -12,5 +12,6 @@ public class DBACheckingAccount extends BankAccount {
 		super();
 		super.setInterestRate(DEFAULT_INTEREST_RATE);
 		super.setMaxAccounts(3);
+		setAccountName("DBA Checking Account");
 	}
 }

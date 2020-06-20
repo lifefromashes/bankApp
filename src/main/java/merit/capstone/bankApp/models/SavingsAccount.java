@@ -16,6 +16,7 @@ public class SavingsAccount extends BankAccount {
 		super();
 		super.setInterestRate(DEFAULT_INTEREST_RATE);
 		super.setMaxAccounts(1);
+		setAccountName("Savings Account");
 	}
 
 	@Override

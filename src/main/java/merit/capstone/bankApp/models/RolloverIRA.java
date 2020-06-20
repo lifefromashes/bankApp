@@ -18,6 +18,7 @@ public class RolloverIRA extends BankAccount {
         super();
         super.setInterestRate(DEFAULT_INTEREST_RATE);
         super.setMaxAccounts(1);
+        setAccountName("Rollover IRA Account");
 
     }
     //override withdraw
