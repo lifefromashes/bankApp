@@ -37,7 +37,7 @@ public class CreateUserController {
 	
 	
 	
-	@PostMapping("Admin/NewUser")
+	@PostMapping("NewUser")
 	@ResponseStatus(HttpStatus.CREATED)
 	public BankUser createCustomer(@Valid @RequestBody BankUser user) throws UsernameAlreadyExistsException {
 		

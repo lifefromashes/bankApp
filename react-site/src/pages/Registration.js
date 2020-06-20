@@ -2,22 +2,32 @@ import React, { Component } from "react";
 import Hero from '../components/Hero';
 import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
-import axios from "axios"; //lightweight rest http client based on angular ugh. use yarn add axios
-//can also use fetch. one of the two
+import axios from "axios";
+import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 
 export default class Registration extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      username: "",
       email: "",
       password: "",
       password_confirmation: "",
+      firstname: "",
+      lastname: "",
+      ssn: "",
+      phone: "",
+      address: "",
+      city: "",
+      stateName: "",
+      zip: "",
       registrationErrors: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.submitNewUser = this.submitNewUser.bind(this);
   }
 
   handleChange(event) {
@@ -26,7 +36,41 @@ export default class Registration extends Component {
     });
   }
 
-  handleSubmit(event) {
+  submitNewUser() {
+    var body = '{"username": "' + this.state.username + '", ';
+    body += '"password": "' + this.state.password + '", ';
+    body += '"firstName": "' + this.state.firstname + '", ';
+    body += '"lastName": "' + this.state.lastname + '", ';
+    body += '"ssn": "' + this.state.ssn + '", ';
+    body += '"email": "' + this.state.email + '", ';
+    body += '"phone": "' + this.state.phone + '", ';
+    body += '"address": "' + this.state.address + '", ';
+    body += '"city": "' + this.state.city + '", ';
+    body += '"state": "' + this.state.stateName + '", ';
+    body += '"zip": "' + this.state.zip + '"}';
+
+    var req = new XMLHttpRequest();
+    var urlString = "http://localHost:8080/NewUser";
+    req.open('POST', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    setCookieHeader(req);
+    req.send(body);
+
+    req.addEventListener('load', () => {
+      
+      if(req.status >= 200 && req.status < 400){
+        console.log(req.responseText);
+        window.location = "/login";
+        
+      } else {
+        //handle bad input
+
+      }
+    })
+    
+  }
+
+  handleSubmit(event) { /*
     const { email, password, password_confirmation } = this.state;
 
     axios
@@ -50,6 +94,7 @@ export default class Registration extends Component {
         console.log("registration error", error);
       });
     event.preventDefault();
+    */
   }
 
   render() {
@@ -61,16 +106,19 @@ export default class Registration extends Component {
           Already have an Account?
           </Link>
             <div>
-              <form onSubmit={this.handleSubmit}>
+                
+                <label>Username:</label>
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={this.state.email}
+                  
+                  type="username"
+                  name="username"
+                  placeholder="Desired Username"
+                  value={this.state.username}
                   onChange={this.handleChange}
                   required
                 />
 
+                <label>Password:</label>
                 <input
                   type="password"
                   name="password"
@@ -78,8 +126,9 @@ export default class Registration extends Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                   required
+                
                 />
-
+                <label>Confirm Password:</label>
                 <input
                   type="password"
                   name="password_confirmation"
@@ -89,8 +138,89 @@ export default class Registration extends Component {
                   required
                 />
 
-                <button type="submit">Register</button>
-              </form>
+                <label>First Name:</label>
+                <input
+                  name="firstname"
+                  placeholder="First Name"
+                  value={this.state.firstname}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <label>Last Name:</label>
+                <input
+                  name="lastname"
+                  placeholder="Last Name"
+                  value={this.state.lastname}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <label>SSN:</label>
+                <input
+                  name="ssn"
+                  placeholder="SSN"
+                  value={this.state.ssn}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <label>Email:</label>
+                <input
+                  name="email"
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <label>Phone Number:</label>
+                <input
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={this.state.phone}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <label>Address:</label>
+                <input
+                  name="address"
+                  placeholder="Address"
+                  value={this.state.address}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <label>City:</label>
+                <input
+                  name="city"
+                  placeholder="City"
+                  value={this.state.city}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <label>State:</label>
+                <input
+                  name="stateName"
+                  placeholder="State"
+                  value={this.state.stateName}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <label>Zip Code:</label>
+                <input
+                  name="zip"
+                  placeholder="Zip Code"
+                  value={this.state.zip}
+                  onChange={this.handleChange}
+                  required
+                />
+
+                <button onClick={this.submitNewUser}>Register</button>
+              
             </div>
           </Banner>
         </Hero>
