@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Hero from '../components/Hero';
-import Banner from "../components/Banner";
+
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
@@ -26,7 +25,7 @@ export default class Login extends Component {
     var req = new XMLHttpRequest();
     var body = '{"username": "' + this.state.username + '", ';
     body += '"password": "' + this.state.password + '"}';
-    
+
     var urlString = "http://localHost:8080/authenticate";
 
     //console.log(body);
@@ -34,7 +33,7 @@ export default class Login extends Component {
     req.open('POST', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(body);
-    
+
     req.addEventListener('load', () => {
       console.log("got response");
 
@@ -120,8 +119,7 @@ export default class Login extends Component {
   render() {
     return (
       <>
-      <Hero hero="accountsHero">
-        <Banner title="Login">
+
           <Link to="/register" className="btn-primary">
           JOIN US
           </Link>
@@ -149,16 +147,13 @@ export default class Login extends Component {
             {/* </form> */}
           </div>
 
-          
-
-          
-          
-          
 
 
-        </Banner>
-        
-      </Hero>
+
+
+
+
+
       <div id="loginOutput"></div>
       </>
     );

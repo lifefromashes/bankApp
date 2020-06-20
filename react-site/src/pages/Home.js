@@ -1,23 +1,41 @@
 import React from "react";
-import Hero from "../components/Hero";
-import Banner from '../components/Banner';
+
 import {Link} from 'react-router-dom';
-import Services from '../components/Services';
-import FeaturedAccounts from '../components/FeaturedAccounts';
 
 
 const Home = () => {
   return(
     <>
-    <Hero>
-      <Banner title="Secured Accounts" subtitle="Complete virtual access">
-        <Link to="/accounts" className="btn-primary">
-          Accounts
-        </Link>
-      </Banner>
-    </Hero>
-    <Services />
-    <FeaturedAccounts />
+    <head>
+      <title>MERIT BANK</title>
+      <link rel="stylesheet" type="text/css" href= "../App.css" />
+    </head>
+    <body>
+
+      <header>
+        <div class="main">
+          <div class="logo">
+            <img />
+          </div>
+          <ul>
+            <li class="home"><a href="index.html">Home</a></li>
+            <li><a href="menu/personal.html">Personal</a></li>
+            <li><a href="menu/services.html">Services</a></li>
+            <li><a href="menu/about.html">About</a></li>
+            <li><a href="menu/contact.html">Contact</a></li>
+            <li><a href="#">Mobile</a></li>
+          </ul>
+        </div>
+        <div class="title">
+          <h1>WELCOME TO MERIT BANK</h1>
+          <h2>Investing in your future</h2>
+        </div>
+        <div class="button">
+          <a class ="btn" href="menu/services.html">LEARN MORE</a>
+        </div>
+      </header>
+    </body>
+
     </>
 
 );

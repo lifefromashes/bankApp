@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import defaultBcg from "../images/logo.jpg";
-import Hero from "../components/Hero";
-import Banner from "../components/Banner";
+
 import { Link } from "react-router-dom";
 import { AccountContext } from "../context";
 
-import StyledHero from "../components/StyledHero";
 
 export default class CheckingAccount extends Component {
   constructor(props) {
@@ -51,13 +49,9 @@ export default class CheckingAccount extends Component {
 
     return (
       <>
-        <StyledHero img={images[0] || this.state.defaultBcg}>
-          <Banner title={`${name} room`}>
             <Link to="/accounts" className="btn-primary">
               back to rooms
             </Link>
-          </Banner>
-        </StyledHero>
         <section className="checking-account">
           <div className="checking-account-images">
             {defaultImages.map((item, index) => (

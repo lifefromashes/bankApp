@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Hero from '../components/Hero';
-import Banner from "../components/Banner";
+
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
@@ -57,17 +56,17 @@ export default class Registration extends Component {
     req.send(body);
 
     req.addEventListener('load', () => {
-      
+
       if(req.status >= 200 && req.status < 400){
         console.log(req.responseText);
         window.location = "/login";
-        
+
       } else {
         //handle bad input
 
       }
     })
-    
+
   }
 
   handleSubmit(event) { /*
@@ -100,16 +99,15 @@ export default class Registration extends Component {
   render() {
     return (
       <>
-      <Hero hero="accountsHero">
-        <Banner title="Register">
+
           <Link to="/login" className="btn-primary">
           Already have an Account?
           </Link>
             <div>
-                
+
                 <label>Username:</label>
                 <input
-                  
+
                   type="username"
                   name="username"
                   placeholder="Desired Username"
@@ -126,7 +124,7 @@ export default class Registration extends Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                   required
-                
+
                 />
                 <label>Confirm Password:</label>
                 <input
@@ -220,10 +218,9 @@ export default class Registration extends Component {
                 />
 
                 <button onClick={this.submitNewUser}>Register</button>
-              
+
             </div>
-          </Banner>
-        </Hero>
+    
         </>
     );
   }
