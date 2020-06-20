@@ -42,7 +42,7 @@ public abstract class BankAccount {
     
     private long userId;
     
-	private int maxAccounts = 0;
+	private int maxAccounts;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	protected List<Transaction> transactions;
@@ -50,6 +50,7 @@ public abstract class BankAccount {
 	private boolean isActive;
 
 	public BankAccount() {
+		this.maxAccounts = 0;
 		this.balance = 0;
 		this.accountOpenedOn = new Date();
 		transactions = new ArrayList<Transaction>();

@@ -70,7 +70,7 @@ public class BankUser {
 		if (bankAccount.getBalance() < 0) {
 			System.out.println("Can't Deposit Negative Amount"); // add exception
 		}		
-		if(getNumberOfAccountsByType(bankAccount) <= bankAccount.getMaxAccounts()){
+		if(bankAccount.getMaxAccounts() > 0 && getNumberOfAccountsByType(bankAccount) >= bankAccount.getMaxAccounts()){
 			throw new MaxAccountsReachedException();
 		}		
 		bankAccounts.add(bankAccount);
