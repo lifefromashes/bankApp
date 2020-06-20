@@ -3,7 +3,7 @@ import Hero from '../components/Hero';
 import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
-import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
+import {parseBankUser, parseUserByID, parseAccounts, parseHistory} from "../parseBankUser";
 
 export default class History extends Component {
   constructor(props) {
@@ -21,7 +21,11 @@ export default class History extends Component {
 
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/User";
+
+    let url = window.location;
+    let urlSplit = url.toString().split("/");
+    let actID = urlSplit[urlSplit.length - 1];
+    var urlString = "http://localHost:8080/User/Transaction/" + actID;
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     var jwt = readCookie("jwt");
@@ -30,26 +34,27 @@ export default class History extends Component {
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
         //document.getElementById("userTitle").title = JSON.parse(req.responseText).username;
-        var t = document.getElementById("userTitle");
-        t.innerHTML = "<p>" + JSON.parse(req.responseText).firstName + "</p>";
+        
+        //t.innerHTML = "<p>" + JSON.parse(req.responseText).firstName;
+        //t += "" + "</p>";
 
-        var al = document.getElementById("accountList");
-        al.innerHTML = parseAccounts(req);
 
-        var accts = JSON.parse(req.responseText).bankAccounts.length;
-        //if(b != null){ 
-          for(var i=0; i<accts; i++){
-            let b = document.getElementById("accountID" + i);
-            this.state.accounts[this.state.accountIndex] = b;
-            this.state.accountIndex ++;
-            b.addEventListener('click', () => {
-              
-              console.log(b.id);
-              //console.log(this.state.accounts[this.state.accountIndex - 1].id);
-            });
-            
-          }
-        //} 
+        var al = document.getElementById("historyList");
+        al.innerHTML = parseHistory(req);
+
+        //var his = JSON.parse(req.responseText).length;
+        //for(let i=0; i<his; i++){
+          //let b = document.getElementById("accountID" + i);
+          //this.state.accounts[this.state.accountIndex] = b;
+          //this.state.accountIndex ++;
+          //b.addEventListener('click', () => {
+            //window.location = "history/" + JSON.parse(req.responseText).bankAccounts[i].accountNumber;
+          //});
+        //}
+
+        
+
+        console.log("transactions: " + req.responseText);
 
       }
     })
@@ -95,7 +100,7 @@ export default class History extends Component {
         </Banner>
         
       </Hero>
-      <div id="accountList"></div>
+      <div id="historyList"></div>
       </>
     );
   }

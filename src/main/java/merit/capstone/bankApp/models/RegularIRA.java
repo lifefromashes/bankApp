@@ -55,7 +55,7 @@ public class RegularIRA extends BankAccount {
         return super.closeAccount(user);
     }
 
-
+    /*
     @Override
     public Transaction processTransaction(Transaction t) {
 		if(t.getTargeAccount().equals(t.getSourceAccount())){
@@ -67,6 +67,7 @@ public class RegularIRA extends BankAccount {
 
 		return t;
 	}
+	*/
 
     
 }

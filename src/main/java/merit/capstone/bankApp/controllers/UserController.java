@@ -203,7 +203,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		BankUser user = findUser(auth);
 		ControllerUtil.enforceFound(user);
 		
-		BankAccount a = transaction.getSourceAccount();
+		BankAccount a = bankAccountRepository.findById( transaction.getSourceAccount() );
 		ControllerUtil.enforceFound(a);
 		
 		a.processTransaction(transaction);
@@ -211,6 +211,23 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		bankAccountRepository.save(a);
         transactionRepository.save(transaction);
 		return transaction;
+	}
+	
+	@CrossOrigin
+	@GetMapping(value = "/User/Transaction/{id}") // id is the BankAccount id
+	public List<Transaction> accountHistory(@RequestHeader("Authorization") String auth, @PathVariable(name = "id") long id) throws NotFoundException {
+		
+		BankUser user = findUser(auth);
+		ControllerUtil.enforceFound(user);
+		
+		BankAccount a = bankAccountRepository.findById(id);
+		ControllerUtil.enforceFound(a);
+		
+		// prevent anyone without the correct token from accessing other's accounts by editing the origin url
+		if(a.getUserId() != user.getId()) { throw new NotFoundException(); }
+		
+        
+		return a.getTransactions();
 	}
 	
 	

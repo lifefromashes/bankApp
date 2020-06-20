@@ -28,12 +28,14 @@ import merit.capstone.bankApp.models.RegularIRA;
 import merit.capstone.bankApp.models.RolloverIRA;
 import merit.capstone.bankApp.models.RothIRA;
 import merit.capstone.bankApp.models.SavingsAccount;
+import merit.capstone.bankApp.models.Transaction;
 import merit.capstone.bankApp.models.BankUser;
 import merit.capstone.bankApp.models.CDAccount;
 import merit.capstone.bankApp.models.CDOffering;
 import merit.capstone.bankApp.repos.BankAccountRepository;
 import merit.capstone.bankApp.repos.BankUserRepository;
 import merit.capstone.bankApp.repos.CDOfferingRepository;
+import merit.capstone.bankApp.repos.TransactionRepository;
 
 /**
  * 
@@ -51,6 +53,7 @@ public class AdminController {
 	@Autowired private BankUserRepository bankUserRepository;
 	@Autowired private BankAccountRepository bankAccountRepository;
 	@Autowired private CDOfferingRepository cdOfferingRepository;
+	@Autowired private TransactionRepository transactionRepository;
 	
 	
 	
@@ -145,6 +148,15 @@ public class AdminController {
 		ControllerUtil.enforceFound(user);
 		a.setUserId(id);
 		user.addBankAccount(a);
+		bankAccountRepository.save(a);
+		
+		Transaction t = new Transaction();
+		t.setSourceAccount(a.getAccountNumber());
+		t.setTargeAccount(a.getAccountNumber());
+		t.setTransactionMemo("Account Created");
+		a.addTransaction(t);
+
+		transactionRepository.save(t);
 		bankAccountRepository.save(a);
 		
 		return a;

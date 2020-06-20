@@ -64,21 +64,44 @@ export const parseAccounts = (req) => {
         }
         s += " id='accountID" + num + "'";
         num ++;
-
-
         s += ">"
-        
         s += obj.bankAccounts[i].accountName;
-        
         s += "          $";
         s += obj.bankAccounts[i].balance;
-
         s += "</div> <br></br>";
-
-
     }
 
 
     return s;
 }
 
+export const parseHistory = (req) => {
+    var s = "";
+    var obj = JSON.parse(req.responseText);
+    var classString = "<div class='accountBox'";
+    var num = 0;
+
+    for(var i=0; i<obj.length; i++){
+        
+        s += classString;
+        if(classString == "<div class='accountBox'"){
+            classString = "<div class='accountBox2'";
+        } else {
+            classString = "<div class='accountBox'";
+        }
+        s += " id='accountID" + num + "'";
+        num ++;
+        
+        s += ">" + obj[i].transactionDate;
+        s += "&nbsp; &nbsp; amount: $"
+        s += obj[i].amount;
+        s += "&nbsp; &nbsp; balance after: $";
+        s += obj[i].balanceAfterTransaction;
+        s += " &nbsp; &nbsp;" + obj[i].transactionMemo;
+        s += "</div> <br></br>";
+
+
+    }
+
+    return s;
+}
