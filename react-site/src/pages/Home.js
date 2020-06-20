@@ -18,8 +18,8 @@ const Home = () => {
             <img />
           </div>
           <ul>
-            <li class="home"><a href="index.html">Home</a></li>
-            <li><a href="menu/personal.html">Personal</a></li>
+            <li class="home"><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
             <li><a href="menu/services.html">Services</a></li>
             <li><a href="menu/about.html">About</a></li>
             <li><a href="menu/contact.html">Contact</a></li>

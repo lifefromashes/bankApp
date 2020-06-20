@@ -7,7 +7,7 @@
 
 header{
   /* background-color: #000; */
-  background-image: url(./images/logo.jpg);
+  background-image: url(./images/logo2.jpg);
   height: 100vh;
   background-size: cover;
   background-position: center;
@@ -43,7 +43,7 @@ ul li.home a{
   background-size: 250px ;
   float: left;
   width: 315px;
-  height: 75px;
+  height: 80px;
 }
 .main{
   max-width: 2000px;
