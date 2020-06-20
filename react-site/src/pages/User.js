@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
+import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
 
 export default class Login extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class Login extends Component {
         sample: "",
         username: "",
         password: "",
-        loginErrors: ""
+        loginErrors: "",
+        accounts: []
     };
 
 
@@ -29,6 +31,9 @@ export default class Login extends Component {
         //document.getElementById("userTitle").title = JSON.parse(req.responseText).username;
         var t = document.getElementById("userTitle");
         t.innerHTML = "<p>" + JSON.parse(req.responseText).firstName + "</p>";
+
+        var al = document.getElementById("accountList");
+        al.innerHTML = parseAccounts(req);
 
       }
     })
@@ -70,8 +75,11 @@ export default class Login extends Component {
               {/*<button onClick={this.loginRequest}>Login</button>*/}
             
           </div>
+          
         </Banner>
+        
       </Hero>
+      <div id="accountList"></div>
       </>
     );
   }

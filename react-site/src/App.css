@@ -512,3 +512,14 @@ min-height: 60vh;
   }
 }
 /* end of rooms fitler*/
+
+
+
+/* account placard stuff */
+.accountBox{
+  text-align: center;
+  background-color: cornflowerblue;
+}.accountBox2{
+  text-align: center;
+  background-color: cyan;
+}

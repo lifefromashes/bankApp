@@ -45,3 +45,34 @@ export const parseUserByID = (req) => {
 
     return s;
 }
+
+
+export const parseAccounts = (req) => {
+    
+    var s = "";
+    var obj = JSON.parse(req.responseText);
+    var classString = "<div class='accountBox'>";
+
+    for(var i=0; i<obj.bankAccounts.length; i++){
+        //acts[i] = bankAccounts[i];
+        s += classString;
+        if(classString == "<div class='accountBox'>"){
+            classString = "<div class='accountBox2'>";
+        } else {
+            classString = "<div class='accountBox'>";
+        }
+        
+        s += obj.bankAccounts[i].accountName;
+        
+        s += "          $";
+        s += obj.bankAccounts[i].balance;
+
+        s += "</div>";
+
+
+    }
+
+
+    return s;
+}
+
