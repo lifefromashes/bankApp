@@ -14,7 +14,8 @@ export default class Login extends Component {
         username: "",
         password: "",
         loginErrors: "",
-        accounts: []
+        accounts: [],
+        accountIndex: 0
     };
 
 
@@ -34,6 +35,21 @@ export default class Login extends Component {
 
         var al = document.getElementById("accountList");
         al.innerHTML = parseAccounts(req);
+
+        var accts = JSON.parse(req.responseText).bankAccounts.length;
+        //if(b != null){ 
+          for(var i=0; i<accts; i++){
+            let b = document.getElementById("accountID" + i);
+            this.state.accounts[this.state.accountIndex] = b;
+            this.state.accountIndex ++;
+            b.addEventListener('click', () => {
+              
+              console.log(b.id);
+              //console.log(this.state.accounts[this.state.accountIndex - 1].id);
+            });
+            
+          }
+        //} 
 
       }
     })

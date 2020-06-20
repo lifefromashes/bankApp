@@ -52,6 +52,7 @@ export const parseAccounts = (req) => {
     var s = "";
     var obj = JSON.parse(req.responseText);
     var classString = "<div class='accountBox'";
+    var num = 0;
 
     for(var i=0; i<obj.bankAccounts.length; i++){
         //acts[i] = bankAccounts[i];
@@ -61,6 +62,10 @@ export const parseAccounts = (req) => {
         } else {
             classString = "<div class='accountBox'";
         }
+        s += " id='accountID" + num + "'";
+        num ++;
+
+
         s += ">"
         
         s += obj.bankAccounts[i].accountName;
@@ -68,7 +73,7 @@ export const parseAccounts = (req) => {
         s += "          $";
         s += obj.bankAccounts[i].balance;
 
-        s += "</div>";
+        s += "</div> <br></br>";
 
 
     }
