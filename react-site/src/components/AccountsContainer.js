@@ -1,14 +1,11 @@
 import React from "react";
 import { withAccountConsumer } from "../context";
-import Loading from "./Loading";
 import AccountsFilter from "./AccountsFilter";
 import AccountsList from "./AccountsList";
 
 function AccountContainer({ context }) {
-  const { loading, sortedAccounts, accounts } = context;
-  if (loading) {
-    return <Loading />;
-  }
+  const { sortedAccounts, accounts } = context;
+  
   return (
     <>
       <AccountsFilter accounts={accounts} />

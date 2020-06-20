@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Hero from '../components/Hero';
-import Banner from "../components/Banner";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID} from "../parseBankUser";
@@ -40,13 +38,13 @@ export default class Admin extends Component {
     req.send();
 
     req.addEventListener('load', () => {
-      
+
       if(req.status >= 200 && req.status < 400){
         //console.log(req.responseText);
         var str = parseBankUser(req);
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
-        
+
       }
     })
   }
@@ -63,13 +61,13 @@ export default class Admin extends Component {
     req.send();
 
     req.addEventListener('load', () => {
-      
+
       if(req.status >= 200 && req.status < 400){
         //console.log(req.responseText);
         var str = parseUserByID(req);
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
-        
+
       }
     })
   }
@@ -100,40 +98,38 @@ export default class Admin extends Component {
     req.send(body);
 
     req.addEventListener('load', () => {
-      
+
       if(req.status >= 200 && req.status < 400){
 
-        
+
         var str = createNewAccount();
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
-        
-        
-        
+
+
+
       }
     })
 
   }
 
-  
+
 
   render() {
     return (
       <>
-      <Hero hero="accountsHero">
-        <Banner title="Admin Page">
-          
-          <div>
-            
-              
 
-            
+
+          <div>
+
+
+
+
 
               {/*<button onClick={this.loginRequest}>Login</button>*/}
-            
+
           </div>
-        </Banner>
-      </Hero>
+    
 
       &nbsp; &nbsp; User Account Number:
       <input
@@ -145,17 +141,17 @@ export default class Admin extends Component {
         required
       />
       <br></br>
-      &nbsp; &nbsp; 
+      &nbsp; &nbsp;
       <button onClick={this.getUsers}>Get All Users</button>
-      
-      &nbsp; &nbsp; 
+
+      &nbsp; &nbsp;
       <button onClick={this.getUserByID}>Get User by User Account Number</button>
 
       <br></br>
       <div>
         &nbsp; &nbsp;
-        <button onClick={this.createAccount}>Create New</button> 
-      
+        <button onClick={this.createAccount}>Create New</button>
+
         <select id="accountType">
           <option value="1">Checking Account</option>
           <option value="2">DBA Checking Account</option>
@@ -166,7 +162,7 @@ export default class Admin extends Component {
         </select>
 
         &nbsp; with a starting balance of &nbsp;
-        <input 
+        <input
           size="10"
           type="amount"
           name="amount"
