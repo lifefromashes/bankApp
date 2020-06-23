@@ -20,9 +20,9 @@ const Home = () => {
           <ul>
             <li class="home"><a href="/">Home</a></li>
             <li><a href="/login">Login</a></li>
-            <li><a href="menu/services.html">Services</a></li>
-            <li><a href="menu/about.html">About</a></li>
-            <li><a href="menu/contact.html">Contact</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/aboutus">About Us</a></li>
+            <li><a href="/contactus">Contact Us</a></li>
             <li><a href="#">Mobile</a></li>
           </ul>
         </div>
@@ -31,7 +31,7 @@ const Home = () => {
           <h2>Investing in your future</h2>
         </div>
         <div class="button">
-          <a class ="btn" href="menu/services.html">LEARN MORE</a>
+          <a class ="btn" href="/services">LEARN MORE</a>
         </div>
       </header>
     </body>

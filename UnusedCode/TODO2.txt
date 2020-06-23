@@ -1,0 +1,5 @@
+TODO: 
+-navigation for the site
+-not every site has to have a button
+-direction to make / register accounts. 
+-plain html/wireframe

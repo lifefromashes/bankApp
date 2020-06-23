@@ -128,22 +128,22 @@ export default class Login extends Component {
       <header>
         <div class="main">
           <div class="logo">
-            <img src="../tempmerit.png" />
+            <img />
           </div>
           <ul>
             <li><a href="/">Home</a></li>
-            <li class="personal"><a href="/login">Personal</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li class="login"><a href="/login">Login</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/aboutus">About Us</a></li>
+            <li><a href="/contactus">Contact Us</a></li>
             <li><a href="#">Mobile</a></li>
           </ul>
           </div>
       </header>
 
       <div class = "loginbox">
-        <img src="../images/avatar.png" class="avatar" />
-          <h1>Login Here</h1>
+        <img class="avatar" />
+          <h1>Access Account</h1>
             {/*<form onSubmit={this.handleSubmit}> */}
             <p>Username</p>
               <input
@@ -165,7 +165,11 @@ export default class Login extends Component {
               />
 
               <button onClick={this.loginRequest}>Login</button>
+              <br />
+              <br />
             {/* </form> */}
+            <a href="/register">Forgot Passowrd?</a><br />
+            <a href="/register">Create an account!</a><br />
           </div>
 
 

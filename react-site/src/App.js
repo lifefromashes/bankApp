@@ -10,6 +10,9 @@ import Registration from './pages/Registration';
 import Admin from './pages/Admin';
 import User from './pages/User';
 import History from './pages/History';
+import Services from './pages/Services';
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 
 import {Route, Switch} from 'react-router-dom';
 
@@ -17,7 +20,7 @@ import {Route, Switch} from 'react-router-dom';
 function App() {
   return (
   <>
-    
+
     <Switch>
       <Route exact path= "/" component = {Home}/>
       <Route exact path= "/accounts" component = {Accounts}/>
@@ -27,6 +30,9 @@ function App() {
       <Route exact path= "/user" component = {User}/>
       <Route exact path= "/history/*" component = {History}/>
       <Route exact path= "/register" component ={Registration} />
+      <Route exact path= "/services" component = {Services} />
+      <Route exact path= "/aboutus" component = {AboutUs}/>
+      <Route exact path= "/contactus" component = {ContactUs} />
       <Route component ={Error} />
     </Switch>
   </>
