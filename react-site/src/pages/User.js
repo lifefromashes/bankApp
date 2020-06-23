@@ -68,6 +68,23 @@ export default class User extends Component {
   render() {
     return (
       <>
+      <head>
+        <title>MERIT BANK</title>
+        <link rel="stylesheet" type="text/css" href= "../App.css" />
+      </head>
+      <body>
+
+        <header>
+          <div class="main">
+            <div class="logo">
+              <img />
+            </div>
+            <ul>
+              <li><a href="/login">Sign Off</a></li>
+              <li><a href="/user">Welcome, USER</a></li>
+              <li><a href="#">Mobile</a></li>
+            </ul>
+          </div>
 
         <div id="userTitle"></div>
 
@@ -90,6 +107,11 @@ export default class User extends Component {
 
 
       <div id="accountList"></div>
+
+
+
+      </header>
+      </body>
       </>
     );
   }

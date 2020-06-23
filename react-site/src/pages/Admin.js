@@ -118,18 +118,33 @@ export default class Admin extends Component {
   render() {
     return (
       <>
+      <head>
+        <title>MERIT BANK</title>
+        <link rel="stylesheet" type="text/css" href= "../App.css" />
+      </head>
+      <body>
+
+        <header>
+          <div class="main">
+            <div class="logo">
+              <img />
+            </div>
+            <ul>
+              <li><a href="/login">Sign Off</a></li>
+              <li><a href="/user">Welcome, ADMIN</a></li>
+              <li><a href="#">Mobile</a></li>
+            </ul>
+          </div>
 
 
           <div>
 
 
 
-
-
               {/*<button onClick={this.loginRequest}>Login</button>*/}
 
           </div>
-    
+
 
       &nbsp; &nbsp; User Account Number:
       <input
@@ -174,6 +189,8 @@ export default class Admin extends Component {
       </div>
 
       <div id="printout"></div>
+      </header>
+      </body>
 
       </>
     );
