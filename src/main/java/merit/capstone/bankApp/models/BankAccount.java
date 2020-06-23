@@ -21,6 +21,7 @@ import org.springframework.security.access.method.P;
 import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
+import merit.capstone.bankApp.exceptions.TransactionNotAllowedException;
 import merit.capstone.bankApp.repos.BankAccountRepository;
 
 
@@ -63,15 +64,13 @@ public abstract class BankAccount {
 		
 	}
 	
-	@Transient
-	@Autowired private BankAccountRepository bankAccountRepository;
 
-
-	public Transaction processTransaction(Transaction t) {
-		if(t.getTargeAccount() == t.getSourceAccount()){
+	
+	public Transaction processTransaction(Transaction t, BankAccount source, BankAccount target) {
+		if(source.equals(target)){
 			t = singleAccountTransaction(t);
 		} else {
-			t = multipleAccountTransaction(t);
+			t = multipleAccountTransaction(t, source, target);
 		}
 
 		t.setBalanceAfterTransaction(this.getBalance());
@@ -98,19 +97,17 @@ public abstract class BankAccount {
 		return t;
 	}
 
-	protected Transaction multipleAccountTransaction(Transaction t) {
+	protected Transaction multipleAccountTransaction(Transaction t, BankAccount source, BankAccount target) {
 		boolean madeWithdraw = false;
 		
 		try {
-			this.withdraw(t.getAmount());
+			source.withdraw(t.getAmount());
 			madeWithdraw = true;
-			BankAccount a = bankAccountRepository.findById(t.getTargeAccount());
-			a.deposit(t.getAmount());
-			//t.getTargeAccount().deposit(t.getAmount());
+			target.deposit(t.getAmount());
 			t.setTransactionSuccess(true);
 		} catch (Exception e) {
 			if(madeWithdraw) {
-				this.setBalance(this.getBalance() + t.getAmount());
+				source.setBalance(source.getBalance() + t.getAmount());
 			}
 			t.setTransactionSuccess(false);
 
@@ -123,7 +120,7 @@ public abstract class BankAccount {
 	
 
 
-    public void withdraw(double amount) throws ExceedsAvailableBalanceException, NegativeAmountException {
+    public void withdraw(double amount) throws TransactionNotAllowedException, ExceedsAvailableBalanceException, NegativeAmountException {
         if(amount > this.balance) {
             throw new ExceedsAvailableBalanceException("Exceeds Available Balance");
         } 
@@ -133,7 +130,7 @@ public abstract class BankAccount {
         this.balance -= amount;
     }
 
-    public void deposit(double amount) throws ExceedsAvailableBalanceException, NegativeAmountException {
+    public void deposit(double amount) throws TransactionNotAllowedException, ExceedsAvailableBalanceException, NegativeAmountException {
       
        if(amount < 0) {
           throw new NegativeAmountException("Unable to process");
@@ -141,7 +138,7 @@ public abstract class BankAccount {
       this.balance += amount;
     }
 
-    public BankAccount closeAccount(BankUser user) throws ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{
+    public BankAccount closeAccount(BankUser user) throws TransactionNotAllowedException, ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{
 		BankAccount targetAccount = user.getSingleSavingsAccount();
 		
 		double amount = this.balance;

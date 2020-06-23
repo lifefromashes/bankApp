@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
-import {parseBankUser, parseUserByID} from "../parseBankUser";
-import {createNewAccount} from "../adminFeedback";
+import {parseBankUser, parseUserByID, parseCDO} from "../parseBankUser";
+import {createNewAccount, createNewCDO} from "../adminFeedback";
 
 export default class Admin extends Component {
   constructor(props) {
@@ -11,21 +11,38 @@ export default class Admin extends Component {
     this.state = {
         sample: "",
         userID: 1,
-        amount: 0
+        amount: 0,
+        accountTypeSelected: 1,
+        CDONum: 0,
+        cdoRate: .0001,
+        cdoTerm: 1
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeA = this.handleChangeA.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.getUserByID = this.getUserByID.bind(this);
     this.createAccount = this.createAccount.bind(this);
+    this.createCDO = this.createCDO.bind(this);
   }
 
 
   handleChange(event) {
+
     this.setState({
       [event.target.name]: event.target.value
     });
+
+    //{console.log(document.getElementById("accountType").value)}
   }
+
+  handleChangeA(event) {
+    this.setState({
+      accountTypeSelected: document.getElementById("accountType").value
+    })
+  }
+
+
 
   getUsers() {
     console.log("enter getUsers");
@@ -72,6 +89,52 @@ export default class Admin extends Component {
     })
   }
 
+  createCDO() {
+    console.log("enter create cdo");
+
+    var req = new XMLHttpRequest();
+    var urlString = "http://localHost:8080/Admin/CDOfferings";
+
+    var body = '{"interestRate": "' + this.state.cdoRate + '", ';
+    body += '"term": "' + this.state.cdoTerm + '"}';
+
+    req.open('POST', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    setCookieHeader(req);
+    req.send(body);
+
+    req.addEventListener('load', () => {
+      if(req.status >= 200 && req.status < 400){
+        var str = createNewCDO();
+        var t = document.getElementById("printout");
+        t.innerHTML = "<p>" + str + "</p>";
+      }
+    })
+
+  }
+
+  getCDOs() {
+    console.log("enter getCDOs");
+
+    var req = new XMLHttpRequest();
+    var urlString = "http://localHost:8080/CDOfferings";
+    req.open('GET', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    setCookieHeader(req);
+    req.send();
+
+    req.addEventListener('load', () => {
+
+      if(req.status >= 200 && req.status < 400){
+        //console.log(req.responseText);
+        var str = parseCDO(req);
+        var t = document.getElementById("printout");
+        t.innerHTML = "<p>" + str + "</p>";
+
+      }
+    })
+  }
+
   createAccount() {
 
     console.log("enter createAccount");
@@ -90,6 +153,10 @@ export default class Admin extends Component {
 
     var urlString = "http://localHost:8080/Admin/" + id + "/" + tString;
 
+    if(t == 3){
+      urlString = "http://localHost:8080/Admin/" + id + "/" + tString + "/" + this.state.CDONum;
+    }
+
     var body = '{"balance": "' + this.state.amount + '"}';
 
     req.open('POST', urlString);
@@ -98,16 +165,10 @@ export default class Admin extends Component {
     req.send(body);
 
     req.addEventListener('load', () => {
-
       if(req.status >= 200 && req.status < 400){
-
-
         var str = createNewAccount();
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
-
-
-
       }
     })
 
@@ -116,29 +177,14 @@ export default class Admin extends Component {
 
 
   render() {
+
+
+
     return (
       <>
-      <head>
-        <title>MERIT BANK</title>
-        <link rel="stylesheet" type="text/css" href= "../App.css" />
-      </head>
-      <body>
-
-        <header>
-          <div class="main">
-            <div class="logo">
-              <img />
-            </div>
-            <ul>
-              <li><a href="/login">Sign Off</a></li>
-              <li><a href="/user">Welcome, ADMIN</a></li>
-              <li><a href="#">Mobile</a></li>
-            </ul>
-          </div>
 
 
           <div>
-
 
 
               {/*<button onClick={this.loginRequest}>Login</button>*/}
@@ -166,8 +212,12 @@ export default class Admin extends Component {
       <div>
         &nbsp; &nbsp;
         <button onClick={this.createAccount}>Create New</button>
+        &nbsp; &nbsp;
+        <select id="accountType"
+          value={this.state.accountTypeSelected}
+          onChange={this.handleChangeA}
+        >
 
-        <select id="accountType">
           <option value="1">Checking Account</option>
           <option value="2">DBA Checking Account</option>
           <option value="3">CD Account</option>
@@ -186,7 +236,50 @@ export default class Admin extends Component {
           onChange={this.handleChange}
           required
         />
+        &nbsp;
+        <label id="CDO lab" hidden={this.state.accountTypeSelected != 3}>  from CDO # </label>
+        &nbsp;
+        <input
+          hidden={this.state.accountTypeSelected != 3}
+          id="CDO box"
+          size="10"
+          name="CDONum"
+          value={this.state.CDONum}
+          onChange={this.handleChange}
+          required
+        />
+
+
+
       </div>
+
+      <div>
+        &nbsp; &nbsp;
+        <button onClick={this.getCDOs}>Get All CDOs</button>
+        &nbsp; &nbsp;
+        <button onClick={this.createCDO}>Create New CDO</button>
+        &nbsp; with an interest rate of &nbsp;
+        <input
+          size="10"
+          name="cdoRate"
+          value={this.state.cdoRate}
+          onChange={this.handleChange}
+          required
+        />
+        &nbsp; % and a term of &nbsp;
+        <input
+          size="4"
+          name="cdoTerm"
+          value={this.state.cdoTerm}
+          onChange={this.handleChange}
+          required
+        />
+        &nbsp; years &nbsp;
+
+
+      </div>
+
+
 
       <div id="printout"></div>
       </header>

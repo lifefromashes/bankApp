@@ -128,8 +128,6 @@ export default class Registration extends Component {
 
                 <label>Username:</label>
                 <input
-
-                  type="username"
                   name="username"
                   placeholder="Desired Username"
                   value={this.state.username}

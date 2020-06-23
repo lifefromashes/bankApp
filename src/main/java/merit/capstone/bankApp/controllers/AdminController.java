@@ -68,16 +68,21 @@ public class AdminController {
 	public List<CDOffering> getCDOfferings() throws NotFoundException {
 		return cdOfferingRepository.findAll();
 	}
+	
+	@GetMapping("CDOffering/{id}")
+	public CDOffering getCDOffering(@PathVariable(name = "id") long id) throws NotFoundException {
+		return cdOfferingRepository.findById(id);
+	}
 		
 	
 	
 	
 	
-	@PostMapping("Admin/{id}/CDAccount")
+	@PostMapping("Admin/{id}/CDAccount/{cdo}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankAccount addCDAccount(@PathVariable(name = "id") long id, @RequestBody @Valid CDAccount a)
+	public BankAccount addCDAccount(@PathVariable(name = "id") long id, @PathVariable(name = "cdo") long cdo, @RequestBody @Valid CDAccount a)
 				throws NotFoundException, ExceedsCombinedBalanceLimitException, MaxAccountsReachedException {
-		return createAccount(id, a);
+		return createAccount(id, a, cdo);
 	}
 	@PostMapping("Admin/{id}/CheckingAccount")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -147,6 +152,32 @@ public class AdminController {
 		BankUser user = bankUserRepository.findById(id);
 		ControllerUtil.enforceFound(user);
 		a.setUserId(id);
+		user.addBankAccount(a);
+		bankAccountRepository.save(a);
+		
+		Transaction t = new Transaction();
+		t.setSourceAccount(a.getAccountNumber());
+		t.setTargeAccount(a.getAccountNumber());
+		t.setTransactionMemo("Account Created");
+		a.addTransaction(t);
+
+		transactionRepository.save(t);
+		bankAccountRepository.save(a);
+		
+		return a;
+	}
+	
+	private BankAccount createAccount(long id, BankAccount a, long cdo) throws NotFoundException, MaxAccountsReachedException {
+		CDOffering c = cdOfferingRepository.findById(cdo);
+		ControllerUtil.enforceFound(c);
+		
+		BankUser user = bankUserRepository.findById(id);
+		ControllerUtil.enforceFound(user);
+		a.setUserId(id);
+		
+		a.setTerm(c.getTerm());
+		a.setInterestRate(c.getInterestRate());
+		
 		user.addBankAccount(a);
 		bankAccountRepository.save(a);
 		

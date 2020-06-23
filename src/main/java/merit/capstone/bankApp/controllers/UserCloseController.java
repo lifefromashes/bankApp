@@ -11,6 +11,7 @@ import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
 import merit.capstone.bankApp.exceptions.NotFoundException;
+import merit.capstone.bankApp.exceptions.TransactionNotAllowedException;
 import merit.capstone.bankApp.models.BankAccount;
 import merit.capstone.bankApp.models.BankUser;
 import merit.capstone.bankApp.repos.BankAccountRepository;
@@ -40,7 +41,7 @@ public class UserCloseController {
     
     @CrossOrigin
 	@PutMapping(value = "/User/Close/{id}")
-	public BankAccount closeAccoun(@RequestHeader("Authorization") String auth, @PathVariable (name="accountNumber") long id) throws NotFoundException, CannotCloseAccountException, ExceedsAvailableBalanceException, NegativeAmountException {
+	public BankAccount closeAccoun(@RequestHeader("Authorization") String auth, @PathVariable (name="accountNumber") long id) throws TransactionNotAllowedException,NotFoundException, CannotCloseAccountException, ExceedsAvailableBalanceException, NegativeAmountException {
 		
 		BankUser user = findUser(auth);
 		ControllerUtil.enforceFound(user);

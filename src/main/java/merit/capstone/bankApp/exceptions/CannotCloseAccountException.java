@@ -6,7 +6,10 @@ import org.springframework.http.HttpStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class CannotCloseAccountException extends Exception {
 
-    public CannotCloseAccountException(String msg) {
+   
+	private static final long serialVersionUID = 1009L;
+
+	public CannotCloseAccountException(String msg) {
         super(msg);
     }
 

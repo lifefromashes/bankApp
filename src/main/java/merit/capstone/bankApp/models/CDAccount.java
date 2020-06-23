@@ -3,6 +3,8 @@ package merit.capstone.bankApp.models;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 
+import merit.capstone.bankApp.exceptions.TransactionNotAllowedException;
+
 @Entity
 public class CDAccount extends BankAccount{
 	
@@ -14,13 +16,13 @@ public class CDAccount extends BankAccount{
 	}
 	
 	@Override
-	public void withdraw(double amount) { //exceptions
-		System.out.println("Unable to Withdraw from CD Account");
+	public void withdraw(double amount) throws TransactionNotAllowedException { 
+		throw new TransactionNotAllowedException();
 	}
 	
 	@Override
-	public void deposit(double amount) { //exceptions
-		System.out.println("Unable to deposit to CD Account");
+	public void deposit(double amount) throws TransactionNotAllowedException {
+		throw new TransactionNotAllowedException();
 	}
     
 }
