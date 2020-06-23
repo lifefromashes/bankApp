@@ -206,7 +206,10 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		BankAccount a = bankAccountRepository.findById( transaction.getSourceAccount() );
 		ControllerUtil.enforceFound(a);
 		
-		a.processTransaction(transaction);
+		BankAccount bat = bankAccountRepository.findById(transaction.getTargeAccount());
+		ControllerUtil.enforceFound(bat);
+		
+		a.processTransaction(transaction, a, bat);
 		
 		bankAccountRepository.save(a);
         transactionRepository.save(transaction);

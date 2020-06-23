@@ -36,10 +36,13 @@ public class AdminTransactionController {
     	BankAccount ba = bankAccountRepository.findById( transaction.getSourceAccount() );
     	ControllerUtil.enforceFound(ba);
     	
+    	BankAccount bat = bankAccountRepository.findById(transaction.getTargeAccount());
+    	ControllerUtil.enforceFound(bat);
+    	
     	BankUser user = bankUserRepository.findById(ba.getUserId());
     	ControllerUtil.enforceFound(user);
     	      
-        ba.processTransaction(transaction);
+        ba.processTransaction(transaction, ba, bat);
         
         bankAccountRepository.save(ba);
         transactionRepository.save(transaction);
