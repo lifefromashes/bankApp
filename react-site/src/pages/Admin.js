@@ -11,10 +11,13 @@ export default class Admin extends Component {
     this.state = {
         sample: "",
         userID: 1,
-        amount: 0
+        amount: 0,
+        accountTypeSelected: 1,
+        CDONum: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeA = this.handleChangeA.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.getUserByID = this.getUserByID.bind(this);
     this.createAccount = this.createAccount.bind(this);
@@ -22,10 +25,21 @@ export default class Admin extends Component {
 
 
   handleChange(event) {
+
     this.setState({
       [event.target.name]: event.target.value
     });
+
+    //{console.log(document.getElementById("accountType").value)}
   }
+
+  handleChangeA(event) {
+    this.setState({
+      accountTypeSelected: document.getElementById("accountType").value
+    })
+  }
+
+
 
   getUsers() {
     console.log("enter getUsers");
@@ -116,14 +130,14 @@ export default class Admin extends Component {
 
 
   render() {
+
+
+
     return (
       <>
 
 
           <div>
-
-
-
 
 
               {/*<button onClick={this.loginRequest}>Login</button>*/}
@@ -151,8 +165,12 @@ export default class Admin extends Component {
       <div>
         &nbsp; &nbsp;
         <button onClick={this.createAccount}>Create New</button>
-
-        <select id="accountType">
+        &nbsp; &nbsp;
+        <select id="accountType"
+          value={this.state.accountTypeSelected}
+          onChange={this.handleChangeA}
+        >
+          
           <option value="1">Checking Account</option>
           <option value="2">DBA Checking Account</option>
           <option value="3">CD Account</option>
@@ -171,7 +189,52 @@ export default class Admin extends Component {
           onChange={this.handleChange}
           required
         />
+        &nbsp;
+        <label id="CDO lab" hidden={this.state.accountTypeSelected != 3}>  from CDO # </label>
+        &nbsp;
+        <input
+          hidden={this.state.accountTypeSelected != 3}
+          id="CDO box"
+          size="10"
+          name="amount"
+          value={this.state.CDONum}
+          onChange={this.handleChange}
+          required
+        />
+
+        
+
       </div>
+
+      <div>
+        &nbsp; &nbsp;
+        <button onClick={this.createAccount}>Get All CDOs</button>
+        &nbsp; &nbsp;
+        <button onClick={this.createAccount}>Create New CDO</button>
+        &nbsp; with an interest rate of &nbsp;
+        <input
+          size="10"
+          name="amount"
+          placeholder="amount"
+          value={this.state.amount}
+          onChange={this.handleChange}
+          required
+        />
+        &nbsp; % and a term of &nbsp;
+        <input
+          size="4"
+          name="amount"
+          placeholder="amount"
+          value={this.state.amount}
+          onChange={this.handleChange}
+          required
+        />
+        &nbsp; years &nbsp;
+
+
+      </div>
+
+      
 
       <div id="printout"></div>
 
