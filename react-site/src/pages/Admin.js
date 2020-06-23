@@ -153,6 +153,10 @@ export default class Admin extends Component {
 
     var urlString = "http://localHost:8080/Admin/" + id + "/" + tString;
 
+    if(t == 3){
+      urlString = "http://localHost:8080/Admin/" + id + "/" + tString + "/" + this.state.CDONum;
+    }
+
     var body = '{"balance": "' + this.state.amount + '"}';
 
     req.open('POST', urlString);
@@ -239,7 +243,7 @@ export default class Admin extends Component {
           hidden={this.state.accountTypeSelected != 3}
           id="CDO box"
           size="10"
-          name="amount"
+          name="CDONum"
           value={this.state.CDONum}
           onChange={this.handleChange}
           required
