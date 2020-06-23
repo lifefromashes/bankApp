@@ -115,7 +115,7 @@ export default class Admin extends Component {
         t.innerHTML = "<p>" + str + "</p>";
       }
     })
-    
+
   }
 
   getCDOs() {
@@ -232,7 +232,7 @@ export default class Admin extends Component {
               {/*<button onClick={this.loginRequest}>Login</button>*/}
 
           </div>
-    
+
 
       &nbsp; &nbsp; User Account Number:
       <input
@@ -260,7 +260,7 @@ export default class Admin extends Component {
           value={this.state.accountTypeSelected}
           onChange={this.handleChangeA}
         >
-          
+
           <option value="1">Checking Account</option>
           <option value="2">DBA Checking Account</option>
           <option value="3">CD Account</option>
@@ -294,7 +294,7 @@ export default class Admin extends Component {
           required
         />
 
-        
+
 
       </div>
 
@@ -326,6 +326,7 @@ export default class Admin extends Component {
 
       </div>
 
+<<<<<<< HEAD
       <div>
         &nbsp; &nbsp;
         Bank Account Number:
@@ -366,8 +367,13 @@ export default class Admin extends Component {
       </div>
 
       
+=======
+
+>>>>>>> 0ea96dc36184e558ed14cf3654948c4432659933
 
       <div id="printout"></div>
+      </header>
+      </body>
 
       </>
     );

@@ -99,7 +99,28 @@ export default class Registration extends Component {
   render() {
     return (
       <>
+        <head>
+          <title>LEARN MORE</title>
+          <link rel="stylesheet" type="text/css" href= "../App.css" />
+        </head>
+          <body>
 
+          <header>
+            <div class="main">
+              <div class="logo">
+                <img  />
+              </div>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li class ="login"><a href="/login">Login</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/aboutus">About Us</a></li>
+                <li><a href="/contactus">Contact Us</a></li>
+                <li><a href="#">Mobile</a></li>
+              </ul>
+            </div>
+          <section id="register-section">
+              <div class="Rcontainer">
           <Link to="/login" className="btn-primary">
           Already have an Account?
           </Link>
@@ -112,7 +133,7 @@ export default class Registration extends Component {
                   value={this.state.username}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>Password:</label>
                 <input
@@ -123,7 +144,7 @@ export default class Registration extends Component {
                   onChange={this.handleChange}
                   required
 
-                />
+                /><br />
                 <label>Confirm Password:</label>
                 <input
                   type="password"
@@ -132,7 +153,7 @@ export default class Registration extends Component {
                   value={this.state.password_confirmation}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>First Name:</label>
                 <input
@@ -141,7 +162,7 @@ export default class Registration extends Component {
                   value={this.state.firstname}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>Last Name:</label>
                 <input
@@ -150,7 +171,7 @@ export default class Registration extends Component {
                   value={this.state.lastname}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>SSN:</label>
                 <input
@@ -159,7 +180,7 @@ export default class Registration extends Component {
                   value={this.state.ssn}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>Email:</label>
                 <input
@@ -168,7 +189,7 @@ export default class Registration extends Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>Phone Number:</label>
                 <input
@@ -177,7 +198,7 @@ export default class Registration extends Component {
                   value={this.state.phone}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>Address:</label>
                 <input
@@ -186,7 +207,7 @@ export default class Registration extends Component {
                   value={this.state.address}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>City:</label>
                 <input
@@ -195,7 +216,7 @@ export default class Registration extends Component {
                   value={this.state.city}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>State:</label>
                 <input
@@ -204,7 +225,7 @@ export default class Registration extends Component {
                   value={this.state.stateName}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <label>Zip Code:</label>
                 <input
@@ -213,12 +234,15 @@ export default class Registration extends Component {
                   value={this.state.zip}
                   onChange={this.handleChange}
                   required
-                />
+                /><br />
 
                 <button onClick={this.submitNewUser}>Register</button>
 
             </div>
-    
+            </div>
+            </section>
+          </header>
+          </body>
         </>
     );
   }

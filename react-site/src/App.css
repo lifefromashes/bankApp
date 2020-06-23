@@ -49,6 +49,10 @@ ul li.aboutus a{
   background-color: #fff;
   color: #000;
 }
+ul li.contactus a{
+  background-color: #fff;
+  color: #000;
+}
 
 .logo img{
   background-image: url(./images/whitemerit.png);
@@ -329,7 +333,208 @@ h1{
 .section p{
   text-align: center;
 }
-/*END OF ABOUT US*?
+/*END OF ABOUT US*/
+
+/*CONTACT US*/
+.container{
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+#contact-section{
+  background: rgba(50,148,188,0.7);
+  /* background: #3294bc;*/ /*linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9), url(...)) in case you want to use image*/
+  overflow: hidden;
+  text-align: center;
+  padding: 60px;
+  /* background: #3294bc; */
+  width: 900px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,-55%);
+  padding:0 0px;
+}
+#contact-section .container h2{
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: under;
+  padding-bottom: 5%;
+  color: rgb(238,235,235);
+  letter-spacing: 2px;
+}
+#contact-section .container p{
+  text-align: center;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3%;
+  color: #fff;
+  letter-spacing: 10px;
+}
+.contact-form i.fa{
+  font-size: 22px;
+  padding: 1%;
+  background-color: none;
+  margin: 1%;
+  border-radius: 20%;
+  cursor: pointer;
+  border: 2px solid rgb(190,190,190);
+  color: rgb(190,190,190);
+}
+.contact-form i.fa:hover{
+  curser: pointer;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.contact-form{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.form-info{
+  font-size: 16px;
+  font-style: italic;
+  color: #fff;
+  letter-spacing: 2px;
+}
+input{
+  padding: 10px;
+  margin: 10px;
+  width: 70%;
+  background-color: rgba(136,133,133,.5);
+  color: #fff;
+  border: none;
+  outline: none;
+
+}
+input::placeholder{
+  color: #fff;
+
+}
+textarea{
+  padding: 10px;
+  margin: 10px;
+  width: 70%;
+  background-color: rgba(136,133,133,.5);
+  color: #fff;
+  border: none;
+  outline: none;
+}
+textarea::placeholder{
+  color: #fff;
+
+}
+.submit{
+  width: 40%;
+  background: none;
+  padding: 4px;
+  outline: none;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  height: 33px;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: 2px;
+  margin-left: 3%;
+  border: 2px solid rgb(190,190,190);
+  color: rgb(190,190,190);
+}
+.submit:hover{
+  border:1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media(max-width: 768px){
+  #contact-section .contact-form{
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  #contact-sections .submit{
+    width: 60%;
+  }
+}
+/*END OF CONTACT US*/
+
+/*REGISTER */
+.Rcontainer{
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+#register-section{
+  background: rgba(50,148,188,0.7);
+  /* background: #3294bc;*/ /*linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9), url(...)) in case you want to use image*/
+  overflow: hidden;
+  text-align: center;
+  padding: 60px;
+  /* background: #3294bc; */
+  width: 900px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,-55%);
+  padding:0 0px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+#register-section .Rcontainer label{
+  text-align: center;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3%;
+  color: #fff;
+  letter-spacing: 10px;
+  font-size: 10px;
+}
+#register-section .Rcontainer input{
+  text-align: center;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3%;
+  color: #fff;
+  font-size: 10px;
+}
+
+button{
+  width: 40%;
+  background: none;
+  padding: 4px;
+  outline: none;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  height: 33px;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: 2px;
+  margin-left: 3%;
+  border: 2px solid rgb(190,190,190);
+  color: rgb(190,190,190);
+}
+button:hover{
+  border:1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media(max-width: 768px){
+  #contact-section .contact-form{
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  #contact-sections .submit{
+    width: 60%;
+  }
+}
+/*end of register*/
 
 
 
