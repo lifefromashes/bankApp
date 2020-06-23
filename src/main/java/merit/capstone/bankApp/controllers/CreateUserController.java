@@ -20,10 +20,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import merit.capstone.bankApp.exceptions.MaxAccountsReachedException;
 import merit.capstone.bankApp.exceptions.NotFoundException;
 import merit.capstone.bankApp.exceptions.UsernameAlreadyExistsException;
 import merit.capstone.bankApp.models.BankUser;
+import merit.capstone.bankApp.models.SavingsAccount;
+import merit.capstone.bankApp.models.Transaction;
+import merit.capstone.bankApp.repos.BankAccountRepository;
 import merit.capstone.bankApp.repos.BankUserRepository;
+import merit.capstone.bankApp.repos.CDOfferingRepository;
+import merit.capstone.bankApp.repos.TransactionRepository;
 
 @RestController
 @CrossOrigin
@@ -32,14 +38,16 @@ public class CreateUserController {
 	private Logger log = LoggerFactory.getLogger(this.getClass() );
 	
 	@Autowired private BankUserRepository bankUserRepository;
-	
+	@Autowired private BankAccountRepository bankAccountRepository;
+	@Autowired private CDOfferingRepository cdOfferingRepository;
+	@Autowired private TransactionRepository transactionRepository;
 	
 	
 	
 	
 	@PostMapping("NewUser")
 	@ResponseStatus(HttpStatus.CREATED)
-	public BankUser createCustomer(@Valid @RequestBody BankUser user) throws UsernameAlreadyExistsException {
+	public BankUser createCustomer(@Valid @RequestBody BankUser user) throws UsernameAlreadyExistsException, MaxAccountsReachedException {
 		
 		if( bankUserRepository.findByUsername(user.getUsername()) != null ) { 
 			throw new UsernameAlreadyExistsException();
@@ -48,6 +56,23 @@ public class CreateUserController {
 		if(user.getAuthority() == null) { user.setAuthority("USER"); } // maybe remove if front handles
 		
 		bankUserRepository.save(user);
+		
+		SavingsAccount a = new SavingsAccount();
+		a.setUserId(user.getId());
+		user.addBankAccount(a);
+		bankAccountRepository.save(a);
+		
+		Transaction t = new Transaction();
+		t.setSourceAccount(a.getAccountNumber());
+		t.setTargetAccount(a.getAccountNumber());
+		t.setTransactionMemo("Account Created");
+		a.addTransaction(t);
+
+		transactionRepository.save(t);
+		bankAccountRepository.save(a);
+		
+		
+		
 		
 		return user;
 	}

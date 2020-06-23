@@ -56,7 +56,7 @@ public class BankAppApplicationTest {
 
 		Transaction t = new Transaction();
 		t.setSourceAccount(a.getAccountNumber());
-		t.setTargeAccount(a.getAccountNumber());
+		t.setTargetAccount(a.getAccountNumber());
 		t.setAmount(100);
 
 		a.processTransaction(t, a, a);
@@ -139,7 +139,7 @@ public class BankAppApplicationTest {
 
 		Transaction t = new Transaction();
 		t.setSourceAccount(a.getAccountNumber());
-		t.setTargeAccount(a.getAccountNumber());
+		t.setTargetAccount(a.getAccountNumber());
 		t.setAmount(-100);
 
 		a.processTransaction(t, a, a);
@@ -203,7 +203,7 @@ public class BankAppApplicationTest {
 		
 		Transaction t = new Transaction();
 		t.setSourceAccount(ra.getAccountNumber());
-		t.setTargeAccount(user.getSingleSavingsAccount().getAccountNumber());
+		t.setTargetAccount(user.getSingleSavingsAccount().getAccountNumber());
 		t.setAmount(100);
 		
 		try {

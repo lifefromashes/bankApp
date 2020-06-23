@@ -15,7 +15,10 @@ export default class Admin extends Component {
         accountTypeSelected: 1,
         CDONum: 0,
         cdoRate: .0001,
-        cdoTerm: 1
+        cdoTerm: 1,
+        transAccount: 0,
+        transAmmount: 0,
+        transNote: "Admin Action"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,8 +27,10 @@ export default class Admin extends Component {
     this.getUserByID = this.getUserByID.bind(this);
     this.createAccount = this.createAccount.bind(this);
     this.createCDO = this.createCDO.bind(this);
+    this.createTransaction = this.createTransaction.bind(this);
+    this.getHistory = this.getHistory.bind(this);
   }
-
+  handleFocus = (event) => event.target.select();
 
   handleChange(event) {
 
@@ -135,6 +140,43 @@ export default class Admin extends Component {
     })
   }
 
+  getHistory() {
+
+  }
+
+  createTransaction() {
+    
+
+    var req = new XMLHttpRequest();
+    var urlString = "http://localHost:8080/Admin/Transaction";
+    
+
+    var body = '{"sourceAccount": ' + this.state.transAccount + ', ';
+    body += '"targetAccount": ' + this.state.transAccount + ', ';
+    body += '"amount": "' + this.state.transAmmount + '", ';
+    body += '"transactionMemo": "' + this.state.transNote + '"}'
+
+    console.log(body);
+
+    req.open('POST', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    setCookieHeader(req);
+    req.send(body);
+
+    req.addEventListener('load', () => {
+      console.log(req.status);
+      if(req.status >= 200 && req.status < 400){
+        console.log("success create transaction");
+
+        var str = "Account " + this.state.transAccount + " adjusted.";
+        var t = document.getElementById("printout");
+        t.innerHTML = "<p>" + str + "</p>";
+      }
+    })
+
+
+  }
+
   createAccount() {
 
     console.log("enter createAccount");
@@ -199,6 +241,7 @@ export default class Admin extends Component {
         placeholder="ID#"
         value={this.state.userID}
         onChange={this.handleChange}
+        onFocus={this.handleFocus}
         required
       />
       <br></br>
@@ -234,6 +277,7 @@ export default class Admin extends Component {
           placeholder="amount"
           value={this.state.amount}
           onChange={this.handleChange}
+          onFocus={this.handleFocus}
           required
         />
         &nbsp;
@@ -246,6 +290,7 @@ export default class Admin extends Component {
           name="CDONum"
           value={this.state.CDONum}
           onChange={this.handleChange}
+          onFocus={this.handleFocus}
           required
         />
 
@@ -264,6 +309,7 @@ export default class Admin extends Component {
           name="cdoRate"
           value={this.state.cdoRate}
           onChange={this.handleChange}
+          onFocus={this.handleFocus}
           required
         />
         &nbsp; % and a term of &nbsp;
@@ -272,10 +318,50 @@ export default class Admin extends Component {
           name="cdoTerm"
           value={this.state.cdoTerm}
           onChange={this.handleChange}
+          onFocus={this.handleFocus}
           required
         />
         &nbsp; years &nbsp;
 
+
+      </div>
+
+      <div>
+        &nbsp; &nbsp;
+        Bank Account Number:
+        <input
+            size="10"
+            name="transAccount"
+            value={this.state.transAccount}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+          />
+          
+
+        &nbsp; &nbsp;
+        <button onClick={this.createTransaction}>Adjust Funds</button>
+        &nbsp; by $  &nbsp;
+        
+        <input
+            size="10"
+            name="transAmmount"
+            value={this.state.transAmmount}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+          />
+        
+        &nbsp; Memmo: &nbsp;
+
+        <input
+            name="transNote"
+            value={this.state.transNote}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+          />
+
+        <br></br>
+        &nbsp; &nbsp;
+        <button onClick={this.getHistory}>See Activity History</button>
 
       </div>
 

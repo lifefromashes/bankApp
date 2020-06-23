@@ -16,11 +16,8 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //@OneToOne(cascade = CascadeType.ALL)
     private long sourceAccount;
-
-    //@OneToOne(cascade = CascadeType.ALL)
-    private long targeAccount;
+    private long targetAccount;
 
     private Date transactionDate;
     private double amount;
@@ -32,14 +29,15 @@ public class Transaction {
     public Transaction() {
     	this.transactionDate = new Date();
     	this.amount = 0;
+    	this.transactionMemo = "";
     }
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
     public long getSourceAccount() { return sourceAccount; }
     public void setSourceAccount(long sourceAccount) { this.sourceAccount = sourceAccount; }
-    public long getTargeAccount() { return targeAccount; }
-    public void setTargeAccount(long targeAccount) { this.targeAccount = targeAccount; }
+    public long getTargetAccount() { return targetAccount; }
+    public void setTargetAccount(long targeAccount) { this.targetAccount = targeAccount; }
     public Date getTransactionDate() { return transactionDate; }
     public void setTransactionDate(Date transactionDate) { this.transactionDate = transactionDate; }
     public double getAmount() { return amount; }

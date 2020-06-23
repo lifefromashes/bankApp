@@ -157,7 +157,7 @@ public class AdminController {
 		
 		Transaction t = new Transaction();
 		t.setSourceAccount(a.getAccountNumber());
-		t.setTargeAccount(a.getAccountNumber());
+		t.setTargetAccount(a.getAccountNumber());
 		t.setTransactionMemo("Account Created");
 		a.addTransaction(t);
 
@@ -183,7 +183,7 @@ public class AdminController {
 		
 		Transaction t = new Transaction();
 		t.setSourceAccount(a.getAccountNumber());
-		t.setTargeAccount(a.getAccountNumber());
+		t.setTargetAccount(a.getAccountNumber());
 		t.setTransactionMemo("Account Created");
 		a.addTransaction(t);
 

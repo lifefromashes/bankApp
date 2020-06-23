@@ -30,17 +30,20 @@ public class AdminTransactionController {
     @Autowired private TransactionRepository transactionRepository;
 
 
-    @PostMapping(value = "Admin/Transaction/{id}")
-	public Transaction inputTransaction(@Valid @PathVariable (name = "id") long id, @RequestBody @Valid Transaction transaction) throws NotFoundException {
+    @PostMapping(value = "Admin/Transaction")
+	public Transaction inputTransaction(@RequestBody @Valid Transaction transaction) throws NotFoundException {
+    	
         
     	BankAccount ba = bankAccountRepository.findById( transaction.getSourceAccount() );
     	ControllerUtil.enforceFound(ba);
     	
-    	BankAccount bat = bankAccountRepository.findById(transaction.getTargeAccount());
+    	BankAccount bat = bankAccountRepository.findById(transaction.getTargetAccount());
     	ControllerUtil.enforceFound(bat);
     	
-    	BankUser user = bankUserRepository.findById(ba.getUserId());
-    	ControllerUtil.enforceFound(user);
+    	System.out.println("hjgkfldhjsgkldhfgkjdhfgkljdhf");
+    	
+    	//BankUser user = bankUserRepository.findById(ba.getUserId());
+    	//ControllerUtil.enforceFound(user);
     	      
         ba.processTransaction(transaction, ba, bat);
         
