@@ -326,7 +326,6 @@ export default class Admin extends Component {
 
       </div>
 
-<<<<<<< HEAD
       <div>
         &nbsp; &nbsp;
         Bank Account Number:
@@ -367,13 +366,10 @@ export default class Admin extends Component {
       </div>
 
       
-=======
 
->>>>>>> 0ea96dc36184e558ed14cf3654948c4432659933
 
       <div id="printout"></div>
-      </header>
-      </body>
+
 
       </>
     );
