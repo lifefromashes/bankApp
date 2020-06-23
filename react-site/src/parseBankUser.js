@@ -21,6 +21,28 @@ export const parseBankUser = (req) => {
     return s;
 }
 
+export const parseCDO = (req) => {
+    //JSON.parse(req.responseText).firstName
+    var obj = JSON.parse(req.responseText);
+    var s = "";
+
+    for(var i=0; i<obj.length; i++){
+        
+
+        s += "ID: ";
+        s += obj[i].id;
+        s += " term: ";
+        s += obj[i].term;
+        s += " rate: ";
+        s += obj[i].interestRate;
+        
+        s += " <br> ";
+    }
+
+
+    return s;
+}
+
 export const parseUserByID = (req) => {
     var obj = JSON.parse(req.responseText);
     var s = "";
