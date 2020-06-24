@@ -83,11 +83,11 @@ export const parseAccounts = (req) => {
         }
         s += " id='accountID" + num + "'";
         num ++;
-        s += ">"
-        s += obj.bankAccounts[i].accountName;
-        s += "          $";
+        s += "><div class='placTitle'>"
+        s += obj.bankAccounts[i].accountName + "</div> <div class='placMain'>";
+        s += "Current Balance: $";
         s += obj.bankAccounts[i].balance;
-        s += "</div> <br></br>";
+        s += "</div></div> ";
     }
 
 
@@ -118,7 +118,7 @@ export const parseHistory = (req) => {
         s += "&nbsp; &nbsp; balance after: $";
         s += obj[i].balanceAfterTransaction;
         s += " &nbsp; &nbsp;" + obj[i].transactionMemo;
-        s += "</div> <br></br>";
+        s += "</div> ";
 
 
     }

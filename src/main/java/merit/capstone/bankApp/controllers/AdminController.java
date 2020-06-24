@@ -159,6 +159,7 @@ public class AdminController {
 		t.setSourceAccount(a.getAccountNumber());
 		t.setTargetAccount(a.getAccountNumber());
 		t.setTransactionMemo("Account Created");
+		t.setBalanceAfterTransaction(a.getBalance());
 		a.addTransaction(t);
 
 		transactionRepository.save(t);
@@ -185,6 +186,7 @@ public class AdminController {
 		t.setSourceAccount(a.getAccountNumber());
 		t.setTargetAccount(a.getAccountNumber());
 		t.setTransactionMemo("Account Created");
+		t.setBalanceAfterTransaction(a.getBalance());
 		a.addTransaction(t);
 
 		transactionRepository.save(t);

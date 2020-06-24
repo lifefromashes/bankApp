@@ -863,11 +863,48 @@ button:hover{
 
 /* account placard stuff */
 .accountBox{
-  text-align: center;
-  background-color: cornflowerblue;
+  
+  /*background-color: cornflowerblue;*/
+  background-image: url(./images/account_plac.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+
+  
+  
+  width: 50%;
+  height: auto;
+  margin: auto;
 }.accountBox2{
-  text-align: center;
-  background-color: cyan;
+  
+  /*background-color: cyan;*/
+  background-image: url(./images/account_plac2.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+
+  height: auto;
+  width: 50%;
+  margin: auto;
+}
+
+.placTitle{
+  text-align: left;
+  font-size: larger;
+}
+
+.placMain{
+  
+  
+  text-align: right;
 }
 
 /* temp stuff just to kee admin page buttons and text fields from being huge */
