@@ -197,7 +197,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 	
 	
 	@CrossOrigin
-	@PutMapping(value = "/User/Transaction")
+	@PostMapping(value = "/User/Transaction")
 	public Transaction inputTransaction(@RequestHeader("Authorization") String auth, @RequestBody @Valid Transaction transaction) throws NotFoundException {
 		
 		BankUser user = findUser(auth);
@@ -208,6 +208,10 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		
 		BankAccount bat = bankAccountRepository.findById(transaction.getTargetAccount());
 		ControllerUtil.enforceFound(bat);
+		
+		// prevent anyone without the correct token from accessing other's accounts by editing the origin url
+		if(a.getUserId() != user.getId()) { throw new NotFoundException(); }
+		
 		
 		a.processTransaction(transaction, a, bat);
 		

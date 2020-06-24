@@ -36,6 +36,8 @@ export default class Registration extends Component {
   }
 
   submitNewUser() {
+    console.log("trying to create new user");
+
     var body = '{"username": "' + this.state.username + '", ';
     body += '"password": "' + this.state.password + '", ';
     body += '"firstName": "' + this.state.firstname + '", ';

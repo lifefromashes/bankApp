@@ -43,8 +43,6 @@ public class AdminTransactionController {
     	BankAccount bat = bankAccountRepository.findById(transaction.getTargetAccount());
     	ControllerUtil.enforceFound(bat);
     	
-    	System.out.println("hjgkfldhjsgkldhfgkjdhfgkljdhf");
-    	
     	//BankUser user = bankUserRepository.findById(ba.getUserId());
     	//ControllerUtil.enforceFound(user);
     	      

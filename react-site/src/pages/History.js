@@ -86,6 +86,40 @@ export default class History extends Component {
 
 
   makeTrans() {
+    
+    var req = new XMLHttpRequest();
+    let url = window.location;
+    let urlSplit = url.toString().split("/");
+    let actID = urlSplit[urlSplit.length - 1];
+
+    let amt = this.state.amount;
+
+    let mem = "Deposit";
+    if(this.state.actionTypeSelected == 2){ 
+      mem = "Withdraw"; 
+      amt *= -1;
+    }
+
+
+    var body = '{"amount": "' + amt + '", ';
+    body += '"sourceAccount": ' + actID + ', ';
+    body += '"targetAccount": ' + actID + ', ';
+    body += '"transactionMemo": "' + mem + '"}';
+
+    var urlString = "http://localHost:8080/User/Transaction";
+    req.open('POST', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    var jwt = readCookie("jwt");
+    setCookieHeader(req);
+    req.send(body);
+
+    req.addEventListener('load', () => {
+      if(req.status >= 200 && req.status < 400){
+        window.location.reload();
+        
+        
+      }
+    })
 
   }
 
@@ -143,8 +177,7 @@ export default class History extends Component {
 
                   <input
                     className="adminTool" 
-                    type="userID"
-                    name="userID"
+                    name="amount"
                     value={this.state.amount}
                     onChange={this.handleChange}
                     onFocus={this.handleFocus}
@@ -155,21 +188,7 @@ export default class History extends Component {
 
                 </div>
 
-                
 
-
-
-                {/*}
-                <input
-                  class="adminTool"
-                  type="sample"
-                  name="sample"
-                  placeholder="Sample"
-                  value={this.state.sample}
-                  onChange={this.handleChange}
-                  required
-                />
-                */}
 
 
 
