@@ -84,7 +84,8 @@ export const parseAccounts = (req) => {
         s += " id='accountID" + num + "'";
         num ++;
         s += "><div class='placTitle'>"
-        s += obj.bankAccounts[i].accountName + "</div> <div class='placMain'>";
+        s += obj.bankAccounts[i].accountName + " #" + obj.bankAccounts[i].accountNumber;
+        s += "</div> <div class='placMain'>";
         s += "Current Balance: $";
         s += obj.bankAccounts[i].balance;
         s += "</div></div> ";
@@ -96,7 +97,8 @@ export const parseAccounts = (req) => {
 
 export const parseHistory = (req) => {
     var s = "";
-    var obj = JSON.parse(req.responseText);
+    var objParent = JSON.parse(req.responseText);
+    var obj = objParent.transactions;
     var classString = "<div class='accountBox'";
     var num = 0;
 

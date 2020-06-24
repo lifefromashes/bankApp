@@ -218,7 +218,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 	
 	@CrossOrigin
 	@GetMapping(value = "/User/Transaction/{id}") // id is the BankAccount id
-	public List<Transaction> accountHistory(@RequestHeader("Authorization") String auth, @PathVariable(name = "id") long id) throws NotFoundException {
+	public BankAccount accountHistory(@RequestHeader("Authorization") String auth, @PathVariable(name = "id") long id) throws NotFoundException {
 		
 		BankUser user = findUser(auth);
 		ControllerUtil.enforceFound(user);
@@ -230,7 +230,8 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		if(a.getUserId() != user.getId()) { throw new NotFoundException(); }
 		
         
-		return a.getTransactions();
+		//return a.getTransactions();
+		return a;
 	}
 	
 	

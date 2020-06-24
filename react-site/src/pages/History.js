@@ -34,27 +34,21 @@ export default class History extends Component {
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
         //document.getElementById("userTitle").title = JSON.parse(req.responseText).username;
+        
+        var s = "";
+        s += JSON.parse(req.responseText).accountName + " #";
+        s += JSON.parse(req.responseText).accountNumber;
+        document.getElementById("accountTitle").innerHTML = s;
 
-        //t.innerHTML = "<p>" + JSON.parse(req.responseText).firstName;
-        //t += "" + "</p>";
-
-
+        
         var al = document.getElementById("historyList");
         al.innerHTML = parseHistory(req);
 
-        //var his = JSON.parse(req.responseText).length;
-        //for(let i=0; i<his; i++){
-          //let b = document.getElementById("accountID" + i);
-          //this.state.accounts[this.state.accountIndex] = b;
-          //this.state.accountIndex ++;
-          //b.addEventListener('click', () => {
-            //window.location = "history/" + JSON.parse(req.responseText).bankAccounts[i].accountNumber;
-          //});
-        //}
+        
 
 
 
-        console.log("transactions: " + req.responseText);
+        
 
       }
     })
@@ -76,31 +70,59 @@ export default class History extends Component {
   render() {
     return (
       <>
-      <div>
-        <div title="Transaction History">
-        <div id="userTitle"></div>
-
-          <div>
-
-              <input
-                type="sample"
-                name="sample"
-                placeholder="Sample"
-                value={this.state.sample}
-                onChange={this.handleChange}
-                required
-              />
+      <head>
+        <title>MERIT BANK</title>
+        <link rel="stylesheet" type="text/css" href= "../App.css" />
+      </head>
+      <body>
 
 
+      <header>
+          <div class="main">
+            <div class="logo">
+              <img />
+            </div>
+            <ul>
+              <li><a href="/login">Sign Off</a></li>
+              <li><a href="/user">Welcome, USER</a></li>
+              <li><a href="#">Mobile</a></li>
+            </ul>
+          </div>
 
-              {/*<button onClick={this.loginRequest}>Login</button>*/}
+
+        
+
+
+        <div>
+          <div title="Transaction History">
+          <div id="userTitle"></div>
+
+            <div>
+                <h1 id="accountTitle">Account</h1>
+
+                {/*}
+                <input
+                  class="adminTool"
+                  type="sample"
+                  name="sample"
+                  placeholder="Sample"
+                  value={this.state.sample}
+                  onChange={this.handleChange}
+                  required
+                />
+                */}
+
+
+
+            </div>
 
           </div>
 
         </div>
-
-      </div>
-      <div id="historyList"></div>
+        <div id="historyList"></div>
+      </header>
+      </body>
+      
       </>
     );
   }
