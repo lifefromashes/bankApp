@@ -869,3 +869,32 @@ button:hover{
   text-align: center;
   background-color: cyan;
 }
+
+/* temp stuff just to kee admin page buttons and text fields from being huge */
+.adminTool{
+  width: 10%;
+  color: white;
+}
+
+.adminTool2{
+  width: 20%;
+  color: white;
+}
+
+#printout{
+  width: 90%;
+  height: 70%;
+
+  background-image: url(./images/console_admin_tool_bg.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  
+
+  font-weight: 900;
+  color: greenyellow;
+
+  padding-left: 2%;
+  padding-top: 2%;
+
+  
+}

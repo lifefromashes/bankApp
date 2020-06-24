@@ -141,7 +141,7 @@ export default class Admin extends Component {
   }
 
   getHistory() {
-
+    console.log("enter get history admin");
   }
 
   createTransaction() {
@@ -250,9 +250,11 @@ export default class Admin extends Component {
 
           </div>
 
+      <br></br><br></br><br></br>
 
       &nbsp; &nbsp; User Account Number:
       <input
+        className="adminTool" 
         type="userID"
         name="userID"
         placeholder="ID#"
@@ -263,15 +265,15 @@ export default class Admin extends Component {
       />
       <br></br>
       &nbsp; &nbsp;
-      <button onClick={this.getUsers}>Get All Users</button>
+      <button className="adminTool" onClick={this.getUsers}>Get All Users</button>
 
       &nbsp; &nbsp;
-      <button onClick={this.getUserByID}>Get User by User Account Number</button>
+      <button className="adminTool2" onClick={this.getUserByID}>Get User by User Account Number</button>
 
       <br></br>
       <div>
         &nbsp; &nbsp;
-        <button onClick={this.createAccount}>Create New</button>
+        <button className="adminTool" onClick={this.createAccount}>Create New</button>
         &nbsp; &nbsp;
         <select id="accountType"
           value={this.state.accountTypeSelected}
@@ -288,6 +290,7 @@ export default class Admin extends Component {
 
         &nbsp; with a starting balance of &nbsp;
         <input
+          className="adminTool" 
           size="10"
           type="amount"
           name="amount"
@@ -301,6 +304,7 @@ export default class Admin extends Component {
         <label id="CDO lab" hidden={this.state.accountTypeSelected != 3}>  from CDO # </label>
         &nbsp;
         <input
+          className="adminTool" 
           hidden={this.state.accountTypeSelected != 3}
           id="CDO box"
           size="10"
@@ -317,11 +321,12 @@ export default class Admin extends Component {
 
       <div>
         &nbsp; &nbsp;
-        <button onClick={this.getCDOs}>Get All CDOs</button>
+        <button className="adminTool" onClick={this.getCDOs}>Get All CDOs</button>
         &nbsp; &nbsp;
-        <button onClick={this.createCDO}>Create New CDO</button>
+        <button className="adminTool" onClick={this.createCDO}>Create New CDO</button>
         &nbsp; with an interest rate of &nbsp;
         <input
+          className="adminTool" 
           size="10"
           name="cdoRate"
           value={this.state.cdoRate}
@@ -331,6 +336,7 @@ export default class Admin extends Component {
         />
         &nbsp; % and a term of &nbsp;
         <input
+          className="adminTool" 
           size="4"
           name="cdoTerm"
           value={this.state.cdoTerm}
@@ -347,6 +353,7 @@ export default class Admin extends Component {
         &nbsp; &nbsp;
         Bank Account Number:
         <input
+            className="adminTool" 
             size="10"
             name="transAccount"
             value={this.state.transAccount}
@@ -356,10 +363,11 @@ export default class Admin extends Component {
           
 
         &nbsp; &nbsp;
-        <button onClick={this.createTransaction}>Adjust Funds</button>
+        <button className="adminTool" onClick={this.createTransaction}>Adjust Funds</button>
         &nbsp; by $  &nbsp;
         
         <input
+            className="adminTool" 
             size="10"
             name="transAmmount"
             value={this.state.transAmmount}
@@ -370,22 +378,22 @@ export default class Admin extends Component {
         &nbsp; Memmo: &nbsp;
 
         <input
+            className="adminTool" 
             name="transNote"
             value={this.state.transNote}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
           />
 
-        <br></br>
-        &nbsp; &nbsp;
-        <button onClick={this.getHistory}>See Activity History</button>
+        
+        <button className="adminTool2" onClick={this.getHistory}>See Activity History</button>
 
       </div>
 
-      
+      <br></br>
 
 
-      <div id="printout"></div>
+      <div id="printout" classname="consoleAdminTool"></div>
       </header>
       </body>
 
