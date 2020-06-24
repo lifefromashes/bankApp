@@ -100,7 +100,7 @@ export default class Registration extends Component {
     return (
       <>
         <head>
-          <title>LEARN MORE</title>
+          <title>REGISTER</title>
           <link rel="stylesheet" type="text/css" href= "../App.css" />
         </head>
           <body>
@@ -112,7 +112,7 @@ export default class Registration extends Component {
               </div>
               <ul>
                 <li><a href="/">Home</a></li>
-                <li class ="login"><a href="/login">Login</a></li>
+                <li class ="register"><a href="/register">Register</a></li>
                 <li><a href="/services">Services</a></li>
                 <li><a href="/aboutus">About Us</a></li>
                 <li><a href="/contactus">Contact Us</a></li>
@@ -120,11 +120,11 @@ export default class Registration extends Component {
               </ul>
             </div>
           <section id="register-section">
-              <div class="Rcontainer">
-          <Link to="/login" className="btn-primary">
-          Already have an Account?
-          </Link>
-            <div>
+              <div class="registercontainer">
+            <Link to="/login" className="btn-primary">
+            Already have an Account?
+            </Link>
+            <div class="register-form">
 
                 <label>Username:</label>
                 <input
@@ -145,7 +145,8 @@ export default class Registration extends Component {
                   required
 
                 /><br />
-                <label>Confirm Password:</label>
+
+                <label>Confirm:</label>
                 <input
                   type="password"
                   name="password_confirmation"
@@ -191,7 +192,7 @@ export default class Registration extends Component {
                   required
                 /><br />
 
-                <label>Phone Number:</label>
+                <label>Phone #:</label>
                 <input
                   name="phone"
                   placeholder="Phone Number"
@@ -243,6 +244,7 @@ export default class Registration extends Component {
             </section>
           </header>
           </body>
+          
         </>
     );
   }

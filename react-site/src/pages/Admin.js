@@ -224,6 +224,23 @@ export default class Admin extends Component {
 
     return (
       <>
+      <head>
+        <title>MERIT BANK</title>
+        <link rel="stylesheet" type="text/css" href= "../App.css" />
+      </head>
+      <body>
+      
+        <header>
+          <div class="main">
+            <div class="logo">
+              <img />
+            </div>
+            <ul>
+              <li><a href="/login">Sign Off</a></li>
+              <li><a href="/user">Welcome, ADMIN</a></li>
+              <li><a href="#">Mobile</a></li>
+            </ul>
+          </div>
 
 
           <div>
@@ -369,7 +386,8 @@ export default class Admin extends Component {
 
 
       <div id="printout"></div>
-
+      </header>
+      </body>
 
       </>
     );
