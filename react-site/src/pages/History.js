@@ -15,8 +15,15 @@ export default class History extends Component {
         password: "",
         loginErrors: "",
         accounts: [],
-        accountIndex: 0
+        accountIndex: 0,
+        actionTypeSelected: 1,
+        amount: 0
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeA = this.handleChangeA.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.makeTrans = this.makeTrans.bind(this);
 
 
 
@@ -39,6 +46,10 @@ export default class History extends Component {
         s += JSON.parse(req.responseText).accountName + " #";
         s += JSON.parse(req.responseText).accountNumber;
         document.getElementById("accountTitle").innerHTML = s;
+
+        s = "";
+        s += "$" + JSON.parse(req.responseText).balance;
+        document.getElementById("bal").innerHTML = s;
 
         
         var al = document.getElementById("historyList");
@@ -63,6 +74,19 @@ export default class History extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  handleChangeA(event) {
+    this.setState({
+      actionTypeSelected: document.getElementById("actionType").value
+    })
+  }
+
+  handleFocus = (event) => event.target.select();
+
+
+  makeTrans() {
+
   }
 
 
@@ -97,8 +121,43 @@ export default class History extends Component {
           <div title="Transaction History">
           <div id="userTitle"></div>
 
+          
+
             <div>
-                <h1 id="accountTitle">Account</h1>
+                <h1 id="accountTitle" class="accountTitle">Account</h1>
+                <h1 id="bal" class="userBalance"></h1>
+
+                <div class="userTrans">
+                  Make a &nbsp;
+
+                  <select id="actionType"
+                    value={this.state.actionTypeSelected}
+                    onChange={this.handleChangeA}
+                  >
+                    <option value="1">Deposit</option>
+                    <option value="2">Withdraw</option>
+                  </select>
+
+
+                  &nbsp; of $
+
+                  <input
+                    className="adminTool" 
+                    type="userID"
+                    name="userID"
+                    value={this.state.amount}
+                    onChange={this.handleChange}
+                    onFocus={this.handleFocus}
+                    required
+                  />
+
+                  <button className="adminTool" onClick={this.makeTrans}>Submit</button>
+
+                </div>
+
+                
+
+
 
                 {/*}
                 <input

@@ -935,3 +935,12 @@ button:hover{
 
   
 }
+
+.userBalance{
+  color: green;
+  font-size: 40pt;
+}
+
+.userTrans{
+  text-align: center;
+}
