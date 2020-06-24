@@ -22,13 +22,11 @@ export const parseBankUser = (req) => {
 }
 
 export const parseCDO = (req) => {
-    //JSON.parse(req.responseText).firstName
     var obj = JSON.parse(req.responseText);
     var s = "";
 
     for(var i=0; i<obj.length; i++){
         
-
         s += "ID: ";
         s += obj[i].id;
         s += " term: ";
@@ -38,7 +36,6 @@ export const parseCDO = (req) => {
         
         s += " <br> ";
     }
-
 
     return s;
 }
@@ -103,7 +100,8 @@ export const parseHistory = (req) => {
     var classString = "<div class='accountBox'";
     var num = 0;
 
-    for(var i=0; i<obj.length; i++){
+    for(var i=obj.length-1; i>=0; i--){
+    //for(var i=0; i<obj.length; i++){
         
         s += classString;
         if(classString == "<div class='accountBox'"){
@@ -136,7 +134,7 @@ export const parseHistoryAdmin = (req) => {
     var obj = JSON.parse(req.responseText);
     var num = 0;
 
-    for(var i=0; i<obj.length; i++){
+    for(var i = obj.length - 1; i >= 0; i--){
         
         s += "<p>";
         s += obj[i].transactionDate;
@@ -145,7 +143,7 @@ export const parseHistoryAdmin = (req) => {
         s += "&nbsp; &nbsp; balance after: $";
         s += obj[i].balanceAfterTransaction;
         s += " &nbsp; &nbsp;" + obj[i].transactionMemo;
-        s += "</p> <br></br>";
+        s += "</p> ";
 
     }
 
