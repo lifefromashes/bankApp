@@ -127,3 +127,27 @@ export const parseHistory = (req) => {
 
     return s;
 }
+
+
+
+
+export const parseHistoryAdmin = (req) => {
+    var s = "";
+    var obj = JSON.parse(req.responseText);
+    var num = 0;
+
+    for(var i=0; i<obj.length; i++){
+        
+        s += "<p>";
+        s += obj[i].transactionDate;
+        s += "&nbsp; &nbsp; amount: $"
+        s += obj[i].amount;
+        s += "&nbsp; &nbsp; balance after: $";
+        s += obj[i].balanceAfterTransaction;
+        s += " &nbsp; &nbsp;" + obj[i].transactionMemo;
+        s += "</p> <br></br>";
+
+    }
+
+    return s;
+}

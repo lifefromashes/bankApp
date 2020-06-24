@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
-import {parseBankUser, parseUserByID, parseCDO} from "../parseBankUser";
+import {parseBankUser, parseUserByID, parseCDO, parseHistoryAdmin} from "../parseBankUser";
 import {createNewAccount, createNewCDO} from "../adminFeedback";
 
 export default class Admin extends Component {
@@ -142,6 +142,42 @@ export default class Admin extends Component {
 
   getHistory() {
     console.log("enter get history admin");
+
+
+
+
+
+
+    var req = new XMLHttpRequest();
+
+    var urlString = "http://localHost:8080/Admin/Transaction/" + this.state.transAccount;
+    req.open('GET', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    var jwt = readCookie("jwt");
+    setCookieHeader(req);
+    req.send();
+
+    req.addEventListener('load', () => {
+      if(req.status >= 200 && req.status < 400){
+        var str = parseHistoryAdmin(req);
+        var t = document.getElementById("printout");
+        t.innerHTML = "<p>" + str + "</p>";
+      }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
   createTransaction() {

@@ -1,5 +1,7 @@
 package merit.capstone.bankApp.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import merit.capstone.bankApp.exceptions.NotFoundException;
@@ -51,6 +54,19 @@ public class AdminTransactionController {
         transactionRepository.save(transaction);
 		return transaction;
     }
+    
+    
+    
+    
+    @CrossOrigin
+	@GetMapping(value = "/Admin/Transaction/{id}") // id is the BankAccount id
+	public List<Transaction> accountHistory(@RequestHeader("Authorization") String auth, @PathVariable(name = "id") long id) throws NotFoundException {
+		
+		BankAccount a = bankAccountRepository.findById(id);
+		ControllerUtil.enforceFound(a);
+		
+		return a.getTransactions();
+	}
     
 
 }
