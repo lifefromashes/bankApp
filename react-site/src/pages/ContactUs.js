@@ -41,7 +41,7 @@ export default class ContactUs extends Component {
                         <i class="fa fa-envelope"></i><span class="form-info"> info@meritbank.com</span><br />
                         </div>
                     <div class="form">
-                        <input type="text" placeholder="Your Name" required/>
+                        <input type="text" placeholder="First Name" required/>
                         <input type="text" placeholder="Last Name" required/>
                         <input type="Email" placeholder="Email" required/>
                         <input type="text" placeholder="Subject of this mesage" required/>

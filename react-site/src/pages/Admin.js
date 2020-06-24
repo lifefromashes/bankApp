@@ -411,7 +411,7 @@ export default class Admin extends Component {
             onFocus={this.handleFocus}
           />
         
-        &nbsp; Memmo: &nbsp;
+        &nbsp; Memo: &nbsp;
 
         <input
             className="adminTool" 
