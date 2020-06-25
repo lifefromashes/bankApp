@@ -105,7 +105,14 @@ export const parseHistory = (req) => {
     for(var i=obj.length-1; i>=0; i--){
     //for(var i=0; i<obj.length; i++){
         
-        s += classString;
+        if(obj[i].transactionSuccess){
+
+            s += classString;
+        } else {
+            s += "<div class='failBox'"
+        }
+
+
         if(classString == "<div class='accountBox'"){
             classString = "<div class='accountBox2'";
         } else {
@@ -117,8 +124,14 @@ export const parseHistory = (req) => {
         s += ">" + obj[i].transactionDate;
         s += "&nbsp; &nbsp; amount: $"
         s += obj[i].amount;
-        s += "&nbsp; &nbsp; balance after: $";
-        s += obj[i].balanceAfterTransaction;
+
+        if(obj[i].transactionSuccess){
+            s += "&nbsp; &nbsp; balance after: $";
+            s += obj[i].balanceAfterTransaction;
+        } else {
+            s += "&nbsp; &nbsp; REJECTED";
+        }
+        
         s += " &nbsp; &nbsp;" + obj[i].transactionMemo;
         s += "</div> ";
 
@@ -139,10 +152,18 @@ export const parseHistoryAdmin = (req) => {
     for(var i = obj.length - 1; i >= 0; i--){
         
         s += "<p>";
-        s += obj[i].transactionDate;
+        s += obj[i].transactionDate + "&nbsp; &nbsp;";
+
+
+        
         s += "&nbsp; &nbsp; amount: $"
         s += obj[i].amount;
-        s += "&nbsp; &nbsp; balance after: $";
+        
+        if(obj[i].transactionSuccess){
+            s += "&nbsp; &nbsp; balance after: $";
+        } else {
+            s += "&nbsp; &nbsp; REJECTED &nbsp; &nbsp;"
+        }
         s += obj[i].balanceAfterTransaction;
         s += " &nbsp; &nbsp;" + obj[i].transactionMemo;
         s += "</p> ";

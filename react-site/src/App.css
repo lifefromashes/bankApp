@@ -879,10 +879,27 @@ button:hover{
   width: 50%;
   height: auto;
   margin: auto;
-}.accountBox2{
+}
+
+.accountBox2{
   
   /*background-color: cyan;*/
   background-image: url(./images/account_plac2.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+
+  height: auto;
+  width: 50%;
+  margin: auto;
+}
+
+.failBox{
+  background-image: url(./images/fail_plac.png);
   background-repeat: no-repeat;
   background-size: 100%;
 

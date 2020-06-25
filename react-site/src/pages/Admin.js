@@ -67,6 +67,8 @@ export default class Admin extends Component {
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
 
+      } else {
+        document.getElementById("printout").innerHTML = "<p>Unable to connect.</p>";
       }
     })
   }
@@ -90,12 +92,13 @@ export default class Admin extends Component {
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
 
+      } else {
+        document.getElementById("printout").innerHTML = "<p>Unable to find user " + id + "</p>";
       }
     })
   }
 
   createCDO() {
-    console.log("enter create cdo");
 
     var req = new XMLHttpRequest();
     var urlString = "http://localHost:8080/Admin/CDOfferings";
@@ -113,13 +116,14 @@ export default class Admin extends Component {
         var str = createNewCDO();
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
+      } else {
+        document.getElementById("printout").innerHTML = "<p>Unable to create CD Offering. </p>";
       }
     })
 
   }
 
   getCDOs() {
-    console.log("enter getCDOs");
 
     var req = new XMLHttpRequest();
     var urlString = "http://localHost:8080/CDOfferings";
@@ -141,12 +145,6 @@ export default class Admin extends Component {
   }
 
   getHistory() {
-    console.log("enter get history admin");
-
-
-
-
-
 
     var req = new XMLHttpRequest();
 
@@ -162,6 +160,8 @@ export default class Admin extends Component {
         var str = parseHistoryAdmin(req);
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
+      } else {
+        document.getElementById("printout").innerHTML = "<p>Unable to find Account #" + this.state.transAccount + "</p>";
       }
     })
 
@@ -204,9 +204,11 @@ export default class Admin extends Component {
       if(req.status >= 200 && req.status < 400){
         console.log("success create transaction");
 
-        var str = "Account " + this.state.transAccount + " adjusted.";
+        var str = "Transaction for account #" + this.state.transAccount + " submitted.";
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
+      } else {
+        document.getElementById("printout").innerHTML = "<p>Unable to find Account #" + this.state.transAccount + "</p>";
       }
     })
 
@@ -247,6 +249,8 @@ export default class Admin extends Component {
         var str = createNewAccount();
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
+      } else {
+        document.getElementById("printout").innerHTML = "<p>Unable to create account.</p>";
       }
     })
 
