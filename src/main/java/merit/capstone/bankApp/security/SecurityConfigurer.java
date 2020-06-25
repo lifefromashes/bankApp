@@ -60,6 +60,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 				.antMatchers("/Admin/**").hasAuthority("ADMIN")
 				.antMatchers("/authenticate").permitAll()
 				.antMatchers("/NewUser").permitAll()
+				.antMatchers("/Feedback").permitAll()
 				
 				.anyRequest().authenticated()
 				.and().sessionManagement()
