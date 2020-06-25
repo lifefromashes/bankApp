@@ -944,3 +944,8 @@ button:hover{
 .userTrans{
   text-align: center;
 }
+
+.userTitle{
+  text-align: center;
+  font-size: 20pt;
+}

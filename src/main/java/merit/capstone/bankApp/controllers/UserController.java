@@ -39,6 +39,7 @@ import merit.capstone.bankApp.security.JwtUtil;
 import merit.capstone.bankApp.security.MyUserDetailsService;
 
 @RestController
+@CrossOrigin
 public class UserController {
 	
 private Logger log = LoggerFactory.getLogger(this.getClass() );
@@ -90,7 +91,6 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 			case "SavingsAccount": return getBankAccounts(user, new SavingsAccount());
 			default: throw new IllegalArgumentException();
 		}
-		
 	}
 	
 	/*
