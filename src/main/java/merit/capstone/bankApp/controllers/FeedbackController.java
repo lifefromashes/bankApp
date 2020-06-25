@@ -16,7 +16,7 @@ public class FeedbackController {
 	@Autowired
 	private FeedbackRepository feedbackRepository;
 	
-	@PostMapping("Feedback")
+	@PostMapping("/Feedback")
 	public Feedback sendFeedback(@RequestBody Feedback fb) {
 		
 		feedbackRepository.save(fb);

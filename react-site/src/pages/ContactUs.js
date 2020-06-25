@@ -1,9 +1,61 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 
 
 
 export default class ContactUs extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      firstname: "First Name",
+      lastname: "Last Name",
+      email: "Email@Somewhere.com",
+      subject: "Subject",
+      message: "Message"
+    }
+
+    this.submitFeedback = this.submitFeedback.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleFocus = (event) => event.target.select();
+
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  submitFeedback(){
+    
+    var req = new XMLHttpRequest();
+    var urlString = "http://localHost:8080/Feedback";
+
+    var body = '{"firstname": "' + this.state.firstname + '", ';
+    body += '"lastname": "' + this.state.lastname + '", ';
+    body += '"email": "' + this.state.email + '", ';
+    body += '"subject": "' + this.state.subject + '", ';
+    body += '"message": "' + this.state.message + '"}';
+
+    req.open('POST', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    setCookieHeader(req);
+    req.send(body);
+
+    req.addEventListener('load', () => {
+      if(req.status >= 200 && req.status < 400){
+        alert("Thanks! We'll review your message and get back to you.");
+        //document.getElementById("myForm").reset();
+        document.getElementById("firstname").value = "";
+      }
+    })
+
+  }
 
   render() {
     return (
@@ -40,13 +92,13 @@ export default class ContactUs extends Component {
                         <i class="fa fa-phone"></i><span class="form-info"> +1-999-999-9999</span><br />
                         <i class="fa fa-envelope"></i><span class="form-info"> info@meritbank.com</span><br />
                         </div>
-                    <div class="form">
-                        <input type="text" placeholder="First Name" required/>
-                        <input type="text" placeholder="Last Name" required/>
-                        <input type="Email" placeholder="Email" required/>
-                        <input type="text" placeholder="Subject of this mesage" required/>
-                        <textarea name="message" placeholder="Message" rows="5" required></textarea>
-                        <button class="submit">Send Message</button>
+                    <div class="form" id="myForm">
+                        <input type="text" name="firstname" id="firstname" value={this.state.firstname} onFocus={this.handleFocus} onChange={this.handleChange} required/>
+                        <input type="text" name="lastname" id="lastname" value={this.state.lastname} onFocus={this.handleFocus} onChange={this.handleChange} required/>
+                        <input type="Email" name="email" id="email" value={this.state.email} onFocus={this.handleFocus} onChange={this.handleChange} required/>
+                        <input type="text" name="subject" id="subject" value={this.state.subject} onFocus={this.handleFocus} onChange={this.handleChange} required/>
+                        <textarea name="message" rows="5" id="message" value={this.state.message} onFocus={this.handleFocus} onChange={this.handleChange} required></textarea>
+                        <button class="submit" onClick={this.submitFeedback}>Send Message</button>
                       </div>
                       </div>
                 </div>
@@ -57,4 +109,6 @@ export default class ContactUs extends Component {
       </>
     );
   }
+
+  
 }
