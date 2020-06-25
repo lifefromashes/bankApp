@@ -433,8 +433,10 @@ export default class Admin extends Component {
 
       <br></br>
 
+      
+        <div id="printout" classname="consoleAdminTool"></div>
+      
 
-      <div id="printout" classname="consoleAdminTool"></div>
       </header>
       </body>
 
