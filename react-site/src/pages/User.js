@@ -213,6 +213,7 @@ export default class User extends Component {
           onChange={this.handleChangeC}
         >
         </select>
+        with a starting balance of $
         <input
           class = "adminTool2"
           name="amount"

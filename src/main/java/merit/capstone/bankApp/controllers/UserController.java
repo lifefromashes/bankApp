@@ -182,6 +182,17 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		a.setUserId(user.getId());
 		user.addBankAccount(a);
 		bankAccountRepository.save(a);
+		
+		Transaction t = new Transaction();
+		t.setSourceAccount(a.getAccountNumber());
+		t.setTargetAccount(a.getAccountNumber());
+		t.setTransactionMemo("Account Created");
+		t.setBalanceAfterTransaction(a.getBalance());
+		a.addTransaction(t);
+
+		transactionRepository.save(t);
+		bankAccountRepository.save(a);
+		
 		return a;
 	}
 	
