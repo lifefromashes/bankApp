@@ -188,6 +188,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		t.setTargetAccount(a.getAccountNumber());
 		t.setTransactionMemo("Account Created");
 		t.setBalanceAfterTransaction(a.getBalance());
+		t.setTransactionSuccess(true);
 		a.addTransaction(t);
 
 		transactionRepository.save(t);

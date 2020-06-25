@@ -83,7 +83,7 @@ public class BankUser {
 	public int getNumberOfAccountsByType(BankAccount type) {
 		int sum = 0;
 		for(BankAccount b : this.bankAccounts) {
-			if(b.getClass() == type.getClass()) {
+			if(b.getClass() == type.getClass() && b.isActive()) {
 				sum++;
 			}
 		}
@@ -95,7 +95,7 @@ public class BankUser {
 	public List<BankAccount> getCheckingAccounts() {
 		List<BankAccount> accounts = new ArrayList<>();
 		for (BankAccount b : this.bankAccounts) {
-			if (b instanceof CheckingAccount) {
+			if (b instanceof CheckingAccount && b.isActive()) {
 				accounts.add(b);
 			}
 		}
@@ -105,7 +105,7 @@ public class BankUser {
 	public List<BankAccount> getDBACheckingAccounts() {
 		List<BankAccount> accounts = new ArrayList<>();
 		for (BankAccount b : this.bankAccounts) {
-			if (b instanceof DBACheckingAccount) {
+			if (b instanceof DBACheckingAccount && b.isActive()) {
 				accounts.add(b);
 			}
 		}
@@ -115,7 +115,7 @@ public class BankUser {
 	public List<BankAccount> getSavingsAccount() {
 		List<BankAccount> accounts = new ArrayList<>();
 		for (BankAccount b : this.bankAccounts) {
-			if (b instanceof SavingsAccount) {
+			if (b instanceof SavingsAccount && b.isActive()) {
 				accounts.add(b);
 			}
 		}
@@ -130,7 +130,7 @@ public class BankUser {
 	public List<BankAccount> getCDAccount() {
 		List<BankAccount> accounts = new ArrayList<>();
 		for (BankAccount b : this.bankAccounts) {
-			if (b instanceof CDAccount) {
+			if (b instanceof CDAccount && b.isActive()) {
 				accounts.add(b);
 			}
 		}
@@ -140,7 +140,7 @@ public class BankUser {
 	public double getBalanceByType(BankAccount type) {
 		double sum = 0;
 		for (BankAccount b : bankAccounts) {
-			if (b.getClass() == type.getClass()) {
+			if (b.getClass() == type.getClass() && b.isActive()) {
 				sum += b.getBalance();
 			}
 		}

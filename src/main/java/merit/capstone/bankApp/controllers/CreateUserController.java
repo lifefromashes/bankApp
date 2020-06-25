@@ -66,6 +66,7 @@ public class CreateUserController {
 		t.setSourceAccount(a.getAccountNumber());
 		t.setTargetAccount(a.getAccountNumber());
 		t.setTransactionMemo("Account Created");
+		t.setTransactionSuccess(true);
 		a.addTransaction(t);
 
 		transactionRepository.save(t);
