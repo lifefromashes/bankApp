@@ -87,6 +87,12 @@ export default class History extends Component {
 
   makeTrans() {
     
+    if(this.state.amount <= 0){
+      document.getElementById("amount").focus();
+      return;
+    }
+
+
     var req = new XMLHttpRequest();
     let url = window.location;
     let urlSplit = url.toString().split("/");
@@ -178,6 +184,7 @@ export default class History extends Component {
                   <input
                     className="adminTool" 
                     name="amount"
+                    id="amount"
                     value={this.state.amount}
                     onChange={this.handleChange}
                     onFocus={this.handleFocus}
