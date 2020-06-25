@@ -132,8 +132,9 @@ export default class User extends Component {
     if(t == 2){ tString = "DBACheckingAccount"; }
     if(t == 3){ tString = "CDAccount"; }
     if(t == 4){ tString = "RegularIRA"; }
-    if(t == 5){ tString = "RolloverIRA"; }
-    if(t == 6){ tString = "RothIRA"; }
+    if(t == 5){ tString = "RothIRA"; }
+    if(t == 6){ tString = "RolloverIRA"; }
+    
 
     var urlString = "http://localHost:8080/User/" + tString;
 
@@ -153,6 +154,8 @@ export default class User extends Component {
       if(req.status >= 200 && req.status < 400){
         window.location.reload();
         console.log(req.responseText);
+      } else {
+        alert("Failed to new create account. You may only have up to 1 personal checking account, 3 DBA checking accounts, and 1 of each IRA account.");
       }
     })
 

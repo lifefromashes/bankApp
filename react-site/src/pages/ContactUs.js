@@ -52,6 +52,10 @@ export default class ContactUs extends Component {
         alert("Thanks! We'll review your message and get back to you.");
         //document.getElementById("myForm").reset();
         document.getElementById("firstname").value = "";
+        document.getElementById("lastname").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("subject").value = "";
+        document.getElementById("message").value = "";
       }
     })
 

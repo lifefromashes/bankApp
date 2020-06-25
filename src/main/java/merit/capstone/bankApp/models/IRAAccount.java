@@ -7,12 +7,47 @@ import merit.capstone.bankApp.exceptions.TransactionNotAllowedException;
 
 public abstract class IRAAccount extends BankAccount {
 
-	
+	@Override
+	protected Transaction singleAccountTransaction(Transaction t) {
+		try {
+			if(t.getAmount() > 0){
+				this.deposit(t.getAmount());
+			}
+			if(t.getAmount() < 0) {
+				this.withdraw(-1 * t.getAmount());
+				
+				double pen = .2 * (t.getAmount() * -1);
+				pen = Math.floor(pen * 100);
+				pen = pen / 100;
+				t.setTransactionMemo("20% Early Withdraw Penalty of $" + pen + " applied");
+			}
+			
+			t.setTransactionSuccess(true);
+			
+
+		} catch (Exception e) {
+			if(t.getAmount() < 0) {
+				double v = t.getAmount() * -1;
+				if(v <= this.getBalance() && v * 1.2 > this.getBalance()) {
+					double m = this.getBalance() / 1.2;
+					m = Math.floor(m * 100);
+					m /= 100;
+					t.setTransactionMemo("Unable to pay 20% Early Withdraw Fee. Max: $" + m);
+				}
+			}
+			
+			t.setTransactionSuccess(false);
+		}
+
+		return t;
+	}
 
 	// override withdraw
 	@Override
 	public void withdraw(double amount) throws ExceedsAvailableBalanceException, NegativeAmountException {
 		double amountWithPenalty = amount * 1.2;
+		amountWithPenalty = Math.floor(amountWithPenalty * 100);
+		amountWithPenalty /= 100;
 
 		if (amount > super.getBalance()) {
 			throw new ExceedsAvailableBalanceException("Exceeds Available Balance.");

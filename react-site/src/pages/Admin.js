@@ -227,8 +227,9 @@ export default class Admin extends Component {
     if(t == 2){ tString = "DBACheckingAccount"; }
     if(t == 3){ tString = "CDAccount"; }
     if(t == 4){ tString = "RegularIRA"; }
-    if(t == 5){ tString = "RolloverIRA"; }
-    if(t == 6){ tString = "RothIRA"; }
+    if(t == 5){ tString = "RothIRA"; }
+    if(t == 6){ tString = "RolloverIRA"; }
+    
     var id = parseInt(this.state.userID);
 
     var urlString = "http://localHost:8080/Admin/" + id + "/" + tString;
