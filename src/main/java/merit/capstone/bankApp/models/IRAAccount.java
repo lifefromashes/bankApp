@@ -1,17 +1,9 @@
 package merit.capstone.bankApp.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Transient;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.stereotype.Component;
-
 import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
 import merit.capstone.bankApp.exceptions.TransactionNotAllowedException;
-import merit.capstone.bankApp.repos.BankAccountRepository;
 
 public abstract class IRAAccount extends BankAccount {
 

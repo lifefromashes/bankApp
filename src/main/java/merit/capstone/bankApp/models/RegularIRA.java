@@ -2,9 +2,6 @@ package merit.capstone.bankApp.models;
 
 import javax.persistence.Entity;
 
-import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
-import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
-import merit.capstone.bankApp.exceptions.NegativeAmountException;
 
 @Entity
 public class RegularIRA extends IRAAccount {
