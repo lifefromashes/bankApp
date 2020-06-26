@@ -207,7 +207,15 @@ public class BankUser {
 	public void setState(String state) { this.state = state; }
 	public String getZip() { return zip; }
 	public void setZip(String zip) { this.zip = zip; }
-	public List<BankAccount> getBankAccounts() { return bankAccounts; }
+	public List<BankAccount> getBankAccounts() {
+		List<BankAccount> ba = new ArrayList<BankAccount>();
+		for(BankAccount b : this.bankAccounts) {
+			if(b.isActive()) {
+				ba.add(b);
+			}
+		}
+		return ba; 
+	}
 	public void setBankAccounts(List<BankAccount> bankAccounts) { this.bankAccounts = bankAccounts; }
 
 	public boolean isActive() {

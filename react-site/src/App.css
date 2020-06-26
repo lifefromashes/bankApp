@@ -969,3 +969,14 @@ button:hover{
   text-align: center;
   font-size: 20pt;
 }
+
+.closeButton{
+  display: block;
+  margin: auto;
+
+  width: 10%;
+  color: white;
+}
+.hidden{
+  display: none;
+}

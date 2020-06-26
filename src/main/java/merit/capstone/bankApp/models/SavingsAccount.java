@@ -20,7 +20,7 @@ public class SavingsAccount extends BankAccount {
 	}
 
 	@Override
-	public BankAccount closeAccount(BankUser user) throws ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{
+	public Transaction closeAccount(BankUser user) throws ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{
 		throw new CannotCloseAccountException();
 	}
 }

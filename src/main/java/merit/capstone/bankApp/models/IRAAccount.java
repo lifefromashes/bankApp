@@ -1,5 +1,7 @@
 package merit.capstone.bankApp.models;
 
+import java.util.List;
+
 import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
@@ -66,13 +68,30 @@ public abstract class IRAAccount extends BankAccount {
 	}
 
 	@Override
-	public BankAccount closeAccount(BankUser user) throws TransactionNotAllowedException,
+	public Transaction closeAccount(BankUser user) throws TransactionNotAllowedException,
 			ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException {
-		setBalance(getBalance() * .8);
-		user.getSingleSavingsAccount().deposit(this.getBalance());
-		this.setBalance(0);
+		
+		Transaction t = new Transaction();
+		
+		double m = this.getBalance() / 1.2;
+		m = Math.floor(m * 100);
+		m /= 100;
+		
+		t.setAmount(m);
+		t.setTargetAccount(user.getSingleSavingsAccount().getAccountNumber());
+		t.setSourceAccount(user.getSingleSavingsAccount().getAccountNumber());
+		t.setTransactionSuccess(true);
+		t.setTransactionMemo("Closed Account #" + getAccountNumber());
+		
+		setBalance(0);
+		user.getSingleSavingsAccount().deposit(m);
+		
+		List <Transaction> lt = user.getSingleSavingsAccount().getTransactions();
+		lt.add(t);
+		user.getSingleSavingsAccount().setTransactions(lt);
+		
 		this.setActive(false);
-		return this;
+		return t;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package merit.capstone.bankApp.models;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -139,13 +141,34 @@ public abstract class BankAccount {
       this.balance += amount;
     }
 
-    public BankAccount closeAccount(BankUser user) throws TransactionNotAllowedException, ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{
-		BankAccount targetAccount = user.getSingleSavingsAccount();
+    public Transaction closeAccount(BankUser user) throws TransactionNotAllowedException, ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException{
 		
+    	BankAccount targetAccount = user.getSingleSavingsAccount();
+		Transaction t = null;
 		double amount = this.balance;
-        withdraw(amount);
-        targetAccount.deposit(amount);
-        return this;
+		
+		this.isActive = false;
+		try {
+			withdraw(amount);
+			targetAccount.deposit(amount);
+			
+			t = new Transaction();
+			t.setAmount(amount);
+			t.setTargetAccount(targetAccount.getAccountNumber());
+			t.setSourceAccount(targetAccount.getAccountNumber());
+			t.setTransactionSuccess(true);
+			t.setTransactionMemo("Closed Account #" + this.accountNumber);
+			
+			List <Transaction> lt = targetAccount.getTransactions();
+			lt.add(t);
+			targetAccount.setTransactions(lt);
+			
+			
+		} catch (Exception expected) {
+			//closing a CD account should not give any funds
+		}
+        
+        return t;
     }
 
     public double futureValue(int years) {
@@ -234,6 +257,14 @@ public abstract class BankAccount {
 	}
 
 	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 

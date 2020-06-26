@@ -17,13 +17,15 @@ export default class History extends Component {
         accounts: [],
         accountIndex: 0,
         actionTypeSelected: 1,
-        amount: 0
+        amount: 0,
+        account: null
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeA = this.handleChangeA.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.makeTrans = this.makeTrans.bind(this);
+    this.closeAccount = this.closeAccount.bind(this);
 
 
 
@@ -42,6 +44,9 @@ export default class History extends Component {
       if(req.status >= 200 && req.status < 400){
         //document.getElementById("userTitle").title = JSON.parse(req.responseText).username;
         
+        this.state.account = JSON.parse(req.responseText);
+        
+
         var s = "";
         s += JSON.parse(req.responseText).accountName + " #";
         s += JSON.parse(req.responseText).accountNumber;
@@ -107,6 +112,37 @@ export default class History extends Component {
 
   handleFocus = (event) => event.target.select();
 
+  closeAccount(){
+
+    if(this.state.account.accountName == "Savings Account"){
+      window.alert("Your Savings Account cannot be closed without closing your entire User Account. If you're sure you want to do this, you can do so from your User page.");
+      return;
+    }
+    
+
+    if(window.confirm("Really close this account, moving all funds to Savings?")){
+
+      var req = new XMLHttpRequest();
+      var urlString = "http://localHost:8080/User/Close/" + this.state.account.accountNumber;
+
+      console.log(this.state.account.accountNumber);
+      
+      req.open('PUT', urlString);
+      req.setRequestHeader('Content-Type', 'application/json');
+      var jwt = readCookie("jwt");
+      setCookieHeader(req);
+      req.send();
+      req.addEventListener('load', () => {
+        if(req.status >= 200 && req.status < 400){
+          window.location = "/User";
+        }
+      })
+
+
+
+    }
+
+  }
 
   makeTrans() {
     
@@ -229,6 +265,19 @@ export default class History extends Component {
 
         </div>
         <div id="historyList"></div>
+
+        <br></br>
+        <button 
+          className={"closeButton"}
+          id="closeButton" 
+          onClick={this.closeAccount}
+          
+          
+
+          
+
+        >Close Account</button>
+        
       </header>
       </body>
       

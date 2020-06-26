@@ -71,6 +71,13 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		
 		BankUser user = findUser(auth);
 		List<BankAccount> a = bankAccountRepository.findByUserId(user.getId());
+		
+		for(BankAccount b : a) {
+			if(!b.isActive()) {
+				a.remove(b);
+			}
+		}
+		
 		return a;
 	}
 	
@@ -100,7 +107,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		List<BankAccount> a = bankAccountRepository.findByUserId(user.getId());
 		List<BankAccount> matching = new ArrayList<>();
 		for(BankAccount b : a) {
-			if(b.getClass() == t.getClass()) {
+			if(b.getClass() == t.getClass() && b.isActive()) {
 				matching.add(b);
 			}
 		}
