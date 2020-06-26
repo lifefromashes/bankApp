@@ -49,20 +49,37 @@ export default class History extends Component {
 
         s = "";
         s += "$" + JSON.parse(req.responseText).balance;
-        if( JSON.parse(req.responseText).term != -1 ){
-          s += " for " + JSON.parse(req.responseText).term + " years."
-        }
         document.getElementById("bal").innerHTML = s;
 
         s = "";
         s += "Interest Rate: " + JSON.parse(req.responseText).interestRate + "%";
+        var dummyTerm = 1;
+        if( JSON.parse(req.responseText).term != -1 ){
+          dummyTerm = JSON.parse(req.responseText).term;
+          s += " for " + JSON.parse(req.responseText).term + " years. Mature value will be $";
+        } else {
+          s += " In 1 year (without withdraws or deposits) balance will be $";
+        }
         document.getElementById("rate").innerHTML = s;
         
         var al = document.getElementById("historyList");
         al.innerHTML = parseHistory(req);
 
-        
+        var req2 = new XMLHttpRequest();
+        urlString = "http://localHost:8080/FutureValue";
+        req2.open('POST', urlString);
+        req2.setRequestHeader('Content-Type', 'application/json');
+        var body = '{"balance": "' + JSON.parse(req.responseText).balance + '", "interestRate": "';
+        body += JSON.parse(req.responseText).interestRate + '", "term": ' + dummyTerm + '}';
+        req2.send(body);
+        req2.addEventListener('load', () => {
+          if(req2.status >= 200 && req2.status < 400){
+            s = req2.responseText;
 
+
+            document.getElementById("rate").innerHTML = document.getElementById("rate").innerHTML + s;
+          }
+        })
 
 
         

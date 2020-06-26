@@ -250,8 +250,21 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		return a;
 	}
 	
-	
-	
+	/*
+	 * This method accepts a dummy bank account object and returns a future value
+	 * because it doesn't use "real" accounts, no security is appropriate 
+	 * 
+	 *   using CD account because it doesn't have a default interest rate, but this method handles all types of accounts 
+	 */
+	@CrossOrigin
+	@PostMapping(value = "/FutureValue")
+	public double futureValue(@RequestBody CDAccount a) throws NotFoundException {
+		
+		double v = a.futureValue(a.getTerm());
+		v = Math.floor(v / 100);
+		v *= 100;
+		return a.getBalance() + v;
+	}
 	
 	
 	
