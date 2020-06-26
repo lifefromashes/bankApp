@@ -977,6 +977,19 @@ button:hover{
   width: 10%;
   color: white;
 }
+
+.closeButton2{
+  display: block;
+  margin: auto;
+
+  width: 20%;
+  color: white;
+}
+
 .hidden{
   display: none;
+}
+
+.staticInfo{
+  background-color: rgb(30, 145, 202);
 }

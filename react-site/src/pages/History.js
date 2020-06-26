@@ -206,9 +206,9 @@ export default class History extends Component {
               <img />
             </div>
             <ul>
-              <li><a href="/login">Sign Off</a></li>
+              
               <li><a href="/user">Welcome, USER</a></li>
-              <li><a href="#">Mobile</a></li>
+              <li><a href="/login">Sign Off</a></li>
             </ul>
           </div>
 
@@ -271,11 +271,6 @@ export default class History extends Component {
           className={"closeButton"}
           id="closeButton" 
           onClick={this.closeAccount}
-          
-          
-
-          
-
         >Close Account</button>
         
       </header>

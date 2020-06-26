@@ -99,6 +99,7 @@ export default class User extends Component {
     this.handleChangeC = this.handleChangeC.bind(this);
     this.createAccount = this.createAccount.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.manageAccount = this.manageAccount.bind(this);
 
   }
 
@@ -121,6 +122,10 @@ export default class User extends Component {
     this.setState({
       cdoType: document.getElementById("cdoType").value
     })
+  }
+
+  manageAccount() {
+    window.location = "/ContactInfo";
   }
 
 
@@ -181,9 +186,8 @@ export default class User extends Component {
               <img />
             </div>
             <ul>
-              <li><a href="/login">Sign Off</a></li>
               <li><a href="/user">Welcome, USER</a></li>
-              <li><a href="#">Mobile</a></li>
+              <li><a href="/login">Sign Off</a></li>
             </ul>
           </div>
 
@@ -230,6 +234,16 @@ export default class User extends Component {
       </div>
 
       <div id="accountList"></div>
+
+
+
+        <br></br>
+        <button 
+          className={"closeButton2"}
+          id="closeButton" 
+          onClick={this.manageAccount}
+        >Manage Account</button>
+
 
 
 

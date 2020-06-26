@@ -278,8 +278,6 @@ export default class Admin extends Component {
             </div>
             <ul>
               <li><a href="/login">Sign Off</a></li>
-              <li><a href="/user">Welcome, ADMIN</a></li>
-              <li><a href="#">Mobile</a></li>
             </ul>
           </div>
 
