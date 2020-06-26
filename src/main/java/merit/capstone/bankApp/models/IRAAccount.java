@@ -71,6 +71,8 @@ public abstract class IRAAccount extends BankAccount {
 	public Transaction closeAccount(BankUser user) throws TransactionNotAllowedException,
 			ExceedsAvailableBalanceException, NegativeAmountException, CannotCloseAccountException {
 		
+		this.setActive(false);
+		
 		Transaction t = new Transaction();
 		
 		double m = this.getBalance() / 1.2;
@@ -90,7 +92,7 @@ public abstract class IRAAccount extends BankAccount {
 		lt.add(t);
 		user.getSingleSavingsAccount().setTransactions(lt);
 		
-		this.setActive(false);
+		
 		return t;
 	}
 
