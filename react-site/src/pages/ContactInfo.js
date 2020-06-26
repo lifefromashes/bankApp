@@ -134,12 +134,52 @@ updateInfo(){
 
 closeAccount(){
 
+    var req = new XMLHttpRequest();
+    var urlString = server() + "quickFunds";
+    req.open('GET', urlString);
+    req.setRequestHeader('Content-Type', 'application/json');
+    setCookieHeader(req);
+    req.send();
+
+    req.addEventListener('load', () => {
+
+      if(req.status >= 200 && req.status < 400){
+        var tot = req.responseText;
+
+        if(window.confirm("Are you sure you want withdraw your $" + tot + " available funds and permanently delete your User Account, forefiting all investments?")){
 
 
-    if(window.confirm("Are you sure you want withdraw your $" + " available funds and permanently delete your User Account, forefiting all investments?")){
+            var req2 = new XMLHttpRequest();
+            urlString = server() + "User/Quit";
+            req2.open('PUT', urlString);
+            req2.setRequestHeader('Content-Type', 'application/json');
+            setCookieHeader(req2);
+            req2.send();
+        
+            req2.addEventListener('load', () => {
+        
+              if(req2.status >= 200 && req2.status < 400){
+                
+                window.location = "/";
+        
+              } else {
+                //handle bad input
+        
+              }
+            })
 
-        window.location = "/"
-    }
+
+
+
+        }
+        
+
+      } else{
+
+      }
+    })
+
+    
 
 }
 

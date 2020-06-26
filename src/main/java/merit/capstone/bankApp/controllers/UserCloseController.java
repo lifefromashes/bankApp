@@ -59,5 +59,25 @@ public class UserCloseController {
 		if(t != null) { transactionRepository.save(t); }
 		return a;
 	}
+    
+    
+    
+    @CrossOrigin
+	@PutMapping(value = "/User/Quit")
+	public BankUser quitAccoun(@RequestHeader("Authorization") String auth) throws NotFoundException, CannotCloseAccountException, ExceedsAvailableBalanceException, NegativeAmountException {
+		
+		BankUser user = findUser(auth);
+		ControllerUtil.enforceFound(user);
+		
+		user.setIsActive(false);
+		bankUserRepository.save(user);
+		
+		return user;
+	}
+    
+    
+    
+    
+    
 
 }
