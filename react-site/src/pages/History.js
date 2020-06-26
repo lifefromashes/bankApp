@@ -49,8 +49,14 @@ export default class History extends Component {
 
         s = "";
         s += "$" + JSON.parse(req.responseText).balance;
+        if( JSON.parse(req.responseText).term != -1 ){
+          s += " for " + JSON.parse(req.responseText).term + " years."
+        }
         document.getElementById("bal").innerHTML = s;
 
+        s = "";
+        s += "Interest Rate: " + JSON.parse(req.responseText).interestRate + "%";
+        document.getElementById("rate").innerHTML = s;
         
         var al = document.getElementById("historyList");
         al.innerHTML = parseHistory(req);
@@ -101,7 +107,7 @@ export default class History extends Component {
     let amt = this.state.amount;
 
     let mem = "Deposit";
-    if(this.state.actionTypeSelected == 2){ 
+    if(this.state.actionTypeSelected == 2){
       mem = "Withdraw"; 
       amt *= -1;
     }
@@ -166,6 +172,7 @@ export default class History extends Component {
             <div>
                 <h1 id="accountTitle" class="accountTitle">Account</h1>
                 <h1 id="bal" class="userBalance"></h1>
+                <h1 id="rate" class="accountInterest"></h1>
 
                 <div class="userTrans">
                   Make a &nbsp;

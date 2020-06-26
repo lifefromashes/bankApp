@@ -15,7 +15,7 @@ export default class User extends Component {
         accounts: [],
         accountIndex: 0,
         accountTypeSelected: 1,
-        cdoType: 1,
+        cdoType: 0,
         amount: 0,
         obj: null
     };
@@ -77,7 +77,8 @@ export default class User extends Component {
 
               //<option value="4">Regular IRA Account</option>
               for(let i=0; i<obj.length; i++){
-                s += '<option value="' + obj[i].id + '">';
+                //s += '<option value="' + obj[i].id + '">';
+                s += '<option value="' + i + '">';
                 s += 'Rate ' + obj[i].interestRate + ' for ' + obj[i].term + ' years';
                 s += '</option>';
               }
@@ -118,7 +119,7 @@ export default class User extends Component {
 
   handleChangeC(event) {
     this.setState({
-      accountTypeSelected: document.getElementById("accountType").value
+      cdoType: document.getElementById("cdoType").value
     })
   }
 

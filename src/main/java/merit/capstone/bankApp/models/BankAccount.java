@@ -61,6 +61,7 @@ public abstract class BankAccount {
 		this.accountOpenedOn = new Date();
 		transactions = new ArrayList<Transaction>();
 		this.isActive = true;
+		this.term = -1;
 		
 	}
 	

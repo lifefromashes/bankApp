@@ -956,6 +956,11 @@ button:hover{
   font-size: 40pt;
 }
 
+.accountInterest{
+  color: white;
+  font-size: 20pt;
+}
+
 .userTrans{
   text-align: center;
 }
