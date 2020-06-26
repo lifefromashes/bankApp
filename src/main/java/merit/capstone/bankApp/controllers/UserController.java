@@ -273,6 +273,15 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		return a.getBalance() + v;
 	}
 	
+	@CrossOrigin
+	@GetMapping(value = "/quickFunds")
+	public double quickFunds(@RequestHeader("Authorization") String auth) throws NotFoundException {
+		BankUser user = findUser(auth);
+		
+		
+		return user.getAllAvailableBalance();
+	}
+	
 	
 	
 	

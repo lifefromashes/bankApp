@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts, parseHistory} from "../parseBankUser";
+import {server} from "../webAddress";
 
 export default class History extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class History extends Component {
     let url = window.location;
     let urlSplit = url.toString().split("/");
     let actID = urlSplit[urlSplit.length - 1];
-    var urlString = "http://localHost:8080/User/Transaction/" + actID;
+    var urlString = server() + "User/Transaction/" + actID;
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     var jwt = readCookie("jwt");
@@ -71,7 +72,7 @@ export default class History extends Component {
         al.innerHTML = parseHistory(req);
 
         var req2 = new XMLHttpRequest();
-        urlString = "http://localHost:8080/FutureValue";
+        urlString = server() + "FutureValue";
         req2.open('POST', urlString);
         req2.setRequestHeader('Content-Type', 'application/json');
         var body = '{"balance": "' + JSON.parse(req.responseText).balance + '", "interestRate": "';
@@ -123,7 +124,7 @@ export default class History extends Component {
     if(window.confirm("Really close this account, moving all funds to Savings?")){
 
       var req = new XMLHttpRequest();
-      var urlString = "http://localHost:8080/User/Close/" + this.state.account.accountNumber;
+      var urlString = server() + "User/Close/" + this.state.account.accountNumber;
 
       console.log(this.state.account.accountNumber);
       
@@ -171,7 +172,7 @@ export default class History extends Component {
     body += '"targetAccount": ' + actID + ', ';
     body += '"transactionMemo": "' + mem + '"}';
 
-    var urlString = "http://localHost:8080/User/Transaction";
+    var urlString = server() + "User/Transaction";
     req.open('POST', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     var jwt = readCookie("jwt");

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
+import {server} from "../webAddress";
 
 export default class User extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class User extends Component {
 
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/User";
+    var urlString = server() + "User";
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     var jwt = readCookie("jwt");
@@ -58,7 +59,7 @@ export default class User extends Component {
 
       
           var req2 = new XMLHttpRequest();
-          var urlString2 = "http://localHost:8080/CDOfferings";
+          var urlString2 = server() + "CDOfferings";
       
       
           req2.open('GET', urlString2);
@@ -142,7 +143,7 @@ export default class User extends Component {
     if(t == 6){ tString = "RolloverIRA"; }
     
 
-    var urlString = "http://localHost:8080/User/" + tString;
+    var urlString = server() + "User/" + tString;
 
     var body = '{"balance": "' + this.state.amount + '"'; 
     if(t == 3){

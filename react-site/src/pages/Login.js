@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
+import {server} from "../webAddress";
 
 export default class Login extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class Login extends Component {
     var body = '{"username": "' + this.state.username + '", ';
     body += '"password": "' + this.state.password + '"}';
 
-    var urlString = "http://localHost:8080/authenticate";
+    var urlString = server() + "authenticate";
 
     //console.log(body);
 
@@ -46,7 +47,7 @@ export default class Login extends Component {
 
           //use our newly saved cookie to request a reditect from the server
           var req2 = new XMLHttpRequest();
-          urlString = "http://localHost:8080/direct";
+          urlString = server() + "direct";
           req2.open('GET', urlString);
           req2.setRequestHeader('Content-Type', 'application/json');
           setCookieHeader(req2);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
+import {server} from "../webAddress";
 
 export default class ContactInfo extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export default class ContactInfo extends Component {
 
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/User";
+    var urlString = server() + "User";
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     var jwt = readCookie("jwt");
@@ -106,7 +107,7 @@ updateInfo(){
     body += '"zip": "' + this.state.zip + '"}';
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/Contact";
+    var urlString = server() + "Contact";
     req.open('POST', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     setCookieHeader(req);
@@ -132,6 +133,13 @@ updateInfo(){
 }
 
 closeAccount(){
+
+
+
+    if(window.confirm("Are you sure you want withdraw your $" + " available funds and permanently delete your User Account, forefiting all investments?")){
+
+        window.location = "/"
+    }
 
 }
 
