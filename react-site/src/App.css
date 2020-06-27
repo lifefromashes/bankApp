@@ -156,7 +156,7 @@ h1{
   border-bottom: 1px solid #fff;
   background: transparent;
   outline: none;
-  height: 40px;
+  height: 30px;
   color: #fff;
   font-size: 16px;
 }
@@ -164,11 +164,11 @@ h1{
 .loginbox input[type="button"]{
   border: none;
   outline: none;
-  height: 40px;
+  height: 20px;
   background: #86c5da;
   color: #fff;
-  font-size: 18px;
-  border-radius: 20px;
+  font-size: 12px;
+  border-radius: 18px;
 }
 .loginbox input[type="button"]:hover{
   cursor: pointer;
@@ -177,9 +177,10 @@ h1{
 
 }
 .loginbox a{
+  padding-bottom: 80px;
   text-decoration: none;
-  font-size:12px;
-  line-height: 20px;
+  font-size:10px;
+  line-height: 10px;
   color: darkblue ;
 }
 .loginbox a:hover{
@@ -242,7 +243,7 @@ h1{
   transform: rotate(45deg);
   margin-bottom: 30px;
   margin-top: 16px;
-  transition: 0.3s linear;
+  transition: 0.6s linear;
 }
 .service-icon i{
   line-height: 70px;
@@ -863,7 +864,7 @@ button:hover{
 
 /* account placard stuff */
 .accountBox{
-  
+
   /*background-color: cornflowerblue;*/
   background-image: url(./images/account_plac.png);
   background-repeat: no-repeat;
@@ -874,15 +875,15 @@ button:hover{
   padding-top: 1%;
   padding-bottom: 1%;
 
-  
-  
+
+
   width: 50%;
   height: auto;
   margin: auto;
 }
 
 .accountBox2{
-  
+
   /*background-color: cyan;*/
   background-image: url(./images/account_plac2.png);
   background-repeat: no-repeat;
@@ -919,8 +920,8 @@ button:hover{
 }
 
 .placMain{
-  
-  
+
+
   text-align: right;
 }
 
@@ -942,7 +943,7 @@ button:hover{
   background-image: url(./images/console_admin_tool_bg.png);
   background-repeat: no-repeat;
   background-size: 100%;
-  
+
 
   font-weight: 900;
   color: greenyellow;
@@ -950,7 +951,7 @@ button:hover{
   padding-left: 2%;
   padding-top: 2%;
 
-  
+
 }
 
 .userBalance{

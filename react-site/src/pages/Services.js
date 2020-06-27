@@ -16,45 +16,45 @@ export default class Services extends Component {
         <body>
 
         <header>
-          <div class="main">
-            <div class="logo">
+          <div className="main">
+            <div className="logo">
               <img  />
             </div>
             <ul>
               <li><a href="/">Home</a></li>
               <li><a href="/login">Login</a></li>
-              <li class= "services"><a href="/services">Services</a></li>
+              <li clasName= "services"><a href="/services">Services</a></li>
               <li><a href="/aboutus">About Us</a></li>
               <li><a href="/contactus">Contact Us</a></li>
               <li><a href="#">Mobile</a></li>
             </ul>
           </div>
 
-          <div class="services-section">
-          <div class="inner-width">
-              <h1 class="section-title">WHAT CAN MERIT DO FOR YOU?</h1>
-              <h4 class="section-title">Merit Bank is a business dedicated to the success and welfare of our customers.<br />
+          <div className="services-section">
+          <div className="inner-width">
+              <h1 clasNames="section-title">WHAT CAN MERIT DO FOR YOU?</h1>
+              <h4 className="section-title">Merit Bank is a business dedicated to the success and welfare of our customers.<br />
             Below are some of the opportunities benefited to our clients: </h4>
-              <div class="border"></div>
-              <div class="services-container">
-                <div class="service-box">
-                  <div class="service-icon">
-                    <i class="fas fa-globe"></i>
+              <div className="border"></div>
+              <div className="services-container">
+                <div className="service-box">
+                  <div className="service-icon">
+                    <i className="fas fa-globe"></i>
                   </div>
-                  <div class="service-title">SECURED VIRTUAL BANKING</div>
-                  <div class="service-desc">Your entire banking experience all online! <br />
+                  <div className="service-title">SECURED VIRTUAL BANKING</div>
+                  <div className="service-desc">Your entire banking experience all online! <br />
                   Your success is in your hands & we are here to help you manage! </div>
                 </div>
-                <div class="service-box">
-                  <div class="service-icon">
-                    <i class="fas fa-user-shield"></i>
+                <div className="service-box">
+                  <div className="service-icon">
+                    <i className="fas fa-user-shield"></i>
                   </div>
-                  <div class="service-title"> SECURED PERSONAL ACCOUNTS</div>
-                  <div class="service-desc">Create secured Checking & Savings Accounts at your fingertips </div>
+                  <div className="service-title"> SECURED PERSONAL ACCOUNTS</div>
+                  <div className="service-desc">Create secured Checking & Savings Accounts at your fingertips </div>
                 </div>
-                <div class="service-box">
-                  <div class="service-icon">
-                    <i class="fas fa-briefcase"></i>
+                <div className="service-box">
+                  <div className="service-icon">
+                    <i className="fas fa-briefcase"></i>
                   </div>
                   <div class="service-title"> SECURED BUSINESS ACCOUNTS</div>
                   <div class="service-desc">Have a business? We got you covered with our DBA accounts! Great for Entrepreneurs with multiple streams of income. </div>

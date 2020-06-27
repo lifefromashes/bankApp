@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
+import nick from '../images/nick.png';
+import rufaro from '../images/rufaro.jpg';
+import kristin from '../images/kristin.jpg';
 
 
 export default class AboutUs extends Component {
@@ -33,9 +35,9 @@ export default class AboutUs extends Component {
             <h1>MEET OUR TEAM</h1>
               <span class="border"></span>
             <div class= "ps">
-              <a href="#kristin">kristin<img /></a>
-              <a href="#nick">Nick<img /></a>
-              <a href="#rufaro">Rufaro<img /></a>
+              <a href="#kristin"><img src={kristin} /></a>
+              <a href="#nick"><img src={nick} /></a>
+              <a href="#rufaro"><img src={rufaro}/></a>
             </div>
             <div class="section" id="kristin">
                 <span class="name">Kristin S.</span>
