@@ -27,7 +27,6 @@ export default class AboutUs extends Component {
               <li><a href="/services">Services</a></li>
               <li class= "aboutus"><a href="/aboutus">About Us</a></li>
               <li><a href="/contactus">Contact Us</a></li>
-              <li><a href="#">Mobile</a></li>
             </ul>
           </div>
 
@@ -38,6 +37,7 @@ export default class AboutUs extends Component {
               <a href="#kristin"><img src={kristin} /></a>
               <a href="#nick"><img src={nick} /></a>
               <a href="#rufaro"><img src={rufaro}/></a>
+
             </div>
             <div class="section" id="kristin">
                 <span class="name">Kristin S.</span>
@@ -50,7 +50,7 @@ export default class AboutUs extends Component {
                 <span class="name">Nick R.</span>
                 <span class="border"></span>
                 <p>
-                  Tech Leader. He is very nice.
+                  Tech Leader. Once successfully wrestled two bears at the same time, but does sometimes exaggerate when writing about himself.
                 </p>
             </div>
             <div class="section" id="rufaro">

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
+import {server} from "../webAddress";
 
 export default class Registration extends Component {
   constructor(props) {
@@ -51,10 +52,10 @@ export default class Registration extends Component {
     body += '"zip": "' + this.state.zip + '"}';
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/NewUser";
+    var urlString = server() + "NewUser";
     req.open('POST', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
+    //setCookieHeader(req);
     req.send(body);
 
     req.addEventListener('load', () => {

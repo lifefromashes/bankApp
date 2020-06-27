@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,7 @@ import merit.capstone.bankApp.repos.BankAccountRepository;
 import merit.capstone.bankApp.repos.BankUserRepository;
 import merit.capstone.bankApp.repos.CDOfferingRepository;
 import merit.capstone.bankApp.repos.TransactionRepository;
+import merit.capstone.bankApp.security.JwtUtil;
 
 @RestController
 @CrossOrigin
@@ -41,6 +43,7 @@ public class CreateUserController {
 	@Autowired private BankAccountRepository bankAccountRepository;
 	@Autowired private CDOfferingRepository cdOfferingRepository;
 	@Autowired private TransactionRepository transactionRepository;
+	@Autowired private JwtUtil jwtUtil;
 	
 	
 	
@@ -113,5 +116,26 @@ public class CreateUserController {
 		return user;
 	}
 	
+	
+	@PostMapping("Contact")
+	@ResponseStatus(HttpStatus.CREATED)
+	public BankUser updateUserInfo(@RequestHeader("Authorization") String auth, @Valid @RequestBody BankUser u) throws NotFoundException {
+		
+		String jwt = auth.substring(7);
+		String username = jwtUtil.extractUsername(jwt);
+		BankUser user = bankUserRepository.findByUsername(username);
+		ControllerUtil.enforceFound(user);
+		
+		user.setEmail(u.getEmail());
+		user.setPhone(u.getPhone());
+		user.setAddress(u.getAddress());
+		user.setCity(u.getCity());
+		user.setState(u.getState());
+		user.setZip(u.getZip());
+		
+		bankUserRepository.save(user);
+		
+		return user;
+	}
 	
 }

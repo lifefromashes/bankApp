@@ -146,7 +146,7 @@ h1{
   font-weight: bold;
 }
 .loginbox input{
-  width: 100%;
+  width: 90%;
   margin-bottom: 20px;
 
 }
@@ -865,7 +865,6 @@ button:hover{
 /* account placard stuff */
 .accountBox{
 
-  /*background-color: cornflowerblue;*/
   background-image: url(./images/account_plac.png);
   background-repeat: no-repeat;
   background-size: 100%;
@@ -884,7 +883,6 @@ button:hover{
 
 .accountBox2{
 
-  /*background-color: cyan;*/
   background-image: url(./images/account_plac2.png);
   background-repeat: no-repeat;
   background-size: 100%;
@@ -925,7 +923,7 @@ button:hover{
   text-align: right;
 }
 
-/* temp stuff just to kee admin page buttons and text fields from being huge */
+/* temp stuff just to keep admin page buttons and text fields from being huge */
 .adminTool{
   width: 10%;
   color: white;
@@ -948,7 +946,7 @@ button:hover{
   font-weight: 900;
   color: greenyellow;
 
-  padding-left: 2%;
+  padding-left: 4%;
   padding-top: 2%;
 
 
@@ -959,6 +957,11 @@ button:hover{
   font-size: 40pt;
 }
 
+.accountInterest{
+  color: white;
+  font-size: 20pt;
+}
+
 .userTrans{
   text-align: center;
 }
@@ -966,4 +969,28 @@ button:hover{
 .userTitle{
   text-align: center;
   font-size: 20pt;
+}
+
+.closeButton{
+  display: block;
+  margin: auto;
+
+  width: 10%;
+  color: white;
+}
+
+.closeButton2{
+  display: block;
+  margin: auto;
+
+  width: 20%;
+  color: white;
+}
+
+.hidden{
+  display: none;
+}
+
+.staticInfo{
+  background-color: rgb(30, 145, 202);
 }

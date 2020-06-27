@@ -13,6 +13,7 @@ import History from './pages/History';
 import Services from './pages/Services';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import ContactInfo from './pages/ContactInfo';
 
 import {Route, Switch} from 'react-router-dom';
 
@@ -28,6 +29,7 @@ function App() {
       <Route exact path= "/login" component = {Login}/>
       <Route exact path= "/admin" component = {Admin}/>
       <Route exact path= "/user" component = {User}/>
+      <Route exact path= "/contactinfo" component = {ContactInfo}/>
       <Route exact path= "/history/*" component = {History}/>
       <Route exact path= "/register" component ={Registration} />
       <Route exact path= "/services" component = {Services} />

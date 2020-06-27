@@ -160,15 +160,23 @@ public class BankUser {
 		return sum;
 	}
 
-	//can't withdraw from IRA or CD accounts so don't include here.
-	public double getAvailableBalanceByType(BankAccount type) throws MaxAccountsReachedException {
+
+	public double getAllAvailableBalance() {
 		double sum = 0;
 
 		sum += getBalanceByType(new CheckingAccount());
 		sum += getBalanceByType(new SavingsAccount());
 		sum += getBalanceByType(new DBACheckingAccount());
 		
-		return sum;
+		double penSum = getBalanceByType(new RegularIRA());
+		penSum += getBalanceByType(new RothIRA());
+		penSum += getBalanceByType(new RolloverIRA());
+		
+		penSum /= 1.2;
+		penSum = Math.floor(penSum * 100);
+		penSum /= 100;
+		
+		return (sum + penSum);
 	}
 	
 	
@@ -207,7 +215,15 @@ public class BankUser {
 	public void setState(String state) { this.state = state; }
 	public String getZip() { return zip; }
 	public void setZip(String zip) { this.zip = zip; }
-	public List<BankAccount> getBankAccounts() { return bankAccounts; }
+	public List<BankAccount> getBankAccounts() {
+		List<BankAccount> ba = new ArrayList<BankAccount>();
+		for(BankAccount b : this.bankAccounts) {
+			if(b.isActive()) {
+				ba.add(b);
+			}
+		}
+		return ba; 
+	}
 	public void setBankAccounts(List<BankAccount> bankAccounts) { this.bankAccounts = bankAccounts; }
 
 	public boolean isActive() {
@@ -217,6 +233,15 @@ public class BankUser {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+	
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 
 
 

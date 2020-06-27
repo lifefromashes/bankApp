@@ -42,6 +42,8 @@ import merit.capstone.bankApp.repos.TransactionRepository;
  * This controller is handles APIs for basic bank worker functions like creating new accounts
  * or viewing information by the user's ID
  * 
+ * It is critical that these functions are accessible only to employees and not account holders
+ * 
  *
  */
 

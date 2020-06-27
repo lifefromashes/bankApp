@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
+import {server} from "../webAddress";
 
 
 
@@ -34,7 +35,7 @@ export default class ContactUs extends Component {
   submitFeedback(){
     
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/Feedback";
+    var urlString = server() + "Feedback";
 
     var body = '{"firstname": "' + this.state.firstname + '", ';
     body += '"lastname": "' + this.state.lastname + '", ';

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseCDO, parseHistoryAdmin} from "../parseBankUser";
 import {createNewAccount, createNewCDO} from "../adminFeedback";
+import {server} from "../webAddress";
 
 export default class Admin extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ export default class Admin extends Component {
     console.log("enter getUsers");
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/Admin/Users";
+    var urlString = server() + "Admin/Users";
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     setCookieHeader(req);
@@ -78,7 +79,7 @@ export default class Admin extends Component {
 
     var req = new XMLHttpRequest();
     var id = parseInt(this.state.userID);
-    var urlString = "http://localHost:8080/Admin/Users/" + id;
+    var urlString = server() + "Admin/Users/" + id;
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     setCookieHeader(req);
@@ -101,7 +102,7 @@ export default class Admin extends Component {
   createCDO() {
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/Admin/CDOfferings";
+    var urlString = server() + "Admin/CDOfferings";
 
     var body = '{"interestRate": "' + this.state.cdoRate + '", ';
     body += '"term": "' + this.state.cdoTerm + '"}';
@@ -126,7 +127,7 @@ export default class Admin extends Component {
   getCDOs() {
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/CDOfferings";
+    var urlString = server() + "CDOfferings";
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     setCookieHeader(req);
@@ -148,7 +149,7 @@ export default class Admin extends Component {
 
     var req = new XMLHttpRequest();
 
-    var urlString = "http://localHost:8080/Admin/Transaction/" + this.state.transAccount;
+    var urlString = server() + "Admin/Transaction/" + this.state.transAccount;
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     var jwt = readCookie("jwt");
@@ -184,7 +185,7 @@ export default class Admin extends Component {
     
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/Admin/Transaction";
+    var urlString = server() + "Admin/Transaction";
     
 
     var body = '{"sourceAccount": ' + this.state.transAccount + ', ';
@@ -232,10 +233,10 @@ export default class Admin extends Component {
     
     var id = parseInt(this.state.userID);
 
-    var urlString = "http://localHost:8080/Admin/" + id + "/" + tString;
+    var urlString = server() + "Admin/" + id + "/" + tString;
 
     if(t == 3){
-      urlString = "http://localHost:8080/Admin/" + id + "/" + tString + "/" + this.state.CDONum;
+      urlString = server() + "Admin/" + id + "/" + tString + "/" + this.state.CDONum;
     }
 
     var body = '{"balance": "' + this.state.amount + '"}';
@@ -278,8 +279,6 @@ export default class Admin extends Component {
             </div>
             <ul>
               <li><a href="/login">Sign Off</a></li>
-              <li><a href="/user">Welcome, ADMIN</a></li>
-              <li><a href="#">Mobile</a></li>
             </ul>
           </div>
 
@@ -433,8 +432,10 @@ export default class Admin extends Component {
 
       <br></br>
 
+      
+        <div id="printout" classname="consoleAdminTool"></div>
+      
 
-      <div id="printout" classname="consoleAdminTool"></div>
       </header>
       </body>
 

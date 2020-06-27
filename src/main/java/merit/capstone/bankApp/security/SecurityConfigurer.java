@@ -61,6 +61,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 				.antMatchers("/authenticate").permitAll()
 				.antMatchers("/NewUser").permitAll()
 				.antMatchers("/Feedback").permitAll()
+				.antMatchers("/FutureValue").permitAll()
+				
 				
 				.anyRequest().authenticated()
 				.and().sessionManagement()

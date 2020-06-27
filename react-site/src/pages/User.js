@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
+import {server} from "../webAddress";
 
 export default class User extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class User extends Component {
         accounts: [],
         accountIndex: 0,
         accountTypeSelected: 1,
-        cdoType: 1,
+        cdoType: 0,
         amount: 0,
         obj: null
     };
@@ -23,7 +24,7 @@ export default class User extends Component {
 
 
     var req = new XMLHttpRequest();
-    var urlString = "http://localHost:8080/User";
+    var urlString = server() + "User";
     req.open('GET', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
     var jwt = readCookie("jwt");
@@ -58,7 +59,7 @@ export default class User extends Component {
 
       
           var req2 = new XMLHttpRequest();
-          var urlString2 = "http://localHost:8080/CDOfferings";
+          var urlString2 = server() + "CDOfferings";
       
       
           req2.open('GET', urlString2);
@@ -77,7 +78,8 @@ export default class User extends Component {
 
               //<option value="4">Regular IRA Account</option>
               for(let i=0; i<obj.length; i++){
-                s += '<option value="' + obj[i].id + '">';
+                //s += '<option value="' + obj[i].id + '">';
+                s += '<option value="' + i + '">';
                 s += 'Rate ' + obj[i].interestRate + ' for ' + obj[i].term + ' years';
                 s += '</option>';
               }
@@ -98,6 +100,7 @@ export default class User extends Component {
     this.handleChangeC = this.handleChangeC.bind(this);
     this.createAccount = this.createAccount.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.manageAccount = this.manageAccount.bind(this);
 
   }
 
@@ -118,8 +121,12 @@ export default class User extends Component {
 
   handleChangeC(event) {
     this.setState({
-      accountTypeSelected: document.getElementById("accountType").value
+      cdoType: document.getElementById("cdoType").value
     })
+  }
+
+  manageAccount() {
+    window.location = "/ContactInfo";
   }
 
 
@@ -136,7 +143,7 @@ export default class User extends Component {
     if(t == 6){ tString = "RolloverIRA"; }
     
 
-    var urlString = "http://localHost:8080/User/" + tString;
+    var urlString = server() + "User/" + tString;
 
     var body = '{"balance": "' + this.state.amount + '"'; 
     if(t == 3){
@@ -180,9 +187,8 @@ export default class User extends Component {
               <img />
             </div>
             <ul>
-              <li><a href="/login">Sign Off</a></li>
               <li><a href="/user">Welcome, USER</a></li>
-              <li><a href="#">Mobile</a></li>
+              <li><a href="/login">Sign Off</a></li>
             </ul>
           </div>
 
@@ -229,6 +235,16 @@ export default class User extends Component {
       </div>
 
       <div id="accountList"></div>
+
+
+
+        <br></br>
+        <button 
+          className={"closeButton2"}
+          id="closeButton" 
+          onClick={this.manageAccount}
+        >Manage Account</button>
+
 
 
 

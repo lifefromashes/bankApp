@@ -71,6 +71,13 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		
 		BankUser user = findUser(auth);
 		List<BankAccount> a = bankAccountRepository.findByUserId(user.getId());
+		
+		for(BankAccount b : a) {
+			if(!b.isActive()) {
+				a.remove(b);
+			}
+		}
+		
 		return a;
 	}
 	
@@ -100,7 +107,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		List<BankAccount> a = bankAccountRepository.findByUserId(user.getId());
 		List<BankAccount> matching = new ArrayList<>();
 		for(BankAccount b : a) {
-			if(b.getClass() == t.getClass()) {
+			if(b.getClass() == t.getClass() && b.isActive()) {
 				matching.add(b);
 			}
 		}
@@ -250,8 +257,37 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		return a;
 	}
 	
+	/*
+	 * This method accepts a dummy bank account object and returns a future value
+	 * because it doesn't use "real" accounts, no security is appropriate 
+	 * 
+	 *   using CD account because it doesn't have a default interest rate, but this method handles all types of accounts 
+	 */
+	@CrossOrigin
+	@PostMapping(value = "/FutureValue")
+	public double futureValue(@RequestBody CDAccount a) throws NotFoundException {
+		
+		System.out.println(a.getBalance());
+		System.out.println(a.getTerm());
+		System.out.println(a.getInterestRate());
+		
+		double v = a.futureValue(a.getTerm());
+		
+		System.out.println("!!" + v);
+		
+		v = Math.floor(v * 100);
+		v /= 100;
+		return v;
+	}
 	
-	
+	@CrossOrigin
+	@GetMapping(value = "/quickFunds")
+	public double quickFunds(@RequestHeader("Authorization") String auth) throws NotFoundException {
+		BankUser user = findUser(auth);
+		
+		
+		return user.getAllAvailableBalance();
+	}
 	
 	
 	
