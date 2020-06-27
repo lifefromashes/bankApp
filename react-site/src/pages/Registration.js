@@ -55,7 +55,7 @@ export default class Registration extends Component {
     var urlString = server() + "NewUser";
     req.open('POST', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
+    //setCookieHeader(req);
     req.send(body);
 
     req.addEventListener('load', () => {

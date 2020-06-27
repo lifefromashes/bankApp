@@ -25,7 +25,6 @@ export default class AboutUs extends Component {
               <li><a href="/services">Services</a></li>
               <li class= "aboutus"><a href="/aboutus">About Us</a></li>
               <li><a href="/contactus">Contact Us</a></li>
-              <li><a href="#">Mobile</a></li>
             </ul>
           </div>
 

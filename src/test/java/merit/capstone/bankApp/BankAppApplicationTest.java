@@ -232,8 +232,15 @@ public class BankAppApplicationTest {
 		assertEquals(380, ra.getBalance(), 0);
 		assertEquals(100, user.getSingleSavingsAccount().getBalance());
 		
-		bankUserRepository.delete(user);
-		bankAccountRepository.delete(ra);
+		user.setIsActive(false);
+		ra.setIsActive(false);
+		
+		bankUserRepository.save(user);
+		bankAccountRepository.save(ra);
+		
+		//bankUserRepository.delete(user);
+		//bankAccountRepository.delete(ra);
+		
 	}
 
 	
