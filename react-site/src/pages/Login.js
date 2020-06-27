@@ -168,7 +168,7 @@ export default class Login extends Component {
               <br />
               <br />
             {/* </form> */}
-            <a href="/register">Forgot Passowrd?</a><br />
+            {/*<a href="/register">Forgot Passowrd?</a><br />*/}
             <a href="/register">Create an account!</a><br />
           </div>
 

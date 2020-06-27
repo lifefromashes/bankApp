@@ -32,7 +32,7 @@ export default class AboutUs extends Component {
             <h1>MEET OUR TEAM</h1>
               <span class="border"></span>
             <div class= "ps">
-              <a href="#kristin">kristin<img /></a>
+              <a href="#kristin">Kristin<img /></a>
               <a href="#nick">Nick<img /></a>
               <a href="#rufaro">Rufaro<img /></a>
             </div>
@@ -47,7 +47,7 @@ export default class AboutUs extends Component {
                 <span class="name">Nick R.</span>
                 <span class="border"></span>
                 <p>
-                  Tech Leader. He is very nice.
+                  Tech Leader. Once successfully wrestled two bears at the same time, but does sometimes exaggerate when writing about himself.
                 </p>
             </div>
             <div class="section" id="rufaro">
