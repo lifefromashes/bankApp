@@ -15,7 +15,7 @@ export default class Admin extends Component {
         amount: 0,
         accountTypeSelected: 1,
         CDONum: 0,
-        cdoRate: .0001,
+        cdoRate: .01,
         cdoTerm: 1,
         transAccount: 0,
         transAmmount: 0,
@@ -104,8 +104,14 @@ export default class Admin extends Component {
     var req = new XMLHttpRequest();
     var urlString = server() + "Admin/CDOfferings";
 
-    var body = '{"interestRate": "' + this.state.cdoRate + '", ';
-    body += '"term": "' + this.state.cdoTerm + '"}';
+    var body = {
+      interestRate: this.state.cdoRate,
+      term: this.state.cdoTerm
+    };
+    body = JSON.stringify(body);
+
+    //var body = '{"interestRate": "' + this.state.cdoRate + '", ';
+    //body += '"term": "' + this.state.cdoTerm + '"}';
 
     req.open('POST', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
@@ -374,7 +380,7 @@ export default class Admin extends Component {
           onFocus={this.handleFocus}
           required
         />
-        &nbsp; % and a term of &nbsp;
+        &nbsp; and a term of &nbsp;
         <input
           className="adminTool" 
           size="4"
@@ -390,7 +396,7 @@ export default class Admin extends Component {
       </div>
 
       <div>
-        &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp;
         Bank Account Number:
         <input
             className="adminTool" 

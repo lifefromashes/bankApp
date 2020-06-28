@@ -58,7 +58,7 @@ export default class History extends Component {
         document.getElementById("bal").innerHTML = s;
 
         s = "";
-        s += "Interest Rate: " + JSON.parse(req.responseText).interestRate + "%";
+        s += "Interest Rate: " + (100 * JSON.parse(req.responseText).interestRate) + "%";
         var dummyTerm = 1;
         if( JSON.parse(req.responseText).term != -1 ){
           dummyTerm = JSON.parse(req.responseText).term;
@@ -167,10 +167,18 @@ export default class History extends Component {
     }
 
 
-    var body = '{"amount": "' + amt + '", ';
-    body += '"sourceAccount": ' + actID + ', ';
-    body += '"targetAccount": ' + actID + ', ';
-    body += '"transactionMemo": "' + mem + '"}';
+    //var body = '{"amount": "' + amt + '", ';
+    //body += '"sourceAccount": ' + actID + ', ';
+    //body += '"targetAccount": ' + actID + ', ';
+    //body += '"transactionMemo": "' + mem + '"}';
+
+    var body = {
+      amount: amt,
+      sourceAccount: actID,
+      targetAccount: actID,
+      transactionMemo: mem
+    }
+    body = JSON.stringify(body);
 
     var urlString = server() + "User/Transaction";
     req.open('POST', urlString);
