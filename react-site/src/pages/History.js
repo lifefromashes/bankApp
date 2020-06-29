@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts, parseHistory} from "../parseBankUser";
 import {server} from "../webAddress";
+import {apiCall} from "../netcode";
 
 export default class History extends Component {
   constructor(props) {
@@ -29,24 +30,16 @@ export default class History extends Component {
     this.closeAccount = this.closeAccount.bind(this);
 
 
-
-    var req = new XMLHttpRequest();
-
     let url = window.location;
     let urlSplit = url.toString().split("/");
     let actID = urlSplit[urlSplit.length - 1];
-    var urlString = server() + "User/Transaction/" + actID;
-    req.open('GET', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    var jwt = readCookie("jwt");
-    setCookieHeader(req);
-    req.send();
+
+    var req = apiCall(null, 'GET', "User/Transaction/" + actID, true);
+
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
-        //document.getElementById("userTitle").title = JSON.parse(req.responseText).username;
         
         this.state.account = JSON.parse(req.responseText);
-        
 
         var s = "";
         s += JSON.parse(req.responseText).accountName + " #";
@@ -71,13 +64,15 @@ export default class History extends Component {
         var al = document.getElementById("historyList");
         al.innerHTML = parseHistory(req);
 
-        var req2 = new XMLHttpRequest();
-        urlString = server() + "FutureValue";
-        req2.open('POST', urlString);
-        req2.setRequestHeader('Content-Type', 'application/json');
-        var body = '{"balance": "' + JSON.parse(req.responseText).balance + '", "interestRate": "';
-        body += JSON.parse(req.responseText).interestRate + '", "term": ' + dummyTerm + '}';
-        req2.send(body);
+
+
+
+        var body = {
+          balance: JSON.parse(req.responseText).balance,
+          interestRate: JSON.parse(req.responseText).interestRate,
+          term: dummyTerm
+        }
+        var req2 = apiCall(body, 'POST', "FutureValue", true);
         req2.addEventListener('load', () => {
           if(req2.status >= 200 && req2.status < 400){
             s = req2.responseText;
@@ -123,16 +118,9 @@ export default class History extends Component {
 
     if(window.confirm("Really close this account, moving all funds to Savings?")){
 
-      var req = new XMLHttpRequest();
-      var urlString = server() + "User/Close/" + this.state.account.accountNumber;
 
-      console.log(this.state.account.accountNumber);
-      
-      req.open('PUT', urlString);
-      req.setRequestHeader('Content-Type', 'application/json');
-      var jwt = readCookie("jwt");
-      setCookieHeader(req);
-      req.send();
+      var req = apiCall(null, 'PUT', "User/Close/" + this.state.account.accountNumber, true);
+
       req.addEventListener('load', () => {
         if(req.status >= 200 && req.status < 400){
           window.location = "/User";
@@ -167,10 +155,6 @@ export default class History extends Component {
     }
 
 
-    //var body = '{"amount": "' + amt + '", ';
-    //body += '"sourceAccount": ' + actID + ', ';
-    //body += '"targetAccount": ' + actID + ', ';
-    //body += '"transactionMemo": "' + mem + '"}';
 
     var body = {
       amount: amt,
@@ -178,15 +162,10 @@ export default class History extends Component {
       targetAccount: actID,
       transactionMemo: mem
     }
-    body = JSON.stringify(body);
 
-    var urlString = server() + "User/Transaction";
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    var jwt = readCookie("jwt");
-    setCookieHeader(req);
-    req.send(body);
 
+    var req = apiCall(body, 'POST', "User/Transaction", true);
+    
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
         window.location.reload();

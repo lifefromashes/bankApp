@@ -52,19 +52,12 @@ export default class Admin extends Component {
 
 
   getUsers() {
-    console.log("enter getUsers");
-
-    var req = new XMLHttpRequest();
-    var urlString = server() + "Admin/Users";
-    req.open('GET', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send();
+    
+    var req = apiCall(null, 'GET', "Admin/Users", true);
 
     req.addEventListener('load', () => {
 
       if(req.status >= 200 && req.status < 400){
-        //console.log(req.responseText);
         var str = parseBankUser(req);
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
@@ -76,15 +69,8 @@ export default class Admin extends Component {
   }
 
   getUserByID() {
-    console.log("enter getUserByID");
-
-    var req = new XMLHttpRequest();
     var id = parseInt(this.state.userID);
-    var urlString = server() + "Admin/Users/" + id;
-    req.open('GET', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send();
+    var req = apiCall(null, 'GET', "Admin/Users/" + id, true);
 
     req.addEventListener('load', () => {
 
@@ -106,7 +92,6 @@ export default class Admin extends Component {
       interestRate: this.state.cdoRate,
       term: this.state.cdoTerm
     };
-
     var req = apiCall(body, 'POST', "Admin/CDOfferings", true);
 
     req.addEventListener('load', () => {
@@ -123,17 +108,10 @@ export default class Admin extends Component {
 
   getCDOs() {
 
-    var req = new XMLHttpRequest();
-    var urlString = server() + "CDOfferings";
-    req.open('GET', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send();
-
+    var req = apiCall(null, 'GET', "CDOfferings", true);
     req.addEventListener('load', () => {
 
       if(req.status >= 200 && req.status < 400){
-        //console.log(req.responseText);
         var str = parseCDO(req);
         var t = document.getElementById("printout");
         t.innerHTML = "<p>" + str + "</p>";
@@ -144,14 +122,7 @@ export default class Admin extends Component {
 
   getHistory() {
 
-    var req = new XMLHttpRequest();
-
-    var urlString = server() + "Admin/Transaction/" + this.state.transAccount;
-    req.open('GET', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    var jwt = readCookie("jwt");
-    setCookieHeader(req);
-    req.send();
+    var req = apiCall(null, 'GET', "Admin/Transaction/" + this.state.transAccount, true);
 
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
@@ -165,24 +136,13 @@ export default class Admin extends Component {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   }
 
   createTransaction() {
     
 
-    var req = new XMLHttpRequest();
-    var urlString = server() + "Admin/Transaction";
+    //var req = new XMLHttpRequest();
+    //var urlString = server() + "Admin/Transaction";
     
 
     //var body = '{"sourceAccount": ' + this.state.transAccount + ', ';
@@ -196,14 +156,7 @@ export default class Admin extends Component {
       amount: this.state.transAmmount,
       transactionMemo: this.state.transNote
     }
-    body = JSON.stringify(body);
-
-    console.log(body);
-
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send(body);
+    var req = apiCall(body, 'POST', "Admin/Transaction", true);
 
     req.addEventListener('load', () => {
       console.log(req.status);
@@ -223,10 +176,6 @@ export default class Admin extends Component {
 
   createAccount() {
 
-    console.log("enter createAccount");
-
-    //createNewAccount(document.getElementById("accountType").value, this.state.amount);
-    var req = new XMLHttpRequest();
     var t = document.getElementById("accountType").value;
     var tString = "fail";
     if(t == 1){ tString = "CheckingAccount"; }
@@ -238,20 +187,17 @@ export default class Admin extends Component {
     
     var id = parseInt(this.state.userID);
 
-    var urlString = server() + "Admin/" + id + "/" + tString;
+    var urlString = "Admin/" + id + "/" + tString;
 
     if(t == 3){
-      urlString = server() + "Admin/" + id + "/" + tString + "/" + this.state.CDONum;
+      urlString = "Admin/" + id + "/" + tString + "/" + this.state.CDONum;
     }
 
-    //var body = '{"balance": "' + this.state.amount + '"}';
-    var body = { balance: this.state.amount };
-    body = JSON.stringify(body);
+    console.log(urlString);
 
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send(body);
+
+    var body = { balance: this.state.amount };
+    var req = apiCall(body, 'POST', urlString, true);
 
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){

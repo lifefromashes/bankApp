@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {server} from "../webAddress";
+import {apiCall} from "../netcode";
 
 export default class Login extends Component {
   constructor(props) {
@@ -23,36 +24,21 @@ export default class Login extends Component {
   loginRequest(){
     console.log("creating login request...");
 
-    var req = new XMLHttpRequest();
-    var body = '{"username": "' + this.state.username + '", ';
-    body += '"password": "' + this.state.password + '"}';
+    var body = {
+      username: this.state.username,
+      password: this.state.password
+    }
 
-    var urlString = server() + "authenticate";
-
-    //console.log(body);
-
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    req.send(body);
+    var req = apiCall(body, 'POST', "authenticate", false);
 
     req.addEventListener('load', () => {
       console.log("got response");
 
         if(req.status >= 200 && req.status < 400){
-          //console.log(req.responseText);
 
           saveTokenInCookie(req);
-          console.log("!: " + readCookie("jwt"));
 
-
-          //use our newly saved cookie to request a reditect from the server
-          var req2 = new XMLHttpRequest();
-          urlString = server() + "direct";
-          req2.open('GET', urlString);
-          req2.setRequestHeader('Content-Type', 'application/json');
-          setCookieHeader(req2);
-          req2.send();
-
+          var req2 = apiCall(null, 'GET', "direct", true);
           req2.addEventListener('load', () => {
             if(req.status >= 200 && req.status < 400){
               window.location = req2.responseText;
@@ -77,7 +63,6 @@ export default class Login extends Component {
 
     })
 
-    //console.log(body);
 
   }
 

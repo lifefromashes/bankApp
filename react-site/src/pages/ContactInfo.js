@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
 import {server} from "../webAddress";
+import {apiCall} from "../netcode";
 
 export default class ContactInfo extends Component {
   constructor(props) {
@@ -23,14 +24,8 @@ export default class ContactInfo extends Component {
         
     };
 
+    var req = apiCall(null, 'GET', "User", true);
 
-    var req = new XMLHttpRequest();
-    var urlString = server() + "User";
-    req.open('GET', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    var jwt = readCookie("jwt");
-    setCookieHeader(req);
-    req.send();
     req.addEventListener('load', () => {
         console.log(123);
         if(req.status >= 200 && req.status < 400){
@@ -93,25 +88,21 @@ handleChange(event) {
 
 updateInfo(){
 
+    var body = {
+      username: this.state.username,
+      password: this.state.password,
+      firstName: this.state.firstname,
+      lastName: this.state.lastname,
+      ssn: this.state.ssn,
+      email: this.state.email,
+      phone: this.state.phone,
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.stateName,
+      zip: this.state.zip
+    }
 
-    var body = '{"username": "' + this.state.username + '", ';
-    body += '"password": "' + this.state.password + '", ';
-    body += '"firstName": "' + this.state.firstname + '", ';
-    body += '"lastName": "' + this.state.lastname + '", ';
-    body += '"ssn": "' + this.state.ssn + '", ';
-    body += '"email": "' + this.state.email + '", ';
-    body += '"phone": "' + this.state.phone + '", ';
-    body += '"address": "' + this.state.address + '", ';
-    body += '"city": "' + this.state.city + '", ';
-    body += '"state": "' + this.state.stateName + '", ';
-    body += '"zip": "' + this.state.zip + '"}';
-
-    var req = new XMLHttpRequest();
-    var urlString = server() + "Contact";
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send(body);
+    var req = apiCall(body, 'POST', "Contact", true);
 
     req.addEventListener('load', () => {
 
@@ -125,21 +116,11 @@ updateInfo(){
       }
     })
 
-
-
-
-
-
 }
 
 closeAccount(){
 
-    var req = new XMLHttpRequest();
-    var urlString = server() + "quickFunds";
-    req.open('GET', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send();
+    var req = apiCall(null, 'GET', "quickFunds", true);
 
     req.addEventListener('load', () => {
 
@@ -148,13 +129,7 @@ closeAccount(){
 
         if(window.confirm("Are you sure you want withdraw your $" + tot + " available funds and permanently delete your User Account, forefiting all investments?")){
 
-
-            var req2 = new XMLHttpRequest();
-            urlString = server() + "User/Quit";
-            req2.open('PUT', urlString);
-            req2.setRequestHeader('Content-Type', 'application/json');
-            setCookieHeader(req2);
-            req2.send();
+            var req2 = apiCall(null, 'PUT', "User/Quit", true);
         
             req2.addEventListener('load', () => {
         
@@ -168,18 +143,12 @@ closeAccount(){
               }
             })
 
-
-
-
         }
         
-
       } else{
 
       }
     })
-
-    
 
 }
 

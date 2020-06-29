@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {parseBankUser, parseUserByID, parseAccounts} from "../parseBankUser";
 import {server} from "../webAddress";
+import {apiCall} from "../netcode";
 
 export default class User extends Component {
   constructor(props) {
@@ -23,16 +24,18 @@ export default class User extends Component {
 
 
 
-    var req = new XMLHttpRequest();
-    var urlString = server() + "User";
-    req.open('GET', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    var jwt = readCookie("jwt");
-    setCookieHeader(req);
-    req.send();
+    //var req = new XMLHttpRequest();
+    //var urlString = server() + "User";
+    //req.open('GET', urlString);
+    //req.setRequestHeader('Content-Type', 'application/json');
+    //var jwt = readCookie("jwt");
+    //setCookieHeader(req);
+    //req.send();
+
+    var req = apiCall(null, 'GET', "User", true);
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
-        //document.getElementById("userTitle").title = JSON.parse(req.responseText).username;
+
         var t = document.getElementById("userTitle");
         var s = "";
         s += "<p>" + JSON.parse(req.responseText).firstName + " ";
@@ -44,7 +47,7 @@ export default class User extends Component {
         al.innerHTML = parseAccounts(req);
 
         var accts = JSON.parse(req.responseText).bankAccounts.length;
-        //if(b != null){
+
           for(let i=0; i<accts; i++){
             let b = document.getElementById("accountID" + i);
             this.state.accounts[this.state.accountIndex] = b;
@@ -55,18 +58,8 @@ export default class User extends Component {
             });
 
           }
-        //}
-
-      
-          var req2 = new XMLHttpRequest();
-          var urlString2 = server() + "CDOfferings";
-      
-      
-          req2.open('GET', urlString2);
-          req2.setRequestHeader('Content-Type', 'application/json');
-          setCookieHeader(req2);
-          req2.send();
-      
+          
+          var req2 = apiCall(null, 'GET', "CDOfferings", true);
           req2.addEventListener('load', () => {
             if(req2.status >= 200 && req2.status < 400){
               
@@ -76,9 +69,7 @@ export default class User extends Component {
               var s = "";
               var t = document.getElementById("cdoType");
 
-              //<option value="4">Regular IRA Account</option>
               for(let i=0; i<obj.length; i++){
-                //s += '<option value="' + obj[i].id + '">';
                 s += '<option value="' + i + '">';
                 s += 'Rate ' + obj[i].interestRate + ' for ' + obj[i].term + ' years';
                 s += '</option>';
@@ -143,20 +134,19 @@ export default class User extends Component {
     if(t == 6){ tString = "RolloverIRA"; }
     
 
-    var urlString = server() + "User/" + tString;
 
-    var body = '{"balance": "' + this.state.amount + '"'; 
-    if(t == 3){
-      body += ', "interestRate": "' + this.state.obj[this.state.cdoType].interestRate + '", ';
-      body += '"term": ' + this.state.obj[this.state.cdoType].term;
+    if(t != 3){
+      var body = {balance: this.state.amount }
+    } else {
+      var body = {
+        balance: this.state.amount, 
+        interestRate: this.state.obj[this.state.cdoType].interestRate,
+        term: this.state.obj[this.state.cdoType].term
+      }
     }
-    body += '}';
 
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send(body);
 
+    var req = apiCall(body, 'POST', "User/" + tString, true);
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
         window.location.reload();

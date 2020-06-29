@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {server} from "../webAddress";
+import {apiCall} from "../netcode";
 
 
 
@@ -34,8 +35,6 @@ export default class ContactUs extends Component {
 
   submitFeedback(){
 
-    var req = new XMLHttpRequest();
-    var urlString = server() + "Feedback";
 
     var body = '{"firstname": "' + this.state.firstname + '", ';
     body += '"lastname": "' + this.state.lastname + '", ';
@@ -43,10 +42,15 @@ export default class ContactUs extends Component {
     body += '"subject": "' + this.state.subject + '", ';
     body += '"message": "' + this.state.message + '"}';
 
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send(body);
+    var body = {
+      firstname: this.state.firstname,
+      email: this.state.email,
+      subject: this.state.subject,
+      message: this.state.message
+    }
+
+
+    var req = apiCall(body, 'POST', "Feedback", false);
 
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
