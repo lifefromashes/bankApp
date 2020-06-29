@@ -33,7 +33,7 @@ export default class ContactUs extends Component {
   }
 
   submitFeedback(){
-    
+
     var req = new XMLHttpRequest();
     var urlString = server() + "Feedback";
 
@@ -93,7 +93,7 @@ export default class ContactUs extends Component {
                     <div class="contact-form">
 
                       <div>
-                        <i class="fa fa-map-marker"></i><span class="form-info"> DFW, Texas To Be decided</span><br />
+                        <i class="fa fa-map-marker"></i><span class="form-info"> Dallas, Texas</span><br />
                         <i class="fa fa-phone"></i><span class="form-info"> +1-999-999-9999</span><br />
                         <i class="fa fa-envelope"></i><span class="form-info"> info@meritbank.com</span><br />
                         </div>
@@ -115,5 +115,5 @@ export default class ContactUs extends Component {
     );
   }
 
-  
+
 }

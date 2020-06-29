@@ -25,6 +25,8 @@ import merit.capstone.bankApp.models.BankAccount;
 import merit.capstone.bankApp.models.BankUser;
 import merit.capstone.bankApp.models.CDAccount;
 import merit.capstone.bankApp.models.CheckingAccount;
+import merit.capstone.bankApp.models.DBACheckingAccount;
+import merit.capstone.bankApp.models.Feedback;
 import merit.capstone.bankApp.models.RegularIRA;
 import merit.capstone.bankApp.models.SavingsAccount;
 import merit.capstone.bankApp.models.Transaction;
@@ -81,8 +83,9 @@ public class BankAppApplicationTest {
 			ra.closeAccount(user);
 
 		} catch (Exception e) {
-			//since we use the catch to stop deposits on CD closings, exceptions here are fine
-			//fail();
+			// since we use the catch to stop deposits on CD closings, exceptions here are
+			// fine
+			// fail();
 		}
 
 		assertEquals(false, ra.isActive());
@@ -106,15 +109,71 @@ public class BankAppApplicationTest {
 	}
 
 	@Test
+	public void addSavingsAccount() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		SavingsAccount sa = new SavingsAccount();
+		try {
+			user.addBankAccount(sa);
+		} catch (MaxAccountsReachedException e) {
+			fail();
+		}
+
+		assertTrue(user.getBankAccounts().size() >= 1);
+	}
+
+	@Test
+	public void addDBAAccount() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		DBACheckingAccount dba = new DBACheckingAccount();
+		try {
+			user.addBankAccount(dba);
+		} catch (MaxAccountsReachedException e) {
+			fail();
+		}
+
+		assertTrue(user.getBankAccounts().size() >= 1);
+
+	}
+
+	@Test
+	public void addCDAccount() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CDAccount cda = new CDAccount();
+		try {
+			user.addBankAccount(cda);
+		} catch (MaxAccountsReachedException e) {
+			fail();
+		}
+
+		assertTrue(user.getBankAccounts().size() >= 1);
+	}
+
+	@Test
 	public void closeAccountTransfer() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
 		user.setLastName("smith");
 		user.setSsn("123123123");
-		
+
 		SavingsAccount a = new SavingsAccount();
 		a.setUserId(user.getId());
-		try { user.addBankAccount(a); } catch (Exception e) { fail(); }
+		try {
+			user.addBankAccount(a);
+		} catch (Exception e) {
+			fail();
+		}
 
 		RegularIRA ra = new RegularIRA();
 		ra.setBalance(500);
@@ -154,6 +213,22 @@ public class BankAppApplicationTest {
 	}
 
 	@Test
+	public void depositIntoSavings() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		SavingsAccount sa = new SavingsAccount();
+		try {
+			sa.deposit(500);
+		} catch (Exception e) {
+
+		}
+		assertEquals(500, sa.getBalance(), 0);
+	}
+
+	@Test
 	public void withdrawIRA() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
@@ -175,6 +250,15 @@ public class BankAppApplicationTest {
 	}
 
 	@Test
+	public void addFeedback() {
+		Feedback fb = new Feedback();
+		fb.setMessage("hello");
+
+		assertThat(fb).isNotNull();
+
+	}
+
+	@Test
 	public void cantDepositCDAccount() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
@@ -193,7 +277,7 @@ public class BankAppApplicationTest {
 		assertEquals(0, cd.getBalance(), 0);
 
 	}
-	
+
 	@Test
 	public void checkOverrideIRAMultipleTrans() {
 		BankUser user = new BankUser();
@@ -201,55 +285,52 @@ public class BankAppApplicationTest {
 		user.setLastName("smith");
 		user.setSsn("123123123");
 		bankUserRepository.save(user);
-		
+
 		SavingsAccount a = new SavingsAccount();
 		a.setUserId(user.getId());
-		try { user.addBankAccount(a); } catch (Exception e) { fail(); }
-		//bankAccountRepository.save(a);
-		
-		
+		try {
+			user.addBankAccount(a);
+		} catch (Exception e) {
+			fail();
+		}
+		// bankAccountRepository.save(a);
+
 		RegularIRA ra = new RegularIRA();
 		ra.setBalance(500);
 		bankAccountRepository.save(ra);
-		
+
 		Transaction t = new Transaction();
 		t.setSourceAccount(ra.getAccountNumber());
-		
-		
-		
-		
+
 		t.setTargetAccount(user.getSingleSavingsAccount().getAccountNumber());
 		t.setAmount(100);
-		
-		
+
 		try {
-			ra.processTransaction(t, ra, user.getSingleSavingsAccount() );
-			
-		}catch (Exception e) {
-			
+			ra.processTransaction(t, ra, user.getSingleSavingsAccount());
+
+		} catch (Exception e) {
+
 		}
-		
+
 		assertEquals(380, ra.getBalance(), 0);
 		assertEquals(100, user.getSingleSavingsAccount().getBalance());
-		
+
 		user.setIsActive(false);
 		ra.setIsActive(false);
-		
+
 		bankUserRepository.save(user);
 		bankAccountRepository.save(ra);
-		
-		//bankUserRepository.delete(user);
-		//bankAccountRepository.delete(ra);
-		
-	}
 
-	
+		// bankUserRepository.delete(user);
+		// bankAccountRepository.delete(ra);
+
+	}
 
 	@Test
 	public void doesControllerCallStuff() {
-		
+
 		assertThat(adminController).isNotNull();
-		
+
 	}
 
 }
