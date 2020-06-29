@@ -4,6 +4,7 @@ import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieU
 import {parseBankUser, parseUserByID, parseCDO, parseHistoryAdmin} from "../parseBankUser";
 import {createNewAccount, createNewCDO} from "../adminFeedback";
 import {server} from "../webAddress";
+import {apiCall} from "../netcode";
 
 export default class Admin extends Component {
   constructor(props) {
@@ -101,22 +102,12 @@ export default class Admin extends Component {
 
   createCDO() {
 
-    var req = new XMLHttpRequest();
-    var urlString = server() + "Admin/CDOfferings";
-
     var body = {
       interestRate: this.state.cdoRate,
       term: this.state.cdoTerm
     };
-    body = JSON.stringify(body);
 
-    //var body = '{"interestRate": "' + this.state.cdoRate + '", ';
-    //body += '"term": "' + this.state.cdoTerm + '"}';
-
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    setCookieHeader(req);
-    req.send(body);
+    var req = apiCall(body, 'POST', "Admin/CDOfferings", true);
 
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
@@ -194,10 +185,18 @@ export default class Admin extends Component {
     var urlString = server() + "Admin/Transaction";
     
 
-    var body = '{"sourceAccount": ' + this.state.transAccount + ', ';
-    body += '"targetAccount": ' + this.state.transAccount + ', ';
-    body += '"amount": "' + this.state.transAmmount + '", ';
-    body += '"transactionMemo": "' + this.state.transNote + '"}'
+    //var body = '{"sourceAccount": ' + this.state.transAccount + ', ';
+    //body += '"targetAccount": ' + this.state.transAccount + ', ';
+    //body += '"amount": "' + this.state.transAmmount + '", ';
+    //body += '"transactionMemo": "' + this.state.transNote + '"}'
+
+    var body = {
+      sourceAccount: this.state.transAccount,
+      targetAccount: this.state.transAccount,
+      amount: this.state.transAmmount,
+      transactionMemo: this.state.transNote
+    }
+    body = JSON.stringify(body);
 
     console.log(body);
 
@@ -245,7 +244,9 @@ export default class Admin extends Component {
       urlString = server() + "Admin/" + id + "/" + tString + "/" + this.state.CDONum;
     }
 
-    var body = '{"balance": "' + this.state.amount + '"}';
+    //var body = '{"balance": "' + this.state.amount + '"}';
+    var body = { balance: this.state.amount };
+    body = JSON.stringify(body);
 
     req.open('POST', urlString);
     req.setRequestHeader('Content-Type', 'application/json');
