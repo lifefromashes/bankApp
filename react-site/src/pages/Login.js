@@ -54,7 +54,7 @@ export default class Login extends Component {
           console.log(req.status);
           //bad user / pass combo code goes here
 
-          document.getElementById("loginOutput").innerHTML = "<p>~~~~Invalid Username Password~~~~</p>";
+          window.alert("Invalid username / password combo.");
 
 
         }
