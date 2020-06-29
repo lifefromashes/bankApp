@@ -23,15 +23,6 @@ export default class User extends Component {
     };
 
 
-
-    //var req = new XMLHttpRequest();
-    //var urlString = server() + "User";
-    //req.open('GET', urlString);
-    //req.setRequestHeader('Content-Type', 'application/json');
-    //var jwt = readCookie("jwt");
-    //setCookieHeader(req);
-    //req.send();
-
     var req = apiCall(null, 'GET', "User", true);
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
