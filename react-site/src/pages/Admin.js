@@ -40,7 +40,6 @@ export default class Admin extends Component {
       [event.target.name]: event.target.value
     });
 
-    //{console.log(document.getElementById("accountType").value)}
   }
 
   handleChangeA(event) {
