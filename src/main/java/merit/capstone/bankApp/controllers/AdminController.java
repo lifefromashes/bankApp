@@ -63,6 +63,7 @@ public class AdminController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public CDOffering createCDOffering(@RequestBody CDOffering a) {
 		cdOfferingRepository.save(a);
+		log.info("Created new CD Offering: " + a.getInterestRate() + " for " + a.getTerm());
 		return a;
 	}
 	
@@ -156,6 +157,8 @@ public class AdminController {
 		a.setUserId(id);
 		user.addBankAccount(a);
 		bankAccountRepository.save(a);
+		
+		log.info("Created new " + a.getAccountName() + " for user # " + user.getId());
 		
 		Transaction t = new Transaction();
 		t.setSourceAccount(a.getAccountNumber());

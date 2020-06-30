@@ -93,7 +93,7 @@ public class CreateUserController {
 		List<BankUser> bu = bankUserRepository.findAll();
 		List<BankUser> ah = new ArrayList<>();
 		for(BankUser b : bu) {
-			if(!b.getAuthority().equals("ADMIN")) {
+			if(b.getAuthority() != null && !b.getAuthority().equals("ADMIN")) {
 				b.setTotalValue(b.getCombinedBalance());
 				ah.add(b);
 			}

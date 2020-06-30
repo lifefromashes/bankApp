@@ -36,11 +36,7 @@ export default class ContactUs extends Component {
   submitFeedback(){
 
 
-    var body = '{"firstname": "' + this.state.firstname + '", ';
-    body += '"lastname": "' + this.state.lastname + '", ';
-    body += '"email": "' + this.state.email + '", ';
-    body += '"subject": "' + this.state.subject + '", ';
-    body += '"message": "' + this.state.message + '"}';
+
 
     var body = {
       firstname: this.state.firstname,
@@ -87,7 +83,6 @@ export default class ContactUs extends Component {
               <li><a href="/services">Services</a></li>
               <li><a href="/aboutus">About Us</a></li>
               <li class = "contactus"><a href="/contactus">Contact Us</a></li>
-              <li><a href="#">Mobile</a></li>
             </ul>
           </div>
           <section id="contact-section">
