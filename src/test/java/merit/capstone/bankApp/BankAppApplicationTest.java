@@ -3,6 +3,7 @@ package merit.capstone.bankApp;
 import static org.assertj.core.api.Assertions.assertThat;
 //import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -246,6 +247,23 @@ public class BankAppApplicationTest {
 	}
 	
 	@Test
+	public void cantDepositNegativeIntoChecking() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+		
+		CheckingAccount ca = new CheckingAccount();
+		try {
+			ca.deposit(-100);
+		} catch (Exception e ){
+			
+		}
+		
+		assertEquals(0, ca.getBalance(), 0);
+	}
+	
+	@Test
 	public void overdrawChecking() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
@@ -293,6 +311,14 @@ public class BankAppApplicationTest {
 
 		assertThat(fb).isNotNull();
 
+	}
+	
+	@Test
+	public void getFeedBack() {
+		Feedback fb = new Feedback();
+		fb.setMessage("Hello Friend");
+		
+		assertNotNull(fb, "Hello Friend");
 	}
 
 	@Test
