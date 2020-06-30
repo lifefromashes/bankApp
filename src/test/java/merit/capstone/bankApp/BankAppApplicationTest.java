@@ -227,6 +227,43 @@ public class BankAppApplicationTest {
 		}
 		assertEquals(500, sa.getBalance(), 0);
 	}
+	
+	@Test
+	public void depositNegativeIntoSavings() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		SavingsAccount sa = new SavingsAccount();
+		try {
+			sa.deposit(-500);
+			fail();
+		} catch (Exception e) {
+
+		}
+		assertEquals(0, sa.getBalance(), 0);
+	}
+	
+	@Test
+	public void overdrawChecking() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CheckingAccount a = new CheckingAccount();
+		a.setBalance(100);
+
+		Transaction t = new Transaction();
+		t.setSourceAccount(a.getAccountNumber());
+		t.setTargetAccount(a.getAccountNumber());
+		t.setAmount(-200);
+
+		a.processTransaction(t, a, a);
+
+		assertEquals(0, a.getBalance(), 100);
+	}
 
 	@Test
 	public void withdrawIRA() {
@@ -327,10 +364,25 @@ public class BankAppApplicationTest {
 	}
 
 	@Test
-	public void doesControllerCallStuff() {
-
+	public void doesAdminControllerInjectSuccessfully() {
 		assertThat(adminController).isNotNull();
-
 	}
+	
+	@Test
+	public void doesBankAccountRepositoryInjectSuccessfully() {
+		assertThat(bankAccountRepository).isNotNull();
+	}
+	
+	@Test
+	public void doesBankUserRepositoryInjectSuccessfully() {
+		assertThat(bankUserRepository).isNotNull();
+	}
+	
+	@Test
+	public void doesTransactionRepositoryInjectSuccessfully() {
+		assertThat(transactionRepository).isNotNull();
+	}
+	
+	
 
 }

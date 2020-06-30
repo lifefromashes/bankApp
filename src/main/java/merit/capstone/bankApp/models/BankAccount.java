@@ -158,6 +158,7 @@ public abstract class BankAccount {
 			t.setSourceAccount(targetAccount.getAccountNumber());
 			t.setTransactionSuccess(true);
 			t.setTransactionMemo("Closed Account #" + this.accountNumber);
+			t.setBalanceAfterTransaction(targetAccount.getBalance());
 			
 			List <Transaction> lt = targetAccount.getTransactions();
 			lt.add(t);

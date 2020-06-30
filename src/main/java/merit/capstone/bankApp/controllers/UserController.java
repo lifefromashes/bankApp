@@ -267,14 +267,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 	@PostMapping(value = "/FutureValue")
 	public double futureValue(@RequestBody CDAccount a) throws NotFoundException {
 		
-		System.out.println(a.getBalance());
-		System.out.println(a.getTerm());
-		System.out.println(a.getInterestRate());
-		
 		double v = a.futureValue(a.getTerm());
-		
-		System.out.println("!!" + v);
-		
 		v = Math.floor(v * 100);
 		v /= 100;
 		return v;

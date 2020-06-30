@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {server} from "../webAddress";
+import {apiCall} from "../netcode";
 
 export default class Registration extends Component {
   constructor(props) {
@@ -39,24 +40,22 @@ export default class Registration extends Component {
   submitNewUser() {
     console.log("trying to create new user");
 
-    var body = '{"username": "' + this.state.username + '", ';
-    body += '"password": "' + this.state.password + '", ';
-    body += '"firstName": "' + this.state.firstname + '", ';
-    body += '"lastName": "' + this.state.lastname + '", ';
-    body += '"ssn": "' + this.state.ssn + '", ';
-    body += '"email": "' + this.state.email + '", ';
-    body += '"phone": "' + this.state.phone + '", ';
-    body += '"address": "' + this.state.address + '", ';
-    body += '"city": "' + this.state.city + '", ';
-    body += '"state": "' + this.state.stateName + '", ';
-    body += '"zip": "' + this.state.zip + '"}';
 
-    var req = new XMLHttpRequest();
-    var urlString = server() + "NewUser";
-    req.open('POST', urlString);
-    req.setRequestHeader('Content-Type', 'application/json');
-    //setCookieHeader(req);
-    req.send(body);
+    var body = {
+      username: this.state.username,
+      password: this.state.password,
+      firstName: this.state.firstname,
+      lastName: this.state.lastname,
+      ssn: this.state.ssn,
+      email: this.state.email,
+      phone: this.state.phone,
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.stateName,
+      zip: this.state.zip
+    }
+
+    var req = apiCall(body, 'POST', "NewUser", false);
 
     req.addEventListener('load', () => {
 
@@ -72,32 +71,7 @@ export default class Registration extends Component {
 
   }
 
-  handleSubmit(event) { /*
-    const { email, password, password_confirmation } = this.state;
-
-    axios
-      .post(
-        "http://localhost:3000/registrations",
-        {
-          user: {
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.status === "created") {
-          this.props.handleSuccessfulAuth(response.data);
-        }
-      })
-      .catch(error => {
-        console.log("registration error", error);
-      });
-    event.preventDefault();
-    */
-  }
+  handleSubmit(event) { }
 
   render() {
     return (
