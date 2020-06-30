@@ -51,6 +51,8 @@ public class BankUser {
 
 	private boolean isActive;
 	
+	private String closedAccounts;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<BankAccount> bankAccounts;
 
@@ -58,6 +60,7 @@ public class BankUser {
 
 	public BankUser() {
 		bankAccounts = new ArrayList<>();
+
 		//SavingsAccount s = new SavingsAccount(); bankAccounts.add(s);
 		this.isActive = true;
 		
@@ -65,6 +68,10 @@ public class BankUser {
 	}
 
 	
+
+	
+
+
 
 	public BankAccount addBankAccount(BankAccount bankAccount) throws MaxAccountsReachedException { // add throws NegAmtException and others
 
@@ -224,6 +231,18 @@ public class BankUser {
 		}
 		return ba; 
 	}
+	
+	public List<BankAccount> getInactiveBankAccounts() {
+		List<BankAccount> ba = new ArrayList<BankAccount>();
+		for(BankAccount b : this.bankAccounts) {
+			if(!b.isActive()) {
+				ba.add(b);
+			}
+		}
+		return ba; 
+	}
+	
+	
 	public void setBankAccounts(List<BankAccount> bankAccounts) { this.bankAccounts = bankAccounts; }
 
 	public boolean isActive() {
@@ -254,6 +273,18 @@ public class BankUser {
 	public void setTotalValue(double totalValue) {
 		this.totalValue = totalValue;
 	}
+
+
+
+	public String getClosedAccounts() {
+		if(closedAccounts == null) { return ""; }
+		return closedAccounts;
+	}
+
+	public void setClosedAccounts(String closedAccounts) {
+		this.closedAccounts = closedAccounts;
+	}
+
 	
 	
 

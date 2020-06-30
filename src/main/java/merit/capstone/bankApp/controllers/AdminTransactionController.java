@@ -57,11 +57,12 @@ public class AdminTransactionController {
     
     
     @CrossOrigin
-	@GetMapping(value = "/Admin/Transaction/{id}") // id is the BankAccount id
-	public List<Transaction> accountHistory(@RequestHeader("Authorization") String auth, @PathVariable(name = "id") long id) throws NotFoundException {
-		
+	@GetMapping(value = "/Admin/Transaction/{id}/{activeNum}") // id is the BankAccount id
+	public List<Transaction> accountHistory(@RequestHeader("Authorization") String auth, @PathVariable(name = "id") long id, @PathVariable(name = "activeNum") int activeNum) throws NotFoundException {
+		boolean active = activeNum == 0 ? true : false;
+    	
 		BankAccount a = bankAccountRepository.findById(id);
-		ControllerUtil.enforceFound(a);
+		ControllerUtil.enforceFound(a, active);
 		
 		return a.getTransactions();
 	}

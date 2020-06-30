@@ -50,6 +50,7 @@ export const parseUserByID = (req) => {
     s += obj.username;
     s += " name: ";
     s += obj.firstName + " " + obj.lastName;
+    
     s += " <br> ";
 
     for(var i=0; i<obj.bankAccounts.length; i++){
@@ -61,6 +62,10 @@ export const parseUserByID = (req) => {
         s += " <br> ";
     }
 
+    if(obj.closedAccounts != ""){
+        s += "Closed Account Numbers: " + obj.closedAccounts;
+        s += "<br>";
+    }
 
     return s;
 }

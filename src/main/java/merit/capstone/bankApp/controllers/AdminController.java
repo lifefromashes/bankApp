@@ -126,9 +126,11 @@ public class AdminController {
 	
 
 	
-	@GetMapping("Admin/{id}/{t}")
+	@GetMapping("Admin/{id}/{t}/{activeNum}")
 	public List<BankAccount> getAnyBankAccounts(@PathVariable(name = "id") long id, @PathVariable(name = "t") String t) 
 			throws NotFoundException, IllegalArgumentException {
+		
+		
 		
 		switch(t) {
 			case "CDAccount": return getBankAccounts(id, new CDAccount());

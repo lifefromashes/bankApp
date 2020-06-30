@@ -1,5 +1,7 @@
 package merit.capstone.bankApp.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,6 +56,11 @@ public class UserCloseController {
 		if(a.getUserId() != user.getId()) { throw new NotFoundException(); }
 		
 		Transaction t = a.closeAccount(user); 
+		String s = user.getClosedAccounts();
+		if(s.length() > 0) {s += ","; }
+		s += id;
+		user.setClosedAccounts(s);
+		bankUserRepository.save(user);
 		
 		bankAccountRepository.save(a);
 		if(t != null) { transactionRepository.save(t); }
@@ -68,6 +75,13 @@ public class UserCloseController {
 		
 		BankUser user = findUser(auth);
 		ControllerUtil.enforceFound(user);
+		
+		List<BankAccount> allA = user.getBankAccounts();
+		for(BankAccount b : allA) {
+			b.setIsActive(false);
+			bankAccountRepository.save(b);
+		}
+		
 		
 		user.setIsActive(false);
 		bankUserRepository.save(user);

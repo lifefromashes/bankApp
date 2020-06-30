@@ -13,8 +13,12 @@ public class ControllerUtil {
 	
 	
 	public static void enforceFound(BankAccount a) throws NotFoundException {
+		enforceFound(a, true);
+	}
+	
+	public static void enforceFound(BankAccount a, boolean active) throws NotFoundException {
 		if(a == null) { throw new NotFoundException(); }
-		if(!a.isActive()) { throw new NotFoundException(); }
+		if(!a.isActive() == active) { throw new NotFoundException(); }
 	}
 	
 	public static void enforceFound(CDOffering a) throws NotFoundException {
@@ -22,9 +26,11 @@ public class ControllerUtil {
 	}
 	
 	public static void enforceFound(BankUser a) throws NotFoundException {
+		enforceFound(a, true);
+	}
+	public static void enforceFound(BankUser a, boolean active) throws NotFoundException {
 		if(a == null) { throw new NotFoundException(); }
-		if(!a.isActive()) { throw new NotFoundException(); }
-
+		if(!a.isActive() == active) { throw new NotFoundException(); }
 	}
 	
 	public static void enforceFound(List<?> a) throws NotFoundException {

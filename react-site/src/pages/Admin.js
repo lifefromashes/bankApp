@@ -20,11 +20,13 @@ export default class Admin extends Component {
         cdoTerm: 1,
         transAccount: 0,
         transAmmount: 0,
-        transNote: "Admin Action"
+        transNote: "Admin Action",
+        searchType: 1
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeA = this.handleChangeA.bind(this);
+    this.handleChangeS = this.handleChangeS.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.getUserByID = this.getUserByID.bind(this);
     this.createAccount = this.createAccount.bind(this);
@@ -48,11 +50,18 @@ export default class Admin extends Component {
     })
   }
 
+  handleChangeS(event) {
+    this.setState({
+      searchType: document.getElementById("searchType").value
+    })
+    //console.log(document.getElementById("searchType").value);
+  }
+
 
 
   getUsers() {
     
-    var req = apiCall(null, 'GET', "Admin/Users", true);
+    var req = apiCall(null, 'GET', "Admin/Users/" + document.getElementById("searchType").value, true);
 
     req.addEventListener('load', () => {
 
@@ -69,7 +78,7 @@ export default class Admin extends Component {
 
   getUserByID() {
     var id = parseInt(this.state.userID);
-    var req = apiCall(null, 'GET', "Admin/Users/" + id, true);
+    var req = apiCall(null, 'GET', "Admin/Users/" + id + "/" + document.getElementById("searchType").value, true);
 
     req.addEventListener('load', () => {
 
@@ -121,7 +130,7 @@ export default class Admin extends Component {
 
   getHistory() {
 
-    var req = apiCall(null, 'GET', "Admin/Transaction/" + this.state.transAccount, true);
+    var req = apiCall(null, 'GET', "Admin/Transaction/" + this.state.transAccount + "/" + document.getElementById("searchType").value, true);
 
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
@@ -140,14 +149,7 @@ export default class Admin extends Component {
   createTransaction() {
     
 
-    //var req = new XMLHttpRequest();
-    //var urlString = server() + "Admin/Transaction";
-    
 
-    //var body = '{"sourceAccount": ' + this.state.transAccount + ', ';
-    //body += '"targetAccount": ' + this.state.transAccount + ', ';
-    //body += '"amount": "' + this.state.transAmmount + '", ';
-    //body += '"transactionMemo": "' + this.state.transNote + '"}'
 
     var body = {
       sourceAccount: this.state.transAccount,
@@ -256,11 +258,25 @@ export default class Admin extends Component {
         required
       />
       <br></br>
+      
       &nbsp; &nbsp;
       <button className="adminTool" onClick={this.getUsers}>Get All Users</button>
 
       &nbsp; &nbsp;
       <button className="adminTool2" onClick={this.getUserByID}>Get User by User Account Number</button>
+
+      &nbsp; &nbsp;
+      <select id="searchType"
+          value={this.state.seachType}
+          onChange={this.handleChangeS}
+        >
+
+          <option value="0">Search Active Accounts</option>
+          <option value="1">Search Inactive Account</option>
+        </select>
+        
+      
+      
 
       <br></br>
       <div>

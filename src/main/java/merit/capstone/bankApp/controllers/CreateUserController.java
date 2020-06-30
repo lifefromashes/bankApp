@@ -88,23 +88,29 @@ public class CreateUserController {
 		return bankUserRepository.findAll();
 	}
 	
-	@GetMapping(value = "/Admin/Users")
-	public Iterable<BankUser> getAccountHolders(){
+	@GetMapping(value = "/Admin/Users/{activeNum}")
+	public Iterable<BankUser> getAccountHolders(@PathVariable(name = "activeNum") int activeNum){
+		boolean active = activeNum == 0 ? true : false;
+		
 		List<BankUser> bu = bankUserRepository.findAll();
 		List<BankUser> ah = new ArrayList<>();
 		for(BankUser b : bu) {
 			if(b.getAuthority() != null && !b.getAuthority().equals("ADMIN")) {
 				b.setTotalValue(b.getCombinedBalance());
-				ah.add(b);
+				if(b.isActive() == active) {
+					ah.add(b);
+				}
 			}
 		}
 		return ah;
 	}
 	
-	@GetMapping(value = "Admin/Users/{id}")
-	public BankUser getAccountHolderByID(@Valid @PathVariable (name = "id") long id) throws NotFoundException {
+	@GetMapping(value = "Admin/Users/{id}/{activeNum}")
+	public BankUser getAccountHolderByID(@Valid @PathVariable (name = "id") long id, @PathVariable(name = "activeNum") int activeNum) throws NotFoundException {
+		boolean active = activeNum == 0 ? true : false;
+		
 		BankUser user = bankUserRepository.findById(id);
-		ControllerUtil.enforceFound(user);
+		ControllerUtil.enforceFound(user, active);
 		return user;
 	}
 	
