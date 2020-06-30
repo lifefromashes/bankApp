@@ -78,6 +78,13 @@ public class UserCloseController {
 		
 		List<BankAccount> allA = user.getBankAccounts();
 		for(BankAccount b : allA) {
+			 
+			String s = user.getClosedAccounts();
+			if(s.length() > 0) {s += ","; }
+			s += b.getAccountNumber();
+			user.setClosedAccounts(s);
+			bankUserRepository.save(user);
+			
 			b.setIsActive(false);
 			bankAccountRepository.save(b);
 		}

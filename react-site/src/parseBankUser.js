@@ -62,10 +62,10 @@ export const parseUserByID = (req) => {
         s += " <br> ";
     }
 
-    if(obj.closedAccounts != ""){
+    //if(obj.closedAccounts != ""){
         s += "Closed Account Numbers: " + obj.closedAccounts;
         s += "<br>";
-    }
+    //}
 
     return s;
 }

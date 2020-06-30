@@ -9,7 +9,9 @@ export const apiCall = (body, verb, url, useToken) => {
 
     req.open(verb, urlString);
     req.setRequestHeader('Content-Type', 'application/json');
-    if(useToken){ setCookieHeader(req); }
+    if(useToken){ 
+        setCookieHeader(req);
+     }
 
 
     
