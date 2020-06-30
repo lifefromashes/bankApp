@@ -234,6 +234,22 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		
 		a.processTransaction(transaction, a, bat);
 		
+		if(transaction.getSourceAccount() != transaction.getTargetAccount()) {
+			if(transaction.getTransactionSuccess()) {
+				Transaction t = new Transaction();
+				t.setAmount(transaction.getAmount());
+				t.setBalanceAfterTransaction(bat.getBalance());
+				t.setSourceAccount(transaction.getSourceAccount());
+				t.setTargetAccount(transaction.getTargetAccount());
+				t.setTransactionMemo("Transfer from account # " + a.getAccountNumber());
+				t.setTransactionSuccess(true);
+				List<Transaction> ts = bat.getTransactions();
+				ts.add(t);
+				bat.setTransactions(ts);
+				transactionRepository.save(t);
+			}
+		}
+		
 		bankAccountRepository.save(a);
         transactionRepository.save(transaction);
 		return transaction;

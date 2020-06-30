@@ -19,13 +19,16 @@ export default class User extends Component {
         accountTypeSelected: 1,
         cdoType: 0,
         amount: 0,
-        obj: null
+        obj: null,
+        userObj: null
     };
 
 
     var req = apiCall(null, 'GET', "User", true);
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
+        this.state.userObj = JSON.parse(req.responseText)
+        document.getElementById("welcomeUser").innerHTML = "Welcome " + this.state.userObj.firstName;
 
         var t = document.getElementById("userTitle");
         var s = "";
@@ -168,7 +171,7 @@ export default class User extends Component {
               <img />
             </div>
             <ul>
-              <li><a href="/user">Welcome, USER</a></li>
+    <li><a href="/user" id="welcomeUser">Welcome, USER</a></li>
               <li><a href="/login">Sign Off</a></li>
             </ul>
           </div>

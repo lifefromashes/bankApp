@@ -19,12 +19,15 @@ export default class History extends Component {
         accounts: [],
         accountIndex: 0,
         actionTypeSelected: 1,
+        transferAccount: 0,
         amount: 0,
-        account: null
+        account: null,
+        allAccounts: null
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeA = this.handleChangeA.bind(this);
+    this.handleChangeT = this.handleChangeT.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.makeTrans = this.makeTrans.bind(this);
     this.closeAccount = this.closeAccount.bind(this);
@@ -79,6 +82,69 @@ export default class History extends Component {
 
 
             document.getElementById("rate").innerHTML = document.getElementById("rate").innerHTML + s;
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var req3 = apiCall(null, 'GET', "Me/BankAccount", true);
+            req3.addEventListener('load', () => {
+              if(req3.status >= 200 && req3.status < 400){
+                
+  
+                var obj = JSON.parse(req3.responseText);
+                this.state.allAccounts = obj;
+                var s = "";
+                var t = document.getElementById("transferTarget");
+  
+                for(let i=0; i<obj.length; i++){
+                  s += '<option value="' + i + '">';
+                  s += obj[i].accountName + ' #' + obj[i].accountNumber + ' ';
+                  s += '</option>';
+                }
+                t.innerHTML = s;
+  
+                
+              }
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           }
         })
 
@@ -103,6 +169,12 @@ export default class History extends Component {
   handleChangeA(event) {
     this.setState({
       actionTypeSelected: document.getElementById("actionType").value
+    })
+  }
+
+  handleChangeT(event) {
+    this.setState({
+      transferAccount: document.getElementById("transferTarget").value
     })
   }
 
@@ -140,11 +212,13 @@ export default class History extends Component {
       return;
     }
 
+    var tarID = this.state.account.accountNumber;
+    var sorID = this.state.account.accountNumber;
 
-    var req = new XMLHttpRequest();
-    let url = window.location;
-    let urlSplit = url.toString().split("/");
-    let actID = urlSplit[urlSplit.length - 1];
+    if(this.state.allAccounts[this.state.transferAccount].accountNumber == "CD Account"){
+      window.alert("Funds in CD Accounts cannot be accessed until the term ends.");
+      return;
+    }
 
     let amt = this.state.amount;
 
@@ -155,11 +229,41 @@ export default class History extends Component {
     }
 
 
+    if(this.state.actionTypeSelected == 3){
+      //transfer logic
+      mem = "Transfer";
+      var tarID = this.state.allAccounts[this.state.transferAccount].accountNumber;
+
+      if(tarID == sorID){
+        window.alert("Transfer target account must be different than source account.");
+        return;
+      }
+      
+    }
+
+    var a = this.state.account.accountName;
+    if(a == "IRA Account" || a == "Roth IRA Account" || a == "Rollover IRA Account"){
+      if(window.confirm("Accept a 20% early withdraw penalty?")){
+
+      } else {
+        return;
+      }
+    }
+
+
+    var req = new XMLHttpRequest();
+    let url = window.location;
+    let urlSplit = url.toString().split("/");
+    let actID = urlSplit[urlSplit.length - 1];
+
+    
+
+
 
     var body = {
       amount: amt,
-      sourceAccount: actID,
-      targetAccount: actID,
+      sourceAccount: sorID,
+      targetAccount: tarID,
       transactionMemo: mem
     }
 
@@ -224,6 +328,7 @@ export default class History extends Component {
                   >
                     <option value="1">Deposit</option>
                     <option value="2">Withdraw</option>
+                    <option value="3">Transfer</option>
                   </select>
 
 
@@ -238,6 +343,18 @@ export default class History extends Component {
                     onFocus={this.handleFocus}
                     required
                   />
+
+                  <label
+                    hidden={this.state.actionTypeSelected != 3}
+                  > to </label>
+
+                  <select id="transferTarget"
+                    hidden={this.state.actionTypeSelected != 3}
+                    value={this.state.transferAccount}
+                    onChange={this.handleChangeT}
+                  >
+                    
+                  </select>
 
                   <button className="adminTool" onClick={this.makeTrans}>Submit</button>
 

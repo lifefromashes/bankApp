@@ -91,8 +91,13 @@ public class CreateUserController {
 	public Iterable<BankUser> getAccountHolders() {
 		List<BankUser> bu = bankUserRepository.findAll();
 		List<BankUser> ah = new ArrayList<>();
+<<<<<<< HEAD
 		for (BankUser b : bu) {
 			if (!b.getAuthority().equals("ADMIN")) {
+=======
+		for(BankUser b : bu) {
+			if(b.getAuthority() != null && !b.getAuthority().equals("ADMIN")) {
+>>>>>>> 01c89df331a0353d5c8d658b8f363287c66bfd24
 				b.setTotalValue(b.getCombinedBalance());
 				ah.add(b);
 			}

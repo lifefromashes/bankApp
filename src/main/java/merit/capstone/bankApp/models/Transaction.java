@@ -46,6 +46,7 @@ public class Transaction {
     public void setTransactionMemo(String transactionMemo) { this.transactionMemo = transactionMemo; }
     public boolean isTransactionSuccess() { return transactionSuccess; }
     public void setTransactionSuccess(boolean transactionSuccess) { this.transactionSuccess = transactionSuccess; }
+    public boolean getTransactionSuccess() { return this.transactionSuccess; }
     public double getBalanceAfterTransaction() { return balanceAfterTransaction; }
     public void setBalanceAfterTransaction(double balanceAfterTransaction) { this.balanceAfterTransaction = balanceAfterTransaction; }
 
