@@ -307,8 +307,36 @@ public class BankAppApplicationTest {
 	
 	@Test
 	public void transferToSavings(){
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
 		
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(500);
+		try {
+			c.withdraw(200);
+		} catch (TransactionNotAllowedException e) {
+			e.printStackTrace();
+		} catch (ExceedsAvailableBalanceException e) {
+			e.printStackTrace();
+		} catch (NegativeAmountException e) {
+			e.printStackTrace();
+		}
+		
+		SavingsAccount s = new SavingsAccount();
+		s.setBalance(100);
+	
+		
+		Transaction t = new Transaction();
+		t.setSourceAccount(c.getAccountNumber());
+		t.setTargetAccount(s.getAccountNumber());
+		c.processTransaction(t, c, s);
+		
+		assertEquals(300, c.getBalance(), 0);
 	}
+	
+	
 	
 	@Test
 	public void overdrawChecking() {
