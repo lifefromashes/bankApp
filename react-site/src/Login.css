@@ -1,0 +1,194 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Century Gothic;
+}
+
+header{
+  /* background-color: #000; */
+  background-image: url(./images/logo2.jpg);
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+ul{
+  float: right;
+  /* list-style-type: none; */
+  margin-top: 25px;
+}
+ul li{
+  display: inline-block;
+}
+ul li a{
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 20px;
+  border: 1px solid transparent;
+  transition: 0.6s ease;
+
+}
+ul li a:hover{
+  background-color: #fff;
+  color: #000;
+}
+ul li.home a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.login a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.services a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.aboutus a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.contactus a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.register a{
+  background-color: #fff;
+  color: #000;
+}
+
+.logo img{
+  background-image: url(./images/whitemerit.png);
+  background-repeat: no-repeat;
+  background-size: 250px ;
+  float: left;
+  width: 315px;
+  height: 80px;
+}
+.main{
+  max-width: 2000px%;
+  margin: auto;
+}
+.title{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.title{
+  grid-column-start: <number> | <name> | span <number> | span <name> | auto;
+  grid-column-end: <number> | <name> | span <number> | span <name> | auto;
+  grid-row-start: <number> | <name> | span <number> | span <name> | auto;
+grid-row-end: <number> | <name> | span <number> | span <name> | auto;
+}
+.title h1{
+  color: #fff;
+  font-size: 70px;
+}
+.title h2{
+  left: 70%;
+  color: #fff;
+  font-size: 25px;
+}
+.button {
+  position: absolute;
+  top: 54.5%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.btn{
+  border: 1px solid #fff;
+  padding: 10px 30px;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.6s ease;
+}
+.btn:hover{
+  background-color: #fff;
+  color: #000;
+}
+.empty-search {
+text-align: center;
+text-transform: capitalize;
+margin: 2rem 0;
+padding: 1rem;
+letter-spacing: var(--mainSpacing);
+}
+/* end of globals */
+
+/*LOGIN/PERSONAL*/
+.loginbox{
+  width: 300px;
+  height: 400px;
+  background: #3294bc;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  padding:70px 30px;
+}
+.avatar{
+  background-image: url(./images/avatar.png);
+  background-repeat: no-repeat;
+  background-size: 100px ;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left:calc(50%-50px);
+}
+h1{
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
+}
+.loginbox p{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+.loginbox input{
+  width: 90%;
+  margin-bottom: 20px;
+
+}
+
+.loginbox input[type ="text"], input[type="username"], input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 30px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.loginbox input[type="button"]{
+  border: none;
+  outline: none;
+  height: 20px;
+  background: #86c5da;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 18px;
+}
+.loginbox input[type="button"]:hover{
+  cursor: pointer;
+  background: #ade6bb;
+  color: #000;
+
+}
+.loginbox a{
+  padding-bottom: 80px;
+  text-decoration: none;
+  font-size:10px;
+  line-height: 10px;
+  color: darkblue ;
+}
+.loginbox a:hover{
+  color: #ade6bb;
+}

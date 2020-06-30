@@ -66,36 +66,35 @@ ul li.register a{
   height: 80px;
 }
 .main{
-  max-width: 2000px;
+  max-width: 2000px%;
   margin: auto;
 }
 .title{
-  position: absolute;
+  position: fixed;
   top:50%;
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
 .title h1{
   color: #fff;
   font-size: 70px;
 }
 .title h2{
-  left: 70%;
   color: #fff;
   font-size: 25px;
+  text-align: Left;
 }
-.button {
-  position: absolute;
-  top: 54.5%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
+
 .btn{
   border: 1px solid #fff;
-  padding: 10px 30px;
   color: #fff;
   text-decoration: none;
   transition: 0.6s ease;
+  margin: auto;
+  text-align: center;
+  display: block;
+  width: 20%;
 }
 .btn:hover{
   background-color: #fff;
@@ -104,89 +103,22 @@ ul li.register a{
 .empty-search {
 text-align: center;
 text-transform: capitalize;
-margin: 2rem 0;
+margin: 3rem 0;
 padding: 1rem;
 letter-spacing: var(--mainSpacing);
 }
+
+@media only screen and (max-width: 768px) {
+  .title {
+    font-size: 10px;
+  }
+  .title h2{
+    text-align: center; 
+  }
+}
+
 /* end of globals */
 
-/*LOGIN/PERSONAL*/
-.loginbox{
-  width: 300px;
-  height: 400px;
-  background: #3294bc;
-  color: #fff;
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%,-50%);
-  box-sizing: border-box;
-  padding:70px 30px;
-}
-.avatar{
-  background-image: url(./images/avatar.png);
-  background-repeat: no-repeat;
-  background-size: 100px ;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  position: absolute;
-  top: -50px;
-  left:calc(50%-50px);
-}
-h1{
-  margin: 0;
-  padding: 0 0 20px;
-  text-align: center;
-  font-size: 22px;
-}
-.loginbox p{
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
-}
-.loginbox input{
-  width: 90%;
-  margin-bottom: 20px;
-
-}
-
-.loginbox input[type ="text"], input[type="username"], input[type="password"] {
-  border: none;
-  border-bottom: 1px solid #fff;
-  background: transparent;
-  outline: none;
-  height: 30px;
-  color: #fff;
-  font-size: 16px;
-}
-
-.loginbox input[type="button"]{
-  border: none;
-  outline: none;
-  height: 20px;
-  background: #86c5da;
-  color: #fff;
-  font-size: 12px;
-  border-radius: 18px;
-}
-.loginbox input[type="button"]:hover{
-  cursor: pointer;
-  background: #ade6bb;
-  color: #000;
-
-}
-.loginbox a{
-  padding-bottom: 80px;
-  text-decoration: none;
-  font-size:10px;
-  line-height: 10px;
-  color: darkblue ;
-}
-.loginbox a:hover{
-  color: #ade6bb;
-}
-/*END LOGIN/PERSONAL*/
 
 /*SERVICES*/
 .services-section{

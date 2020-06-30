@@ -27,11 +27,15 @@ const Home = () => {
         </div>
         <div class="title">
           <h1>WELCOME TO MERIT BANK</h1>
-          <h2>Investing in your future</h2>
+          <div>
+          <h2>Investing in your Future</h2><br />
+          </div>
+          <div>
+          <a class = "btn" href= "/services"> LEARN MORE </a>
+          </div>
         </div>
-        <div class="button">
-          <a class ="btn" href="/services">LEARN MORE</a>
-        </div>
+
+
       </header>
     </body>
 
