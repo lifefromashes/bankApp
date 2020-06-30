@@ -70,11 +70,12 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 				throws NotFoundException {
 		
 		BankUser user = findUser(auth);
-		List<BankAccount> a = bankAccountRepository.findByUserId(user.getId());
+		List<BankAccount> aa = bankAccountRepository.findByUserId(user.getId());
+		List<BankAccount> a = new ArrayList<>();
 		
-		for(BankAccount b : a) {
-			if(!b.isActive()) {
-				a.remove(b);
+		for(BankAccount b : aa) {
+			if(b.isActive()) {
+				a.add(b);
 			}
 		}
 		
