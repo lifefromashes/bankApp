@@ -10,7 +10,7 @@ export default class Services extends Component {
       <>
       <head>
         <title>LEARN MORE</title>
-        <link rel="stylesheet" type="text/css" href= "../App.css" />
+        <link rel="stylesheet" type="text/css" href= "../css/Services.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossOrigin="anonymous"/>
       </head>
         <body>
@@ -31,9 +31,11 @@ export default class Services extends Component {
 
           <div className="services-section">
           <div className="inner-width">
-              <h1 clasNames="section-title">WHAT CAN MERIT DO FOR YOU?</h1>
+          <div>
+              <h1>WHAT CAN MERIT DO FOR YOU?</h1><br />
               <h4 className="section-title">Merit Bank is a business dedicated to the success and welfare of our customers.<br />
             Below are some of the opportunities benefited to our clients: </h4>
+          </div><br />
               <div className="border"></div>
               <div className="services-container">
                 <div className="service-box">

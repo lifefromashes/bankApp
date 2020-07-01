@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import './Login.css';
+import './css/Login.css';
+import './css/Services.css';
 
 import Home from './pages/Home';
 import Accounts from './pages/Accounts';

@@ -107,7 +107,7 @@ export default class Login extends Component {
       <>
       <head>
         <title>LOGIN MERIT BANK</title>
-          <link rel="stylesheet" type="text/css" href= "../Login.css" />
+          <link rel="stylesheet" type="text/css" href= "../css/Login.css" />
       </head>
       <body>
 

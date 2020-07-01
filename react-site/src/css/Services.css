@@ -1,0 +1,236 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Century Gothic;
+}
+
+header{
+  /* background-color: #000; */
+  background-image: url(../images/logo2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+ul{
+  float: right;
+  /* list-style-type: none; */
+  margin-top: 25px;
+}
+ul li{
+  display: inline-block;
+}
+ul li a{
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 20px;
+  border: 1px solid transparent;
+  transition: 0.6s ease;
+
+}
+ul li a:hover{
+  background-color: #fff;
+  color: #000;
+}
+ul li.home a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.login a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.services a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.aboutus a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.contactus a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.register a{
+  background-color: #fff;
+  color: #000;
+}
+
+.logo img{
+  background-image: url(../images/whitemerit.png);
+  background-repeat: no-repeat;
+  background-size: 250px ;
+  float: left;
+  width: 315px;
+  height: 80px;
+}
+.main{
+  max-width: 2000px%;
+  margin: auto;
+}
+.title{
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+mpty-search {
+text-align: center;
+text-transform: capitalize;
+margin: 3rem 0;
+padding: 1rem;
+letter-spacing: var(--mainSpacing);
+}
+
+@media only screen and (max-width: 768px) {
+  .title {
+    font-size: 10px;
+  }
+  .title h2{
+    text-align: center;
+  }
+}
+
+/* end of globals */
+
+
+/*SERVICES*/
+.services-section{
+  width: 1000px;
+  height: 700px;
+  /* background-color: #3294bc; */
+  background-color: rgba(50,148,188,0.7);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,-55%);
+  padding:0 0px;
+}
+
+.inner-width{
+  width: 100%;
+  max-width: 1000;
+  margin: auto;
+  padding: 50px 1px;
+  overflow: hidden;
+}
+ h1{
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+}
+.section-title{
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+}
+.border{
+  width: 500px;
+  height: 2px;
+  background: #fff;
+}
+.services-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.service-box{
+  max-width: 30.33%;
+  padding:15px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}
+.service-icon{
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  border: 3px solid #fff;
+  color: #fff;
+  transform: rotate(45deg);
+  margin-bottom: 30px;
+  margin-top: 16px;
+  transition: 0.6s linear;
+}
+.service-icon i{
+  line-height: 70px;
+  transform: rotate(-45deg);
+  font-size: 26px;
+}
+.service-box:hover .service-icon{
+  background: #bee5ed;
+  color: #fff;
+}
+.service-title{
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.service-desc{
+  font-size:12px;
+}
+/*END SERVICES*/
+
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 768px) {
+  .services-section{
+    width: 85%;
+    height: 200%;
+    /* background-color: #3294bc; */
+    background-color: rgba(50,148,188,0.7);
+    margin-top: 1100px;
+    top: 20%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-55%);
+  }
+  header{
+    height: 3000px;
+
+  }
+  .border{
+    width: 250px;
+    height: 2px;
+    background: #fff;
+  }
+
+  .service-box{
+    max-width: 80.33%;
+    padding:15px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+  }
+  .service-icon{
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border: 3px solid #fff;
+    color: #fff;
+    transform: rotate(45deg);
+    margin-bottom: 30px;
+    margin-top: 16px;
+    transition: 0.6s linear;
+  }
+  .service-icon i{
+    line-height: 70px;
+    transform: rotate(-45deg);
+    font-size: 26px;
+  }
+  .service-box:hover .service-icon{
+    background: #bee5ed;
+    color: #fff;
+  }
+  .service-title{
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .service-desc{
+    font-size:12px;
+  }
+}
