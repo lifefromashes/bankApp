@@ -1,5 +1,7 @@
 package merit.capstone.bankApp.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,8 @@ import merit.capstone.bankApp.repos.FeedbackRepository;
 @RestController
 public class FeedbackController {
 	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private FeedbackRepository feedbackRepository;
 	
@@ -23,6 +27,7 @@ public class FeedbackController {
 	public Feedback sendFeedback(@RequestBody Feedback fb) {
 		
 		feedbackRepository.save(fb);
+		log.info("Feedback form accepted.");
 		return fb;
 		
 	}

@@ -173,6 +173,8 @@ public class AdminController {
 		transactionRepository.save(t);
 		bankAccountRepository.save(a);
 		
+		
+		log.info("Created new " + a.getAccountName() + " for user # " + id);
 		return a;
 	}
 	
@@ -201,6 +203,7 @@ public class AdminController {
 		transactionRepository.save(t);
 		bankAccountRepository.save(a);
 		
+		log.info("Created new " + a.getAccountName() + " for user # " + id);
 		return a;
 	}
 	

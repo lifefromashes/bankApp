@@ -31,7 +31,7 @@ import merit.capstone.bankApp.security.MyUserDetailsService;
 @RestController
 public class LoginController {
 	
-private Logger log = LoggerFactory.getLogger(this.getClass() );
+	private Logger log = LoggerFactory.getLogger(this.getClass() );
 	
 	@Autowired private AuthenticationManager authenticationManager;
 	@Autowired private MyUserDetailsService userDetailsService;
@@ -70,7 +70,6 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 	@RequestMapping(value = "/direct", method = RequestMethod.GET)
 	public String directByRole(@RequestHeader("Authorization") String auth) {
 		
-		log.info("~~~~~~~");
 		
 		
 		String jwt = auth.substring(7);

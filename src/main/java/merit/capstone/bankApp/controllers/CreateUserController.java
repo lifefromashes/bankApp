@@ -81,13 +81,14 @@ public class CreateUserController {
 
 		transactionRepository.save(t);
 		bankAccountRepository.save(a);
-
+		
+		log.info("Registered user # " + user.getId());
+		
 		return user;
 	}
 
 	@GetMapping(value = "/Admin/AllUsers")
 	public Iterable<BankUser> getAllBankUsers() {
-		log.info("account holders queried");
 		return bankUserRepository.findAll();
 	}
 
@@ -130,6 +131,7 @@ public class CreateUserController {
 			throws NotFoundException {
 		BankUser user = bankUserRepository.findById(id);
 		user.updateContactInfo(newInfo);
+		log.info("User # " + user.getId() + " updated contact info. ");
 		return user;
 	}
 

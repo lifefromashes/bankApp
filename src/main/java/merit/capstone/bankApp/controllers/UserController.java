@@ -204,6 +204,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		transactionRepository.save(t);
 		bankAccountRepository.save(a);
 		
+		log.info("User # " + user.getId() + " created account # " + a.getAccountNumber());
 		return a;
 	}
 	
@@ -255,6 +256,8 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		
 		bankAccountRepository.save(a);
         transactionRepository.save(transaction);
+        
+        log.info("User # " + user.getId() + " created a transaction from account " + a.getAccountNumber());
 		return transaction;
 	}
 	

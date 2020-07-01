@@ -55,6 +55,8 @@ public class AdminTransactionController {
         
         bankAccountRepository.save(ba);
         transactionRepository.save(transaction);
+        
+        log.info("Adjusted Funds of user # " + ba.getUserId() + "'s " + ba.getAccountName() + " by $" + transaction.getAmount());
 		return transaction;
     }
     
