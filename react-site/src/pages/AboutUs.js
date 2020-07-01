@@ -61,12 +61,12 @@ export default class AboutUs extends Component {
 
             </div>
             <div class="section" id="rufaro">
-                <span class="name">Rufaro Z.</span>
+                <span class="name">Rufaro Zengeni</span>
                 <span class="border"></span>
                 <p>
                 Front End Developer</p>
-                <partner> Rufaro's tenacity and persuit of knowledge drives her yearning for efficiency in all things programming.
-                She learns quickly, has a pioneer spirit, and is always ready to learn.  </partner>
+                <partner> Rufaro's tenacity and persuit of knowledge drives her yearning for efficiency in all things programming. She's driven and always looking for ways to grow.
+                Her specialties inclued: problem-solving, a willingness to learn, and a pioneer spirit.   </partner>
                 <a class = "btn" href= "https://www.linkedin.com/in/rufarozengeni"> LEARN MORE </a>
             </div>
             </div>

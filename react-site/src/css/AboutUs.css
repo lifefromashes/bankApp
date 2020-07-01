@@ -166,3 +166,103 @@ ul li.register a{
 }
 
 /*END OF ABOUT US*/
+@media only screen and (max-width: 768px) {
+
+
+
+  .team-section{
+    overflow: hidden;
+    text-align: center;
+    padding: 70px;
+    /* background: #3294bc; */
+    background-color: rgba(50,148,188,0.7);
+    margin-top: 500px;
+    width: 50%;
+    height: 70%;
+    top: 20%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-55%);
+  }
+
+
+  .team-section h1{
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    color: white;
+
+  }
+  .border{
+    display: block;
+    margin: auto;
+    width: 160px auto;
+    height: 3px;
+    background: #fff;
+    margin-bottom: 40px;
+  }
+  .ps{
+    margin-bottom: 40px;
+
+  }
+
+  .ps a{
+    display: inline-block;
+    margin: 0 30px;
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .ps a img{
+    width: 100%;
+    filter: grayscale(100%);
+    transition: 0.4s all;
+  }
+  .ps a:hover >img{
+    filter: none;
+  }
+  .section{
+    width: 600px;
+    margin: auto;
+    font-size: 12px;
+    color: white;
+    text-align: justify;
+    height: 0;
+    overflow: hidden;
+  }
+  .section:target{
+    height: auto;
+  }
+  .name{
+    display: block;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .section p{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .section partner{
+    font-size: 18px;
+  }
+  .btn{
+    border: 3px solid #fff;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.6s ease;
+    margin: auto;
+    text-align: center;
+    display: block;
+    width: 30%;
+    font-size: 20px;
+  }
+  .btn:hover{
+    background-color: #fff;
+
+  }
+
+}
