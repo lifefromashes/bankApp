@@ -8,7 +8,7 @@ const Home = () => {
     <>
     <head>
       <title>MERIT BANK</title>
-      <link rel="stylesheet" type="text/css" href= "../App.css" />
+      <link rel="stylesheet" type="text/css" href= "../css/Home.css" />
     </head>
     <body>
 

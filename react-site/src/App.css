@@ -69,58 +69,6 @@ ul li.register a{
   max-width: 2000px%;
   margin: auto;
 }
-.title{
-  position: fixed;
-  top:50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
-
-.title h1{
-  color: #fff;
-  font-size: 70px;
-}
-.title h2{
-  color: #fff;
-  font-size: 25px;
-  text-align: Left;
-}
-
-.btn{
-  border: 3px solid #fff;
-  color: #fff;
-  text-decoration: none;
-  transition: 0.6s ease;
-  margin: auto;
-  text-align: center;
-  display: block;
-  width: 20%;
-  font-size: 23px;
-}
-.btn:hover{
-  background-color: #fff;
-  color: #3294bc;
-}
-.empty-search {
-text-align: center;
-text-transform: capitalize;
-margin: 3rem 0;
-padding: 1rem;
-letter-spacing: var(--mainSpacing);
-}
-
-@media only screen and (max-width: 768px) {
-  .title {
-    font-size: 10px;
-  }
-  .title h2{
-    text-align: center;
-  }
-  .btn{
-    width: 50%;
-  }
-
-}
 
 /* end of globals */
 

@@ -65,8 +65,8 @@ export default class AboutUs extends Component {
                 <span class="border"></span>
                 <p>
                 Front End Developer</p>
-                <partner> Kristin's brilliance shines when she's solving problems. Her drive for knowledge when programming makes her the best candidate for any Java related task.
-                Her specialties include: problem-solving, quick reasoning, and taking calculated risks.</partner>
+                <partner> Rufaro's tenacity and persuit of knowledge drives her yearning for efficiency in all things programming.
+                She learns quickly, has a pioneer spirit, and is always ready to learn.  </partner>
                 <a class = "btn" href= "https://www.linkedin.com/in/rufarozengeni"> LEARN MORE </a>
             </div>
             </div>

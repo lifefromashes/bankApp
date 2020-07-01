@@ -1,0 +1,123 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Century Gothic;
+}
+
+header{
+  /* background-color: #000; */
+  background-image: url(../images/logo2.jpg);
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+ul{
+  float: right;
+  /* list-style-type: none; */
+  margin-top: 25px;
+}
+ul li{
+  display: inline-block;
+}
+ul li a{
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 20px;
+  border: 1px solid transparent;
+  transition: 0.6s ease;
+
+}
+ul li a:hover{
+  background-color: #fff;
+  color: #000;
+}
+ul li.home a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.login a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.services a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.aboutus a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.contactus a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.register a{
+  background-color: #fff;
+  color: #000;
+}
+
+.logo img{
+  background-image: url(../images/whitemerit.png);
+  background-repeat: no-repeat;
+  background-size: 250px ;
+  float: left;
+  width: 315px;
+  height: 80px;
+}
+.main{
+  max-width: 2000px%;
+  margin: auto;
+}
+.title{
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.title h1{
+  color: #fff;
+  font-size: 70px;
+}
+.title h2{
+  color: #fff;
+  font-size: 25px;
+  text-align: Left;
+}
+
+.btn{
+  border: 3px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.6s ease;
+  margin: auto;
+  text-align: center;
+  display: block;
+  width: 30%;
+  font-size: 23px;
+}
+.btn:hover{
+  background-color: #fff;
+  color: #3294bc;
+}
+.empty-search {
+text-align: center;
+text-transform: capitalize;
+margin: 3rem 0;
+padding: 1rem;
+letter-spacing: var(--mainSpacing);
+}
+
+ @media only screen and (max-width: 768px) {
+  .title {
+    font-size: 10px;
+  }
+  .title h2{
+    text-align: center;
+  }
+  .btn{
+    width: 50%;
+    font-size: 20px;
+  }
+}
