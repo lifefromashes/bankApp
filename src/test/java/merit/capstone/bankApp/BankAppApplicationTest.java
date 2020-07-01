@@ -3,6 +3,7 @@ package merit.capstone.bankApp;
 import static org.assertj.core.api.Assertions.assertThat;
 //import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -231,7 +232,8 @@ public class BankAppApplicationTest {
 
 		try {
 			c.closeAccount(user);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 
 		assertEquals(500, user.getSingleSavingsAccount().getBalance(), 0);
 	}
@@ -479,6 +481,25 @@ public class BankAppApplicationTest {
 
 		assertEquals(0, cd.getBalance(), 0);
 
+	}
+
+	@Test
+	public void cantWithdrawCDAccount() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CDAccount cd = new CDAccount();
+		cd.setBalance(500);
+
+		try {
+			cd.withdraw(200);
+		} catch (TransactionNotAllowedException e) {
+
+		}
+
+		assertEquals(500, cd.getBalance(), 0);
 	}
 
 	@Test
