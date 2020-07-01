@@ -5,6 +5,10 @@ import javax.validation.constraints.Min;
 
 import merit.capstone.bankApp.exceptions.TransactionNotAllowedException;
 
+/*
+ * Model class for CD accounts
+ * CD accounts cannot be adjusted once created, as the funds are frozen until the term expires
+ */
 @Entity
 public class CDAccount extends BankAccount{
 	

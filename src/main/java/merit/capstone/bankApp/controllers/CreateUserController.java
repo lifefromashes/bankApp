@@ -31,6 +31,10 @@ import merit.capstone.bankApp.repos.CDOfferingRepository;
 import merit.capstone.bankApp.repos.TransactionRepository;
 import merit.capstone.bankApp.security.JwtUtil;
 
+/*
+ * API in-points for user creation and querying, as well as updating contact info
+ *   
+ */
 @RestController
 @CrossOrigin
 public class CreateUserController {

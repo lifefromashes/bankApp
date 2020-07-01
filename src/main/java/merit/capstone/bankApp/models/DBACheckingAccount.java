@@ -1,7 +1,10 @@
 package merit.capstone.bankApp.models;
 
 import javax.persistence.Entity;
-
+/*
+ * Model class to represent business checking accounts
+ * users are limited to a max of 3 of these
+ */
 @Entity
 public class DBACheckingAccount extends BankAccount {
 

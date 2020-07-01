@@ -7,6 +7,11 @@ import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
 import merit.capstone.bankApp.exceptions.TransactionNotAllowedException;
 
+/*
+ * abstract model class to represent IRA accounts
+ * 
+ * IRA accounts confer a 20% penalty to withdraws 
+ */
 public abstract class IRAAccount extends BankAccount {
 
 	@Override

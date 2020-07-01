@@ -1,5 +1,9 @@
 package merit.capstone.bankApp.models;
 
+/*
+ * Model class representing CD Offerings, the interest rate and term combs available when a uers
+ * wishes to open a new CD Account
+ */
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

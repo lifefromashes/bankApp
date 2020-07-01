@@ -8,7 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-
+/*
+ * Model class for representing transactions- deposits, withdraws, and transfers
+ * 
+ * Transactions are passed into Bank Account objects to alter the funds, and saved in a list to 
+ * serve as history
+ * 
+ */
 @Entity
 public class Transaction {
 

@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import merit.capstone.bankApp.models.BankAccount;
 
 
-
+/*
+ * Repository interface to be used by spring as it autowires access to the database
+ */
 public interface BankAccountRepository extends JpaRepository <BankAccount, Long>{
 	
 	BankAccount findById(long id);

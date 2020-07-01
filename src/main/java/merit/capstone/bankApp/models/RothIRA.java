@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import merit.capstone.bankApp.exceptions.CannotCloseAccountException;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
 import merit.capstone.bankApp.exceptions.NegativeAmountException;
-
+/*
+ * Model class to represent Roth IRA accounts
+ * client's specs asked for very little in terms of defining IRA accounts, so
+ * no unique behavior is detailed here
+ */
 @Entity
 public class RothIRA extends IRAAccount {
     //no RMDs for Roths

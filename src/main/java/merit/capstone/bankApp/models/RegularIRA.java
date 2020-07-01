@@ -2,7 +2,11 @@ package merit.capstone.bankApp.models;
 
 import javax.persistence.Entity;
 
-
+/*
+ * Model class to represent Regular IRA accounts
+ * client's specs asked for very little in terms of defining IRA accounts, so
+ * no unique behavior is detailed here
+ */
 @Entity
 public class RegularIRA extends IRAAccount {
 

@@ -22,7 +22,12 @@ import merit.capstone.bankApp.models.Transaction;
 import merit.capstone.bankApp.repos.BankAccountRepository;
 import merit.capstone.bankApp.repos.BankUserRepository;
 import merit.capstone.bankApp.repos.TransactionRepository;
-
+/*
+ * Controllers to allow for admin accounts to adjust the funds in other accounts,
+ * as well as view account history.
+ * 
+ * Gated behind an admin level JWT
+ */
 @CrossOrigin
 @RestController
 public class AdminTransactionController {

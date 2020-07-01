@@ -24,6 +24,11 @@ import merit.capstone.bankApp.repos.TransactionRepository;
 import merit.capstone.bankApp.security.JwtUtil;
 import merit.capstone.bankApp.security.MyUserDetailsService;
 
+/*
+ * API in-points for closing bank accounts and user accounts
+ * note: savings accounts cannot be closed without closing the entire user account
+ * closing a user account will first close all of its bank accounts
+ */
 @RestController
 public class UserCloseController {
 

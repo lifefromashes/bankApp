@@ -1,5 +1,7 @@
 package merit.capstone.bankApp.security;
-
+/*
+ * model class to represent auth HTTP requests as they come in so that our security classes can interact with them
+ */
 public class AuthenticationRequest {
 	
 	private String username;

@@ -23,6 +23,10 @@ import merit.capstone.bankApp.security.AuthenticationResponse;
 import merit.capstone.bankApp.security.JwtUtil;
 import merit.capstone.bankApp.security.MyUserDetailsService;
 
+/*
+ * API in-points for logging in, and redirecting the user to either the admin page or user page, depending
+ * on their token's level
+ */
 @CrossOrigin
 @RestController
 public class LoginController {

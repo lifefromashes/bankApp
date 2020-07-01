@@ -206,6 +206,12 @@ export default class History extends Component {
   }
 
   makeTrans() {
+
+    var a = this.state.account.accountName;
+    if(a == "CD Account"){
+      window.alert("Unable to Deposit / Withdraw / Transfer into or out out a CD Account before the term has ended.");
+      return;
+    }
     
     if(this.state.amount <= 0){
       document.getElementById("amount").focus();
@@ -241,7 +247,7 @@ export default class History extends Component {
       
     }
 
-    var a = this.state.account.accountName;
+    
     if(a == "IRA Account" || a == "Roth IRA Account" || a == "Rollover IRA Account"){
       if(window.confirm("Accept a 20% early withdraw penalty?")){
 

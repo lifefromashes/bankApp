@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import merit.capstone.bankApp.models.Feedback;
 import merit.capstone.bankApp.repos.FeedbackRepository;
 
+/*
+ * simple controller to save user feedback to the database so that it can be reviewed at a later time
+ */
 @CrossOrigin
 @RestController
 public class FeedbackController {
