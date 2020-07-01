@@ -284,6 +284,7 @@ public class BankAppApplicationTest {
 		sa.processTransaction(t, sa, ch);
 
 		assertEquals(200, ch.getBalance(), 0);
+		assertEquals(400, sa.getBalance(), 0);
 
 	}
 
@@ -308,6 +309,31 @@ public class BankAppApplicationTest {
 		c.processTransaction(t, c, s);
 
 		assertEquals(300, s.getBalance(), 0);
+		assertEquals(300, c.getBalance(), 0);
+	}
+	
+	@Test
+	public void cantTransferNegativeAmount() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+		
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(200);
+		
+		DBACheckingAccount db = new DBACheckingAccount();
+		db.setBalance(100);
+		
+		Transaction t = new Transaction();
+		t.setSourceAccount(c.getAccountNumber());
+		t.setTargetAccount(db.getAccountNumber());
+		t.setAmount(-100);
+
+		c.processTransaction(t, c, db);
+		
+		assertEquals(100, db.getBalance(), 0);
+		assertEquals(200, c.getBalance(), 0);
 	}
 
 	@Test
@@ -322,6 +348,7 @@ public class BankAppApplicationTest {
 
 		DBACheckingAccount db = new DBACheckingAccount();
 		db.setBalance(100);
+		
 		Transaction t = new Transaction();
 		t.setSourceAccount(c.getAccountNumber());
 		t.setTargetAccount(db.getAccountNumber());
