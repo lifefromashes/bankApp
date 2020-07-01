@@ -330,7 +330,7 @@ public class BankAppApplicationTest {
 		c.processTransaction(t, c, db);
 
 		assertEquals(200, db.getBalance(), 0);
-		
+		assertEquals(300, c.getBalance(), 0);
 	}
 
 	@Test
