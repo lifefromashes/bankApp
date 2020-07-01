@@ -228,7 +228,7 @@ public class BankAppApplicationTest {
 		}
 		assertEquals(500, sa.getBalance(), 0);
 	}
-	
+
 	@Test
 	public void depositNegativeIntoSavings() {
 		BankUser user = new BankUser();
@@ -245,99 +245,94 @@ public class BankAppApplicationTest {
 		}
 		assertEquals(0, sa.getBalance(), 0);
 	}
-	
+
 	@Test
 	public void cantDepositNegativeIntoChecking() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
 		user.setLastName("smith");
 		user.setSsn("123123123");
-		
+
 		CheckingAccount ca = new CheckingAccount();
 		try {
 			ca.deposit(-100);
-		} catch (Exception e ){
-			
+		} catch (Exception e) {
+
 		}
-		
+
 		assertEquals(0, ca.getBalance(), 0);
 	}
-	
+
 	@Test
 	public void transferToChecking() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
 		user.setLastName("smith");
 		user.setSsn("123123123");
-		
+
 		SavingsAccount sa = new SavingsAccount();
 		sa.setBalance(500);
-		try {
-			sa.withdraw(100);
-		} catch (TransactionNotAllowedException e) {
-			e.printStackTrace();
-		} catch (ExceedsAvailableBalanceException e) {
-			e.printStackTrace();
-		} catch (NegativeAmountException e) {
-			e.printStackTrace();
-		}
-	
-		
+
 		CheckingAccount ch = new CheckingAccount();
 		ch.setBalance(100);
-		try {
-			ch.deposit(100);
-		} catch (TransactionNotAllowedException e) {
-			e.printStackTrace();
-		} catch (ExceedsAvailableBalanceException e) {
-			e.printStackTrace();
-		} catch (NegativeAmountException e) {
-			e.printStackTrace();
-		}
-		
+
 		Transaction t = new Transaction();
 		t.setSourceAccount(sa.getAccountNumber());
 		t.setTargetAccount(ch.getAccountNumber());
-		
+		t.setAmount(100);
+
 		sa.processTransaction(t, sa, ch);
-		
+
 		assertEquals(200, ch.getBalance(), 0);
-		
+
 	}
-	
+
 	@Test
-	public void transferToSavings(){
+	public void transferToSavings() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
 		user.setLastName("smith");
 		user.setSsn("123123123");
-		
+
 		CheckingAccount c = new CheckingAccount();
 		c.setBalance(500);
-		try {
-			c.withdraw(200);
-		} catch (TransactionNotAllowedException e) {
-			e.printStackTrace();
-		} catch (ExceedsAvailableBalanceException e) {
-			e.printStackTrace();
-		} catch (NegativeAmountException e) {
-			e.printStackTrace();
-		}
-		
+
 		SavingsAccount s = new SavingsAccount();
 		s.setBalance(100);
-	
-		
+
 		Transaction t = new Transaction();
 		t.setSourceAccount(c.getAccountNumber());
 		t.setTargetAccount(s.getAccountNumber());
+		t.setAmount(200);
+
 		c.processTransaction(t, c, s);
-		
+
+		assertEquals(300, s.getBalance(), 0);
+	}
+
+	@Test
+	public void transferToDBA() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(400);
+
+		DBACheckingAccount db = new DBACheckingAccount();
+		db.setBalance(100);
+		Transaction t = new Transaction();
+		t.setSourceAccount(c.getAccountNumber());
+		t.setTargetAccount(db.getAccountNumber());
+		t.setAmount(100);
+
+		c.processTransaction(t, c, db);
+
+		assertEquals(200, db.getBalance(), 0);
 		assertEquals(300, c.getBalance(), 0);
 	}
-	
-	
-	
+
 	@Test
 	public void overdrawChecking() {
 		BankUser user = new BankUser();
@@ -387,12 +382,12 @@ public class BankAppApplicationTest {
 		assertThat(fb).isNotNull();
 
 	}
-	
+
 	@Test
 	public void getFeedBack() {
 		Feedback fb = new Feedback();
 		fb.setMessage("Hello Friend");
-		
+
 		assertNotNull(fb, "Hello Friend");
 	}
 
@@ -468,22 +463,20 @@ public class BankAppApplicationTest {
 	public void doesAdminControllerInjectSuccessfully() {
 		assertThat(adminController).isNotNull();
 	}
-	
+
 	@Test
 	public void doesBankAccountRepositoryInjectSuccessfully() {
 		assertThat(bankAccountRepository).isNotNull();
 	}
-	
+
 	@Test
 	public void doesBankUserRepositoryInjectSuccessfully() {
 		assertThat(bankUserRepository).isNotNull();
 	}
-	
+
 	@Test
 	public void doesTransactionRepositoryInjectSuccessfully() {
 		assertThat(transactionRepository).isNotNull();
 	}
-	
-	
 
 }
