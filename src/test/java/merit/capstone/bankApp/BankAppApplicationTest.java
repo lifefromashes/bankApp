@@ -67,6 +67,23 @@ public class BankAppApplicationTest {
 
 		assertEquals(100, a.getBalance(), 0);
 	}
+	
+	@Test
+	public void getCheckingAccounts() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+		
+		CheckingAccount c = new CheckingAccount();
+		
+		try {
+		user.addBankAccount(c);
+		} catch (MaxAccountsReachedException e) {}
+		
+		assertTrue(user.getNumberOfAccountsByType(c) == 1);
+		
+	}
 
 	@Test
 	public void testCloseAccount() {
