@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import './css/Login.css';
 import './css/Services.css';
+import './css/AboutUs.css';
 
 import Home from './pages/Home';
 import Accounts from './pages/Accounts';

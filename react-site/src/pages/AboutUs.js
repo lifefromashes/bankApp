@@ -12,7 +12,7 @@ export default class AboutUs extends Component {
       <>
       <head>
         <title>ABOUT US</title>
-        <link rel="stylesheet" type="text/css" href= "../App.css" />
+        <link rel="stylesheet" type="text/css" href= "../css/AboutUs.css" />
       </head>
       <body>
 
@@ -43,13 +43,11 @@ export default class AboutUs extends Component {
                 <span class="name">Kristin S.</span>
                 <span class="border"></span>
                 <p>
-                Back End Developer. Kristin's love for coding began the moment her dad walked in the door with a monstosity of a thing called a "Computer".
-                Through growing pains, nursing school and motherhood-- Kristin still had passion brewing for programming and happened on Merit-America which
-                helps her explore her curiosities in all things JAVA.
-                Her specialties include: problem-solving, quick reasoning, and taking calculated risks.
+                Back End Developer</p><br />
+                <kristin> Kristin's brilliance shines when she's solving problems. Her drive for knowledge when programming makes her the best candidate for any Java related task.
+                Her specialties include: problem-solving, quick reasoning, and taking calculated risks.</kristin>
                 <a class = "btn" href= "https://www.linkedin.com/in/kristin-skipper"> LEARN MORE </a>
 
-                </p>
             </div>
             <div class="section" id="nick">
                 <span class="name">Nick R.</span>

@@ -1,0 +1,166 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Century Gothic;
+}
+
+header{
+  /* background-color: #000; */
+  background-image: url(../images/logo2.jpg);
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+ul{
+  float: right;
+  /* list-style-type: none; */
+  margin-top: 25px;
+}
+ul li{
+  display: inline-block;
+}
+ul li a{
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 20px;
+  border: 1px solid transparent;
+  transition: 0.6s ease;
+
+}
+ul li a:hover{
+  background-color: #fff;
+  color: #000;
+}
+ul li.home a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.login a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.services a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.aboutus a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.contactus a{
+  background-color: #fff;
+  color: #000;
+}
+ul li.register a{
+  background-color: #fff;
+  color: #000;
+}
+
+.logo img{
+  background-image: url(../images/whitemerit.png);
+  background-repeat: no-repeat;
+  background-size: 250px ;
+  float: left;
+  width: 315px;
+  height: 80px;
+}
+.main{
+  max-width: 2000px%;
+  margin: auto;
+}
+/* end of globals */
+
+/*ABOUT US*/
+.team-section{
+  overflow: hidden;
+  text-align: center;
+  padding: 60px;
+  /* background: #3294bc; */
+  background-color: rgba(50,148,188,0.7);
+  width: 900px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,-55%);
+  padding:0 0px;
+}
+.team-section h1{
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  color: white;
+
+}
+.border{
+  display: block;
+  margin: auto;
+  width: 160px auto;
+  height: 3px;
+  background: #fff;
+  margin-bottom: 40px;
+}
+.ps{
+  margin-bottom: 40px;
+
+}
+
+.ps a{
+  display: inline-block;
+  margin: 0 30px;
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.ps a img{
+  width: 100%;
+  filter: grayscale(100%);
+  transition: 0.4s all;
+}
+.ps a:hover >img{
+  filter: none;
+}
+.section{
+  width: 600px;
+  margin: auto;
+  font-size: 20px;
+  color: white;
+  text-align: justify;
+  height: 0;
+  overflow: hidden;
+}
+.section:target{
+  height: auto;
+}
+.name{
+  display: block;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.section p{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 23px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.btn{
+  border: 3px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.6s ease;
+  margin: auto;
+  text-align: center;
+  display: block;
+  width: 30%;
+  font-size: 20px;
+}
+.btn:hover{
+  background-color: #fff;
+
+}
+
+/*END OF ABOUT US*/
