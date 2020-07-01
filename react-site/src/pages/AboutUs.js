@@ -40,28 +40,34 @@ export default class AboutUs extends Component {
 
             </div>
             <div class="section" id="kristin">
-                <span class="name">Kristin S.</span>
+                <span class="name">Kristin Skipper</span>
                 <span class="border"></span>
                 <p>
-                Back End Developer</p><br />
-                <kristin> Kristin's brilliance shines when she's solving problems. Her drive for knowledge when programming makes her the best candidate for any Java related task.
-                Her specialties include: problem-solving, quick reasoning, and taking calculated risks.</kristin>
+                Back End Developer</p>
+                <partner> Kristin's brilliance shines when she's solving problems. Her drive for knowledge when programming makes her the best candidate for any Java related task.
+                Her specialties include: problem-solving, quick reasoning, and taking calculated risks.</partner>
                 <a class = "btn" href= "https://www.linkedin.com/in/kristin-skipper"> LEARN MORE </a>
 
             </div>
             <div class="section" id="nick">
                 <span class="name">Nick R.</span>
                 <span class="border"></span>
+
                 <p>
-                  Tech Leader. Once successfully wrestled two bears at the same time, but does sometimes exaggerate when writing about himself.
-                </p>
+                Tech Lead</p>
+                <partner>Nick's general curiosity has made him a sponge for information
+                but a machine when it comes to excecution in all his programming endeavors. His specialties include: problem-solving, forward thinking, & patience.</partner>
+                <a class = "btn" href= "https://www.linkedin.com/in/nick-rekuch"> LEARN MORE </a>
+
             </div>
             <div class="section" id="rufaro">
                 <span class="name">Rufaro Z.</span>
                 <span class="border"></span>
                 <p>
-                  Front-End Developer. She is very nice.
-                </p>
+                Front End Developer</p>
+                <partner> Kristin's brilliance shines when she's solving problems. Her drive for knowledge when programming makes her the best candidate for any Java related task.
+                Her specialties include: problem-solving, quick reasoning, and taking calculated risks.</partner>
+                <a class = "btn" href= "https://www.linkedin.com/in/rufarozengeni"> LEARN MORE </a>
             </div>
             </div>
           </header>

@@ -142,10 +142,12 @@ ul li.register a{
 }
 .section p{
   text-align: center;
-  text-decoration: underline;
-  font-size: 23px;
+  font-size: 40px;
   font-weight: bold;
   text-transform: uppercase;
+}
+.section partner{
+  font-size: 18px;
 }
 .btn{
   border: 3px solid #fff;
