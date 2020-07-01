@@ -75,38 +75,7 @@ ul li.register a{
   left: 50%;
   transform: translate(-50%,-50%);
 }
-.title{
-  grid-column-start: <number> | <name> | span <number> | span <name> | auto;
-  grid-column-end: <number> | <name> | span <number> | span <name> | auto;
-  grid-row-start: <number> | <name> | span <number> | span <name> | auto;
-grid-row-end: <number> | <name> | span <number> | span <name> | auto;
-}
-.title h1{
-  color: #fff;
-  font-size: 70px;
-}
-.title h2{
-  left: 70%;
-  color: #fff;
-  font-size: 25px;
-}
-.button {
-  position: absolute;
-  top: 54.5%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
-.btn{
-  border: 1px solid #fff;
-  padding: 10px 30px;
-  color: #fff;
-  text-decoration: none;
-  transition: 0.6s ease;
-}
-.btn:hover{
-  background-color: #fff;
-  color: #000;
-}
+
 .empty-search {
 text-align: center;
 text-transform: capitalize;
@@ -191,4 +160,16 @@ h1{
 }
 .loginbox a:hover{
   color: #ade6bb;
+}
+
+
+/*MEDIA QUIERIES*/
+@media only screen and (max-width: 768px) {
+  .loginbox{
+    margin-top: 150px;
+  }
+  header{
+    height: 500px; /*THIS IS TENTATIVE*/
+
+  }
 }

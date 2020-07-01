@@ -43,7 +43,12 @@ export default class AboutUs extends Component {
                 <span class="name">Kristin S.</span>
                 <span class="border"></span>
                 <p>
-                  Back-End Developer. She is very nice.
+                Back End Developer. Kristin's love for coding began the moment her dad walked in the door with a monstosity of a thing called a "Computer".
+                Through growing pains, nursing school and motherhood-- Kristin still had passion brewing for programming and happened on Merit-America which
+                helps her explore her curiosities in all things JAVA.
+                Her specialties include: problem-solving, quick reasoning, and taking calculated risks.
+                <a class = "btn" href= "https://www.linkedin.com/in/kristin-skipper"> LEARN MORE </a>
+
                 </p>
             </div>
             <div class="section" id="nick">

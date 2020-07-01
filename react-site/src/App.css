@@ -87,7 +87,7 @@ ul li.register a{
 }
 
 .btn{
-  border: 1px solid #fff;
+  border: 3px solid #fff;
   color: #fff;
   text-decoration: none;
   transition: 0.6s ease;
@@ -95,10 +95,11 @@ ul li.register a{
   text-align: center;
   display: block;
   width: 20%;
+  font-size: 23px;
 }
 .btn:hover{
   background-color: #fff;
-  color: #000;
+  color: #3294bc;
 }
 .empty-search {
 text-align: center;
@@ -115,6 +116,10 @@ letter-spacing: var(--mainSpacing);
   .title h2{
     text-align: center;
   }
+  .btn{
+    width: 50%;
+  }
+
 }
 
 /* end of globals */
