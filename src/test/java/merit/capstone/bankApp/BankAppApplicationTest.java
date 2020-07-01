@@ -296,7 +296,7 @@ public class BankAppApplicationTest {
 
 		CheckingAccount c = new CheckingAccount();
 		c.setBalance(500);
-		
+
 		SavingsAccount s = new SavingsAccount();
 		s.setBalance(100);
 
@@ -304,7 +304,7 @@ public class BankAppApplicationTest {
 		t.setSourceAccount(c.getAccountNumber());
 		t.setTargetAccount(s.getAccountNumber());
 		t.setAmount(200);
-		
+
 		c.processTransaction(t, c, s);
 
 		assertEquals(300, s.getBalance(), 0);
@@ -320,23 +320,17 @@ public class BankAppApplicationTest {
 		CheckingAccount c = new CheckingAccount();
 		c.setBalance(400);
 
-		try {
-			c.withdraw(200);
-		} catch (Exception e) {
-
-		}
-		Transaction t = new Transaction();
-//		t.setSourceAccount(c.getAccountNumber());
-//		t.setTargetAccount(db.getAccountNumber());
-//		c.processTransaction(t, c, db);
-
 		DBACheckingAccount db = new DBACheckingAccount();
 		db.setBalance(100);
+		Transaction t = new Transaction();
+		t.setSourceAccount(c.getAccountNumber());
+		t.setTargetAccount(db.getAccountNumber());
+		t.setAmount(100);
 
-		db.processTransaction(t, c, db);
+		c.processTransaction(t, c, db);
 
-		assertEquals(200, c.getBalance(), 0);
-		assertEquals(300, db.getBalance());
+		assertEquals(200, db.getBalance(), 0);
+		
 	}
 
 	@Test
