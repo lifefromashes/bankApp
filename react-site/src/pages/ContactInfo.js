@@ -61,7 +61,7 @@ export default class ContactInfo extends Component {
             this.state.zip = user.zip;
             document.getElementById("zip").value = user.zip;
 
-            
+            document.getElementById("welcomeUser").innerHTML = "Welcome " + user.firstName;
             
         }
     })
@@ -170,7 +170,7 @@ render() {
               <img />
             </div>
             <ul>
-              <li><a href="/user">Welcome, USER</a></li>
+              <li><a href="/user" id="welcomeUser">Welcome, USER</a></li>
               <li><a href="/login">Sign Off</a></li>
             </ul>
           </div>
