@@ -3,6 +3,7 @@ package merit.capstone.bankApp;
 import static org.assertj.core.api.Assertions.assertThat;
 //import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -66,6 +67,24 @@ public class BankAppApplicationTest {
 		a.processTransaction(t, a, a);
 
 		assertEquals(100, a.getBalance(), 0);
+	}
+
+	@Test
+	public void getCheckingAccounts() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CheckingAccount c = new CheckingAccount();
+
+		try {
+			user.addBankAccount(c);
+		} catch (MaxAccountsReachedException e) {
+		}
+
+		assertTrue(user.getNumberOfAccountsByType(c) == 1);
+
 	}
 
 	@Test
@@ -194,6 +213,32 @@ public class BankAppApplicationTest {
 	}
 
 	@Test
+	public void closeCheckingTransferToSavings() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		SavingsAccount sa = new SavingsAccount();
+		try {
+			user.addBankAccount(sa);
+		} catch (Exception e) {
+		}
+
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(500);
+
+		assertEquals(500, c.getBalance(), 0);
+
+		try {
+			c.closeAccount(user);
+		} catch (Exception e) {
+		}
+
+		assertEquals(500, user.getSingleSavingsAccount().getBalance(), 0);
+	}
+
+	@Test
 	public void withdraw() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
@@ -311,27 +356,27 @@ public class BankAppApplicationTest {
 		assertEquals(300, s.getBalance(), 0);
 		assertEquals(300, c.getBalance(), 0);
 	}
-	
+
 	@Test
 	public void cantTransferNegativeAmount() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
 		user.setLastName("smith");
 		user.setSsn("123123123");
-		
+
 		CheckingAccount c = new CheckingAccount();
 		c.setBalance(200);
-		
+
 		DBACheckingAccount db = new DBACheckingAccount();
 		db.setBalance(100);
-		
+
 		Transaction t = new Transaction();
 		t.setSourceAccount(c.getAccountNumber());
 		t.setTargetAccount(db.getAccountNumber());
 		t.setAmount(-100);
 
 		c.processTransaction(t, c, db);
-		
+
 		assertEquals(100, db.getBalance(), 0);
 		assertEquals(200, c.getBalance(), 0);
 	}
@@ -348,7 +393,7 @@ public class BankAppApplicationTest {
 
 		DBACheckingAccount db = new DBACheckingAccount();
 		db.setBalance(100);
-		
+
 		Transaction t = new Transaction();
 		t.setSourceAccount(c.getAccountNumber());
 		t.setTargetAccount(db.getAccountNumber());
@@ -436,6 +481,25 @@ public class BankAppApplicationTest {
 
 		assertEquals(0, cd.getBalance(), 0);
 
+	}
+
+	@Test
+	public void cantWithdrawCDAccount() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CDAccount cd = new CDAccount();
+		cd.setBalance(500);
+
+		try {
+			cd.withdraw(200);
+		} catch (TransactionNotAllowedException e) {
+
+		}
+
+		assertEquals(500, cd.getBalance(), 0);
 	}
 
 	@Test

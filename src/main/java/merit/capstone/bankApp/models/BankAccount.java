@@ -26,7 +26,9 @@ import merit.capstone.bankApp.exceptions.NegativeAmountException;
 import merit.capstone.bankApp.exceptions.TransactionNotAllowedException;
 import merit.capstone.bankApp.repos.BankAccountRepository;
 
-
+/*
+ * Abstract model class to specify behavior for bank accounts.
+ */
 @Entity
 public abstract class BankAccount {
 

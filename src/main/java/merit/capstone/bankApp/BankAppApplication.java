@@ -9,15 +9,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import merit.capstone.bankApp.models.CheckingAccount;
 import merit.capstone.bankApp.models.Transaction;
-
+/*
+ * Application entry point
+ * 
+ */
 @SpringBootApplication
 public class BankAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BankAppApplication.class, args);
 
-	
-		
 	}
 	
 	

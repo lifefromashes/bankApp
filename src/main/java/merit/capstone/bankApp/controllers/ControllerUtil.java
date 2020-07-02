@@ -7,7 +7,15 @@ import merit.capstone.bankApp.models.BankAccount;
 import merit.capstone.bankApp.models.BankUser;
 import merit.capstone.bankApp.models.CDOffering;
 
-
+/*
+ * Simple utility class for the controllers:
+ * 
+ * Many of the APIs throw exceptions if the object they're looking for isn't found,
+ * that code is abstracted here in a single methods that's overloaded for each standard
+ * configuration
+ * 
+ * Methods to find the best interest rates available for CD account
+ */
 public class ControllerUtil {
 
 	

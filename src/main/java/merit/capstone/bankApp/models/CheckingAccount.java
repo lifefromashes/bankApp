@@ -2,6 +2,10 @@ package merit.capstone.bankApp.models;
 
 import javax.persistence.Entity;
 
+/*
+ * Model class representing a Checking Account. Other than the low default interest rate,
+ * checking accounts have no special rules 
+ */
 @Entity
 public class CheckingAccount extends BankAccount{
 	

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
+/*
+ * helper class that interacts with JWT
+ */
 @Service
 @CrossOrigin
 public class JwtUtil {

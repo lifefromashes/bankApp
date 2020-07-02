@@ -17,7 +17,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
-
+/*
+ * filter to be ran on incoming HTTP requests to validate JWT
+ */
 @Component
 @CrossOrigin
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -31,7 +33,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 		
-		final Logger log = LoggerFactory.getLogger(this.getClass() );
 		
 		final String authorizationHeader = request.getHeader("Authorization");
 		
@@ -56,11 +57,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}
 		}
-		//final String origin = "http://localhost:3000";
-		
-		//response.addHeader("Access-Control-Allow-Origin", origin); ////
-		//response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT");
-		//response.setHeader("Access-Control-Allow-Credentials", "true");
 		
 		chain.doFilter(request, response);
 	}

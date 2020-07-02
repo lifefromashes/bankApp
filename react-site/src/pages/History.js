@@ -111,7 +111,17 @@ export default class History extends Component {
                   s += '</option>';
                 }
                 t.innerHTML = s;
-  
+                
+                
+                var req4 = apiCall(null, 'GET', "User", true);
+                req4.addEventListener('load', () => {
+                  if(req4.status >= 200 && req4.status < 400){
+                    
+                    document.getElementById("welcomeUser").innerHTML = "Welcome " + JSON.parse(req4.responseText).firstName;
+                  }
+                })
+                
+
                 
               }
             })
@@ -206,6 +216,12 @@ export default class History extends Component {
   }
 
   makeTrans() {
+
+    var a = this.state.account.accountName;
+    if(a == "CD Account"){
+      window.alert("Unable to Deposit / Withdraw / Transfer into or out out a CD Account before the term has ended.");
+      return;
+    }
     
     if(this.state.amount <= 0){
       document.getElementById("amount").focus();
@@ -241,7 +257,7 @@ export default class History extends Component {
       
     }
 
-    var a = this.state.account.accountName;
+    
     if(a == "IRA Account" || a == "Roth IRA Account" || a == "Rollover IRA Account"){
       if(window.confirm("Accept a 20% early withdraw penalty?")){
 
@@ -299,7 +315,7 @@ export default class History extends Component {
             </div>
             <ul>
               
-              <li><a href="/user">Welcome, USER</a></li>
+              <li><a href="/user" id="welcomeUser">Welcome, USER</a></li>
               <li><a href="/login">Sign Off</a></li>
             </ul>
           </div>

@@ -26,7 +26,12 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
-
+/*
+ * All the rules for what APIs require what token are here-
+ * feedback, register, and pre-flight requests are auto approved
+ * anything in the admin path requires an admin token.
+ * everything else requires a regular token
+ */
 @SuppressWarnings("deprecation")
 @EnableWebSecurity
 @CrossOrigin
@@ -50,12 +55,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		
 		
 		http
-		
-		//.cors().and()
-		
 		.csrf().disable().authorizeRequests()
 				//preflight CORS requests are of type OPTIONS, as long as NO APIs exist of this type it's safe to approve
-				// them all to resolve this issue, TODO: remove this "fix" when site is on a server and this is no longer needed
+				// them all to resolve this issue
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				.antMatchers("/Admin/**").hasAuthority("ADMIN")
 				.antMatchers("/authenticate").permitAll()
@@ -86,16 +88,5 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	}
 	
-	/*
-	@Bean
-    CorsConfigurationSource corsConfigurationSource() 
-    {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-    */
+
 }

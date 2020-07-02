@@ -38,6 +38,10 @@ import merit.capstone.bankApp.repos.TransactionRepository;
 import merit.capstone.bankApp.security.JwtUtil;
 import merit.capstone.bankApp.security.MyUserDetailsService;
 
+/*
+ * API in-points for the user to create accounts and transactions
+ * 
+ */
 @RestController
 @CrossOrigin
 public class UserController {
@@ -48,9 +52,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 	@Autowired private TransactionRepository transactionRepository;
 	@Autowired private BankAccountRepository bankAccountRepository;
 	@Autowired private JwtUtil jwtUtil;
-	@Autowired private MyUserDetailsService userDetailsService;
-
-	private MyUserDetailsService myUserDetailsService;
+	
 	
 	
 	@CrossOrigin
@@ -202,6 +204,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		transactionRepository.save(t);
 		bankAccountRepository.save(a);
 		
+		log.info("User # " + user.getId() + " created account # " + a.getAccountNumber());
 		return a;
 	}
 	
@@ -253,6 +256,8 @@ private Logger log = LoggerFactory.getLogger(this.getClass() );
 		
 		bankAccountRepository.save(a);
         transactionRepository.save(transaction);
+        
+        log.info("User # " + user.getId() + " created a transaction from account " + a.getAccountNumber());
 		return transaction;
 	}
 	

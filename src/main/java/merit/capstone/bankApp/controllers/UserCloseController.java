@@ -2,6 +2,8 @@ package merit.capstone.bankApp.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +26,16 @@ import merit.capstone.bankApp.repos.TransactionRepository;
 import merit.capstone.bankApp.security.JwtUtil;
 import merit.capstone.bankApp.security.MyUserDetailsService;
 
+/*
+ * API in-points for closing bank accounts and user accounts
+ * note: savings accounts cannot be closed without closing the entire user account
+ * closing a user account will first close all of its bank accounts
+ */
 @RestController
 public class UserCloseController {
 
+	private Logger log = LoggerFactory.getLogger(this.getClass() );
+	
     @Autowired private BankUserRepository bankUserRepository;
 	@Autowired private BankAccountRepository bankAccountRepository;
     @Autowired private CDOfferingRepository cdOfferingRepository;
@@ -64,6 +73,8 @@ public class UserCloseController {
 		
 		bankAccountRepository.save(a);
 		if(t != null) { transactionRepository.save(t); }
+		
+		log.info("User # " + user.getId() + " closed account # " + a.getAccountNumber());
 		return a;
 	}
     
@@ -93,6 +104,7 @@ public class UserCloseController {
 		user.setIsActive(false);
 		bankUserRepository.save(user);
 		
+		log.info("User # " + user.getId() + " closed their user account. ");
 		return user;
 	}
     

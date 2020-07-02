@@ -18,7 +18,10 @@ import merit.capstone.bankApp.models.BankUser;
 import merit.capstone.bankApp.repos.BankUserRepository;
 
 
-
+/*
+ * service to look compare provided login details with expected ones. user / password combos must both match what's in the
+ * database and be active
+ */
 @Service
 @CrossOrigin
 public class MyUserDetailsService implements UserDetailsService {
