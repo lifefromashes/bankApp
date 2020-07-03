@@ -56,6 +56,22 @@ export default class Registration extends Component {
       zip: sterilizeString(this.state.zip)
     }
 
+    if(body.username.length < 4){
+      window.alert("Usernames must be at least 4 characters.");
+      return;
+    }
+
+    if(body.password.length < 4){
+      window.alert("Passwords must be at least 4 characters.");
+      return;
+    }
+
+    if(body.password != document.getElementById("password_confirmation").value){
+      window.alert("Password must match password confirmation.");
+      return;
+    }
+
+
     var req = apiCall(body, 'POST', "NewUser", false);
 
     req.addEventListener('load', () => {
@@ -65,7 +81,7 @@ export default class Registration extends Component {
         window.location = "/login";
 
       } else {
-        //handle bad input
+        window.alert("Please select a different username.");
 
       }
     })
@@ -127,6 +143,7 @@ export default class Registration extends Component {
                 <input
                   type="password"
                   name="password_confirmation"
+                  id="password_confirmation"
                   placeholder="Password confirmation"
                   value={this.state.password_confirmation}
                   onChange={this.handleChange}
