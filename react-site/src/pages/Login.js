@@ -53,7 +53,7 @@ export default class Login extends Component {
 
         } else {
           console.log(req.status);
-          //bad user / pass combo code goes here
+          console.log(this.state.username + " " + this.state.password + ".");
 
           window.alert("Invalid username / password combo.");
 

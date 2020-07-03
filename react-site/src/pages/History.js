@@ -50,7 +50,7 @@ export default class History extends Component {
         document.getElementById("accountTitle").innerHTML = s;
 
         s = "";
-        s += "$" + JSON.parse(req.responseText).balance;
+        s += "$" + JSON.parse(req.responseText).balance.toFixed(2);
         document.getElementById("bal").innerHTML = s;
 
         s = "";
@@ -78,7 +78,9 @@ export default class History extends Component {
         var req2 = apiCall(body, 'POST', "FutureValue", true);
         req2.addEventListener('load', () => {
           if(req2.status >= 200 && req2.status < 400){
-            s = req2.responseText;
+            s = JSON.parse(req2.responseText).toFixed(2);
+
+
 
 
             document.getElementById("rate").innerHTML = document.getElementById("rate").innerHTML + s;
