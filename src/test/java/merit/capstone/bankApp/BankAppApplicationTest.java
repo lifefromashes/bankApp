@@ -30,6 +30,8 @@ import merit.capstone.bankApp.models.CheckingAccount;
 import merit.capstone.bankApp.models.DBACheckingAccount;
 import merit.capstone.bankApp.models.Feedback;
 import merit.capstone.bankApp.models.RegularIRA;
+import merit.capstone.bankApp.models.RolloverIRA;
+import merit.capstone.bankApp.models.RothIRA;
 import merit.capstone.bankApp.models.SavingsAccount;
 import merit.capstone.bankApp.models.Transaction;
 import merit.capstone.bankApp.repos.BankAccountRepository;
@@ -52,6 +54,66 @@ public class BankAppApplicationTest {
 	private FeedbackRepository feedbackRepository;
 
 	@SuppressWarnings("deprecation")
+
+	@Test
+	public void getallAvailableBalance() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+		
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(100);
+		
+		SavingsAccount s = new SavingsAccount();
+		s.setBalance(100);
+		
+		DBACheckingAccount dba = new DBACheckingAccount();
+		dba.setBalance(100);
+		
+		RothIRA roth = new RothIRA();
+		roth.setBalance(100);
+		
+		RegularIRA reg = new RegularIRA();
+		reg.setBalance(100);
+		
+		RolloverIRA roll = new RolloverIRA();
+		roll.setBalance(100);
+		
+		try {
+			user.addBankAccount(c);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+		try {
+			user.addBankAccount(s);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+		try {
+			user.addBankAccount(dba);
+		} catch (MaxAccountsReachedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			user.addBankAccount(roth);
+		} catch (MaxAccountsReachedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			user.addBankAccount(reg);
+		} catch (MaxAccountsReachedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			user.addBankAccount(roll);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals(550, user.getAllAvailableBalance(), 0);
+		
+	}
 	
 	@Test
 	public void futureValue() {
@@ -59,15 +121,13 @@ public class BankAppApplicationTest {
 		user.setFirstName("ted");
 		user.setLastName("smith");
 		user.setSsn("123123123");
-		
+
 		CheckingAccount c = new CheckingAccount();
 		c.setBalance(1000);
-		
-		
+
 		assertEquals(1000.5001000100006, c.futureValue(5));
 	}
-	
-	
+
 	@Test
 	public void testProcessTransaction() {
 		BankUser user = new BankUser();
@@ -476,14 +536,14 @@ public class BankAppApplicationTest {
 
 	@Test
 	public void getFeedbackFromDB() {
-		
+
 		Feedback fb = new Feedback();
 		fb.setMessage("You're the best");
 		fb.setFirstname("Ted");
 
 		feedbackRepository.save(fb);
 		long msgId = fb.getId();
-		
+
 		assertEquals("You're the best", feedbackRepository.findById(msgId).getMessage());
 	}
 
