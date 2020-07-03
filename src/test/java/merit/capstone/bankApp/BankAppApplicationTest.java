@@ -34,6 +34,7 @@ import merit.capstone.bankApp.models.SavingsAccount;
 import merit.capstone.bankApp.models.Transaction;
 import merit.capstone.bankApp.repos.BankAccountRepository;
 import merit.capstone.bankApp.repos.BankUserRepository;
+import merit.capstone.bankApp.repos.FeedbackRepository;
 import merit.capstone.bankApp.repos.TransactionRepository;
 
 @SpringBootTest
@@ -47,6 +48,8 @@ public class BankAppApplicationTest {
 	private BankUserRepository bankUserRepository;
 	@Autowired
 	private TransactionRepository transactionRepository;
+	@Autowired
+	private FeedbackRepository feedbackRepository;
 
 	@SuppressWarnings("deprecation")
 	@Test
@@ -453,6 +456,20 @@ public class BankAppApplicationTest {
 
 		assertThat(fb).isNotNull();
 
+	}
+
+	@Test
+	public void getFeedbackFromDB() {
+		
+		Feedback fb = new Feedback();
+		fb.setMessage("You're the best");
+
+		feedbackRepository.save(fb);
+		System.out.println(fb.getMessage());
+		long msgId = fb.getId();
+		
+		assertEquals("You're the best", feedbackRepository.findById(msgId));
+		//assertTrue(feedbackRepository.findById(msgId).equals("You're the best"));
 	}
 
 	@Test
