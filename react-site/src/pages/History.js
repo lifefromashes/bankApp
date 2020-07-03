@@ -291,6 +291,8 @@ export default class History extends Component {
         window.location.reload();
         
         
+      } else {
+        document.getElementById("amount").focus();
       }
     })
 
