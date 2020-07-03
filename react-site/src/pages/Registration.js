@@ -5,6 +5,7 @@ import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {server} from "../webAddress";
 import {apiCall} from "../netcode";
+import {sterilizeString} from "../sterilize";
 
 export default class Registration extends Component {
   constructor(props) {
@@ -42,17 +43,17 @@ export default class Registration extends Component {
 
 
     var body = {
-      username: this.state.username,
-      password: this.state.password,
-      firstName: this.state.firstname,
-      lastName: this.state.lastname,
-      ssn: this.state.ssn,
-      email: this.state.email,
-      phone: this.state.phone,
-      address: this.state.address,
-      city: this.state.city,
-      state: this.state.stateName,
-      zip: this.state.zip
+      username: sterilizeString(this.state.username),
+      password: sterilizeString(this.state.password),
+      firstName: sterilizeString(this.state.firstname),
+      lastName: sterilizeString(this.state.lastname),
+      ssn: sterilizeString(this.state.ssn),
+      email: sterilizeString(this.state.email),
+      phone: sterilizeString(this.state.phone),
+      address: sterilizeString(this.state.address),
+      city: sterilizeString(this.state.city),
+      state: sterilizeString(this.state.stateName),
+      zip: sterilizeString(this.state.zip)
     }
 
     var req = apiCall(body, 'POST', "NewUser", false);

@@ -5,6 +5,7 @@ import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {server} from "../webAddress";
 import {apiCall} from "../netcode";
+import {sterilizeString} from "../sterilize";
 
 export default class Login extends Component {
   constructor(props) {
@@ -25,8 +26,8 @@ export default class Login extends Component {
     console.log("creating login request...");
 
     var body = {
-      username: this.state.username,
-      password: this.state.password
+      username: sterilizeString(this.state.username),
+      password: sterilizeString(this.state.password)
     }
 
     var req = apiCall(body, 'POST', "authenticate", false);
