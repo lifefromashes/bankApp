@@ -63,7 +63,7 @@ public class BankAppApplicationTest {
 		user.setLastName("smith");
 		user.setSsn("123123123");
 		user.setAddress("1234 honey grove");
-		
+		bankUserRepository.save(user);
 		
 		BankUser u = bankUserRepository.findById(user.getId());
 		u.setAddress("444 W Holly");
