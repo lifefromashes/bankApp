@@ -56,7 +56,7 @@ public class BankAppApplicationTest {
 	@SuppressWarnings("deprecation")
 
 	@Test
-	public void getBalanceByType() {
+	public void getBalanceByTypeChecking() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
 		user.setLastName("smith");
@@ -72,6 +72,26 @@ public class BankAppApplicationTest {
 		}
 
 		assertEquals(500, user.getBalanceByType(c));
+
+	}
+	
+	@Test
+	public void getBalanceByTypeSavings() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		SavingsAccount s = new SavingsAccount();
+		s.setBalance(500);
+
+		try {
+			user.addBankAccount(s);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(500, user.getBalanceByType(s));
 
 	}
 
