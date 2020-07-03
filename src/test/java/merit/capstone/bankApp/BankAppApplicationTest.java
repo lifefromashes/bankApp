@@ -52,6 +52,22 @@ public class BankAppApplicationTest {
 	private FeedbackRepository feedbackRepository;
 
 	@SuppressWarnings("deprecation")
+	
+	@Test
+	public void futureValue() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+		
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(1000);
+		
+		
+		assertEquals(1000.5001000100006, c.futureValue(5));
+	}
+	
+	
 	@Test
 	public void testProcessTransaction() {
 		BankUser user = new BankUser();
