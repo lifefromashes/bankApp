@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.UserRequestPostProcessor;
 
 import merit.capstone.bankApp.controllers.AdminController;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
@@ -55,6 +56,23 @@ public class BankAppApplicationTest {
 
 	@SuppressWarnings("deprecation")
 
+	@Test
+	public void canUpdateContactInfo() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+		user.setAddress("1234 honey grove");
+		
+		
+		BankUser u = bankUserRepository.findById(user.getId());
+		u.setAddress("444 W Holly");
+		u.updateContactInfo(u);
+		bankUserRepository.save(u);
+		
+		assertEquals("444 W Holly", bankUserRepository.findById(user.getId()).getAddress());
+	}
+	
 	@Test
 	public void getBalanceByTypeChecking() {
 		BankUser user = new BankUser();
