@@ -94,6 +94,26 @@ public class BankAppApplicationTest {
 		assertEquals(500, user.getBalanceByType(s));
 
 	}
+	
+	@Test
+	public void getBalanceByTypeDBAChecking() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		DBACheckingAccount dba = new DBACheckingAccount();
+		dba.setBalance(500);
+
+		try {
+			user.addBankAccount(dba);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(500, user.getBalanceByType(dba));
+
+	}
 
 	@Test
 	public void getallAvailableBalance() {
