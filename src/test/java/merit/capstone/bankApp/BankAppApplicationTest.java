@@ -56,30 +56,50 @@ public class BankAppApplicationTest {
 	@SuppressWarnings("deprecation")
 
 	@Test
+	public void getBalanceByType() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(500);
+
+		try {
+			user.addBankAccount(c);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(500, user.getBalanceByType(c));
+
+	}
+
+	@Test
 	public void getallAvailableBalance() {
 		BankUser user = new BankUser();
 		user.setFirstName("ted");
 		user.setLastName("smith");
 		user.setSsn("123123123");
-		
+
 		CheckingAccount c = new CheckingAccount();
 		c.setBalance(100);
-		
+
 		SavingsAccount s = new SavingsAccount();
 		s.setBalance(100);
-		
+
 		DBACheckingAccount dba = new DBACheckingAccount();
 		dba.setBalance(100);
-		
+
 		RothIRA roth = new RothIRA();
 		roth.setBalance(100);
-		
+
 		RegularIRA reg = new RegularIRA();
 		reg.setBalance(100);
-		
+
 		RolloverIRA roll = new RolloverIRA();
 		roll.setBalance(100);
-		
+
 		try {
 			user.addBankAccount(c);
 		} catch (MaxAccountsReachedException e) {
@@ -110,11 +130,11 @@ public class BankAppApplicationTest {
 		} catch (MaxAccountsReachedException e) {
 			e.printStackTrace();
 		}
-		
+
 		assertEquals(550, user.getAllAvailableBalance(), 0);
-		
+
 	}
-	
+
 	@Test
 	public void futureValue() {
 		BankUser user = new BankUser();
@@ -146,6 +166,23 @@ public class BankAppApplicationTest {
 		a.processTransaction(t, a, a);
 
 		assertEquals(100, a.getBalance(), 0);
+	}
+
+	@Test
+	public void getSavingsAccounts() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		SavingsAccount s = new SavingsAccount();
+
+		try {
+			user.addBankAccount(s);
+		} catch (MaxAccountsReachedException e) {
+		}
+
+		assertTrue(user.getNumberOfAccountsByType(s) == 1);
 	}
 
 	@Test
