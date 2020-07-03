@@ -463,13 +463,12 @@ public class BankAppApplicationTest {
 		
 		Feedback fb = new Feedback();
 		fb.setMessage("You're the best");
+		fb.setFirstname("Ted");
 
 		feedbackRepository.save(fb);
-		System.out.println(fb.getMessage());
 		long msgId = fb.getId();
 		
-		assertEquals("You're the best", feedbackRepository.findById(msgId));
-		//assertTrue(feedbackRepository.findById(msgId).equals("You're the best"));
+		assertEquals("You're the best", feedbackRepository.findById(msgId).getMessage());
 	}
 
 	@Test

@@ -7,6 +7,6 @@ import merit.capstone.bankApp.models.Feedback;
  * Repository interface to be used by spring as it autowires access to the database
  */
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
-
+	Feedback findById(long id);
 	
 }
