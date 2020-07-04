@@ -37,7 +37,7 @@ export default class Admin extends Component {
 
     var req = apiCall(null, 'GET', "direct", true);
     req.addEventListener('load', () => {
-      if(req.responseText === "/user"){ window.location = "/"; }
+      if(req.responseText != "/admin"){ window.location = "/"; }
     })
 
 
