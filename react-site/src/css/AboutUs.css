@@ -263,5 +263,28 @@ ul li.register a{
     background-color: #fff;
 
   }
+  .main ul{
+    list-style: none;
+    position: absolute;
+    right: -400px;
+  }
+  .main ul li{
+    padding-top: 0px;
+    float: none;
+    width: 150%
+  }
+  .main ul a{
+    white-space: nowrap;
+  }
+  .main li:hover ul{
+    left: 0;
+  }
+  .main li:hover ul a{
+    text-decoration: none;
+  }
+  .main ul li a{
+    padding: 1px 20px;
+    border: 1px solid transparent;
+  }
 
 }
