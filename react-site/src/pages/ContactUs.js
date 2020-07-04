@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {server} from "../webAddress";
 import {apiCall} from "../netcode";
+import {sterilizeString} from "../sterilize";
 
 
 
@@ -39,24 +40,27 @@ export default class ContactUs extends Component {
 
 
     var body = {
-      firstname: this.state.firstname,
-      email: this.state.email,
-      subject: this.state.subject,
-      message: this.state.message
+      firstname: sterilizeString(this.state.firstname),
+      email: sterilizeString(this.state.email),
+      subject: sterilizeString(this.state.subject),
+      message: sterilizeString(this.state.message)
     }
 
+    console.log(body.firstname);
 
     var req = apiCall(body, 'POST', "Feedback", false);
 
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
         alert("Thanks! We'll review your message and get back to you.");
-        //document.getElementById("myForm").reset();
-        document.getElementById("firstname").value = "";
-        document.getElementById("lastname").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("subject").value = "";
-        document.getElementById("message").value = "";
+        
+        window.location = "/";
+
+        //document.getElementById("firstname").value = "";
+        //document.getElementById("lastname").value = "";
+        //document.getElementById("email").value = "";
+        //document.getElementById("subject").value = "";
+        //document.getElementById("message").value = "";
       }
     })
 

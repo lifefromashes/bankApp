@@ -11,7 +11,7 @@ export const parseBankUser = (req) => {
         s += " username: ";
         s += obj[i].username;
         s += " total assets: ";
-        s += obj[i].totalValue;
+        s += obj[i].totalValue.toFixed(2);
         
         
         s += " <br> ";
@@ -58,7 +58,7 @@ export const parseUserByID = (req) => {
         s += obj.bankAccounts[i].accountNumber;
         s += " " + obj.bankAccounts[i].accountName;
         s += " $"
-        s += obj.bankAccounts[i].balance;
+        s += obj.bankAccounts[i].balance.toFixed(2);
         s += " <br> ";
     }
 
@@ -92,7 +92,7 @@ export const parseAccounts = (req) => {
         s += obj.bankAccounts[i].accountName + " #" + obj.bankAccounts[i].accountNumber;
         s += "</div> <div class='placMain'>";
         s += "Current Balance: $";
-        s += obj.bankAccounts[i].balance;
+        s += obj.bankAccounts[i].balance.toFixed(2);
         s += "</div></div> ";
     }
 
@@ -128,11 +128,11 @@ export const parseHistory = (req) => {
         
         s += ">" + obj[i].transactionDate;
         s += "&nbsp; &nbsp; amount: $"
-        s += obj[i].amount;
+        s += obj[i].amount.toFixed(2);
 
         if(obj[i].transactionSuccess){
             s += "&nbsp; &nbsp; balance after: $";
-            s += obj[i].balanceAfterTransaction;
+            s += obj[i].balanceAfterTransaction.toFixed(2);
         } else {
             s += "&nbsp; &nbsp; REJECTED";
         }

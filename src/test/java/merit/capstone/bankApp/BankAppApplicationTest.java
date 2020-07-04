@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.UserRequestPostProcessor;
 
 import merit.capstone.bankApp.controllers.AdminController;
 import merit.capstone.bankApp.exceptions.ExceedsAvailableBalanceException;
@@ -30,10 +31,13 @@ import merit.capstone.bankApp.models.CheckingAccount;
 import merit.capstone.bankApp.models.DBACheckingAccount;
 import merit.capstone.bankApp.models.Feedback;
 import merit.capstone.bankApp.models.RegularIRA;
+import merit.capstone.bankApp.models.RolloverIRA;
+import merit.capstone.bankApp.models.RothIRA;
 import merit.capstone.bankApp.models.SavingsAccount;
 import merit.capstone.bankApp.models.Transaction;
 import merit.capstone.bankApp.repos.BankAccountRepository;
 import merit.capstone.bankApp.repos.BankUserRepository;
+import merit.capstone.bankApp.repos.FeedbackRepository;
 import merit.capstone.bankApp.repos.TransactionRepository;
 
 @SpringBootTest
@@ -47,8 +51,202 @@ public class BankAppApplicationTest {
 	private BankUserRepository bankUserRepository;
 	@Autowired
 	private TransactionRepository transactionRepository;
+	@Autowired
+	private FeedbackRepository feedbackRepository;
 
 	@SuppressWarnings("deprecation")
+
+	@Test
+	public void canUpdateContactInfo() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+		user.setAddress("1234 honey grove");
+		bankUserRepository.save(user);
+		
+		BankUser u = bankUserRepository.findById(user.getId());
+		u.setAddress("444 W Holly");
+		u.updateContactInfo(u);
+		bankUserRepository.save(u);
+		
+		assertEquals("444 W Holly", bankUserRepository.findById(user.getId()).getAddress());
+	}
+	
+	@Test
+	public void getBalanceByTypeChecking() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(500);
+
+		try {
+			user.addBankAccount(c);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(500, user.getBalanceByType(c));
+
+	}
+	
+	@Test
+	public void getBalanceByTypeSavings() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		SavingsAccount s = new SavingsAccount();
+		s.setBalance(500);
+
+		try {
+			user.addBankAccount(s);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(500, user.getBalanceByType(s));
+
+	}
+	
+	@Test
+	public void getBalanceByTypeDBAChecking() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		DBACheckingAccount dba = new DBACheckingAccount();
+		dba.setBalance(500);
+
+		try {
+			user.addBankAccount(dba);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(500, user.getBalanceByType(dba));
+
+	}
+	
+	@Test
+	public void getBalanceByTypeROTHIra() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		RothIRA r = new RothIRA();
+		r.setBalance(500);
+
+		try {
+			user.addBankAccount(r);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(500, user.getBalanceByType(r));
+
+	}
+	
+	public void getBalanceByTypeRegIRA() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		RegularIRA r = new RegularIRA();
+		r.setBalance(500);
+
+		try {
+			user.addBankAccount(r);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(500, user.getBalanceByType(r));
+
+	}
+	
+	
+
+	@Test
+	public void getallAvailableBalance() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(100);
+
+		SavingsAccount s = new SavingsAccount();
+		s.setBalance(100);
+
+		DBACheckingAccount dba = new DBACheckingAccount();
+		dba.setBalance(100);
+
+		RothIRA roth = new RothIRA();
+		roth.setBalance(100);
+
+		RegularIRA reg = new RegularIRA();
+		reg.setBalance(100);
+
+		RolloverIRA roll = new RolloverIRA();
+		roll.setBalance(100);
+
+		try {
+			user.addBankAccount(c);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+		try {
+			user.addBankAccount(s);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+		try {
+			user.addBankAccount(dba);
+		} catch (MaxAccountsReachedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			user.addBankAccount(roth);
+		} catch (MaxAccountsReachedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			user.addBankAccount(reg);
+		} catch (MaxAccountsReachedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			user.addBankAccount(roll);
+		} catch (MaxAccountsReachedException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(550, user.getAllAvailableBalance(), 0);
+
+	}
+
+	@Test
+	public void futureValue() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		CheckingAccount c = new CheckingAccount();
+		c.setBalance(1000);
+
+		assertEquals(1000.5001000100006, c.futureValue(5));
+	}
+
 	@Test
 	public void testProcessTransaction() {
 		BankUser user = new BankUser();
@@ -67,6 +265,23 @@ public class BankAppApplicationTest {
 		a.processTransaction(t, a, a);
 
 		assertEquals(100, a.getBalance(), 0);
+	}
+
+	@Test
+	public void getSavingsAccounts() {
+		BankUser user = new BankUser();
+		user.setFirstName("ted");
+		user.setLastName("smith");
+		user.setSsn("123123123");
+
+		SavingsAccount s = new SavingsAccount();
+
+		try {
+			user.addBankAccount(s);
+		} catch (MaxAccountsReachedException e) {
+		}
+
+		assertTrue(user.getNumberOfAccountsByType(s) == 1);
 	}
 
 	@Test
@@ -453,6 +668,19 @@ public class BankAppApplicationTest {
 
 		assertThat(fb).isNotNull();
 
+	}
+
+	@Test
+	public void getFeedbackFromDB() {
+
+		Feedback fb = new Feedback();
+		fb.setMessage("You're the best");
+		fb.setFirstname("Ted");
+
+		feedbackRepository.save(fb);
+		long msgId = fb.getId();
+
+		assertEquals("You're the best", feedbackRepository.findById(msgId).getMessage());
 	}
 
 	@Test

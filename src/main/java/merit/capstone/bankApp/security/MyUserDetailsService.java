@@ -35,11 +35,13 @@ public class MyUserDetailsService implements UserDetailsService {
 		BankUser u = bankUserRepository.findByUsername(username);
 		
 		
+		
 		if(u != null) {
 			if(!u.isActive()) { return null; }
 			String userLevel = u.getAuthority();
 			Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 			authorities.add(new SimpleGrantedAuthority(userLevel));
+			
 			return new User(username, u.getPassword(), authorities);
 		}
 		

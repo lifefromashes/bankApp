@@ -5,6 +5,7 @@ import axios from "axios";
 import {saveTokenInCookie, readCookie, logout, setCookieHeader} from "../cookieUtil";
 import {server} from "../webAddress";
 import {apiCall} from "../netcode";
+import {sterilizeString} from "../sterilize";
 
 export default class Registration extends Component {
   constructor(props) {
@@ -42,18 +43,34 @@ export default class Registration extends Component {
 
 
     var body = {
-      username: this.state.username,
-      password: this.state.password,
-      firstName: this.state.firstname,
-      lastName: this.state.lastname,
-      ssn: this.state.ssn,
-      email: this.state.email,
-      phone: this.state.phone,
-      address: this.state.address,
-      city: this.state.city,
-      state: this.state.stateName,
-      zip: this.state.zip
+      username: sterilizeString(this.state.username),
+      password: sterilizeString(this.state.password),
+      firstName: sterilizeString(this.state.firstname),
+      lastName: sterilizeString(this.state.lastname),
+      ssn: sterilizeString(this.state.ssn),
+      email: sterilizeString(this.state.email),
+      phone: sterilizeString(this.state.phone),
+      address: sterilizeString(this.state.address),
+      city: sterilizeString(this.state.city),
+      state: sterilizeString(this.state.stateName),
+      zip: sterilizeString(this.state.zip)
     }
+
+    if(body.username.length < 4){
+      window.alert("Usernames must be at least 4 characters.");
+      return;
+    }
+
+    if(body.password.length < 4){
+      window.alert("Passwords must be at least 4 characters.");
+      return;
+    }
+
+    if(body.password != document.getElementById("password_confirmation").value){
+      window.alert("Password must match password confirmation.");
+      return;
+    }
+
 
     var req = apiCall(body, 'POST', "NewUser", false);
 
@@ -64,7 +81,7 @@ export default class Registration extends Component {
         window.location = "/login";
 
       } else {
-        //handle bad input
+        window.alert("Please select a different username.");
 
       }
     })
@@ -126,6 +143,7 @@ export default class Registration extends Component {
                 <input
                   type="password"
                   name="password_confirmation"
+                  id="password_confirmation"
                   placeholder="Password confirmation"
                   value={this.state.password_confirmation}
                   onChange={this.handleChange}

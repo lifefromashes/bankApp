@@ -117,7 +117,13 @@ export default class User extends Component {
 
   createAccount() {
 
-    var req = new XMLHttpRequest();
+    var amt = document.getElementById("amount").value;
+    if(amt < 0 || isNaN(amt)){ 
+      document.getElementById("amount").focus();
+      return;
+    }
+
+
     var t = document.getElementById("accountType").value;
     var tString = "fail";
     if(t == 1){ tString = "CheckingAccount"; }
@@ -210,6 +216,7 @@ export default class User extends Component {
         <input
           class = "adminTool2"
           name="amount"
+          id="amount"
           value={this.state.amount}
           onFocus={this.handleFocus}
           onChange={this.handleChange}

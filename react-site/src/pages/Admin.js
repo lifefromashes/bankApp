@@ -33,6 +33,14 @@ export default class Admin extends Component {
     this.createCDO = this.createCDO.bind(this);
     this.createTransaction = this.createTransaction.bind(this);
     this.getHistory = this.getHistory.bind(this);
+
+
+    var req = apiCall(null, 'GET', "direct", true);
+    req.addEventListener('load', () => {
+      if(req.responseText === "/user"){ window.location = "/"; }
+    })
+
+
   }
   handleFocus = (event) => event.target.select();
 

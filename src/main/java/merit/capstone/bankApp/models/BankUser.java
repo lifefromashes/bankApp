@@ -60,11 +60,7 @@ public class BankUser {
 
 	public BankUser() {
 		bankAccounts = new ArrayList<>();
-
-		//SavingsAccount s = new SavingsAccount(); bankAccounts.add(s);
 		this.isActive = true;
-		
-		
 	}
 
 	
