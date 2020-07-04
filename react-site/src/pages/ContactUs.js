@@ -53,7 +53,7 @@ export default class ContactUs extends Component {
     req.addEventListener('load', () => {
       if(req.status >= 200 && req.status < 400){
         alert("Thanks! We'll review your message and get back to you.");
-        
+
         window.location = "/";
 
         //document.getElementById("firstname").value = "";
@@ -71,7 +71,7 @@ export default class ContactUs extends Component {
       <>
       <head>
         <title>LEARN MORE</title>
-        <link rel="stylesheet" type="text/css" href= "../App.css" />
+        <link rel="stylesheet" type="text/css" href= "../ContactUs.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossOrigin="anonymous"/>
       </head>
         <body>

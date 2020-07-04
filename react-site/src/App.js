@@ -4,6 +4,7 @@ import './css/Login.css';
 import './css/Services.css';
 import './css/AboutUs.css';
 import './css/Home.css';
+import './css/ContactUs.css';
 
 import Home from './pages/Home';
 import Accounts from './pages/Accounts';
