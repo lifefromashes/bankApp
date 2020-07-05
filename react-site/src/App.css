@@ -152,7 +152,7 @@ input.adminTool{
 }
 .adminTool2:hover{
   background-color: white;
-  color:  rgba(50,148,188)
+  color:  rgba(50,148,188);
 }
 
 #printout{
@@ -198,10 +198,7 @@ input.adminTool{
   width: 10%;
   color: white;
 }
-.closeButton:hover{
-  background-color: white;
-  color: rgba(50,148,188);
-}
+
 
 .closeButton2{
   display: block;
