@@ -148,17 +148,27 @@ button:hover{
   cursor: pointer;
 }
 
-@media(max-width: 768px){
-  .registercontainer{
-    padding-top: 20px;
-}
+@media only screen and (max-width: 768px){
+  header{
+    background-repeat: no-repeat;
+  }
+  #register-section {
+    width: 340px;
+    height: 750px;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-55%);
+    padding:20px 60px;
+  }
   #register-section .register-form{
     display: block;
-    width: 100%;
+    width: 200%;
     text-align: center;
   }
   #register-section button{
-    width: 100%;
+    width: 35%;
+    margin-right: 230px;
   }
 }
 .btn-primary{
