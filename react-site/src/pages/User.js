@@ -167,7 +167,7 @@ export default class User extends Component {
       <>
       <head>
         <title>MERIT BANK</title>
-        <link rel="stylesheet" type="text/css" href= "../App.css" />
+        <link rel="stylesheet" type="text/css" href= "../css/User.css" />
       </head>
       <body>
 

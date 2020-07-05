@@ -230,7 +230,7 @@ export default class Admin extends Component {
       <>
       <head>
         <title>MERIT BANK</title>
-        <link rel="stylesheet" type="text/css" href= "../App.css" />
+        <link rel="stylesheet" type="text/css" href= "../css/Admin.css" />
       </head>
       <body>
 

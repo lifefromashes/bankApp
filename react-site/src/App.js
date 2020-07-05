@@ -6,6 +6,8 @@ import './css/AboutUs.css';
 import './css/Home.css';
 import './css/ContactUs.css';
 import './css/Register.css';
+import './css/Admin.css';
+import './css/User.css';
 
 import Home from './pages/Home';
 import Accounts from './pages/Accounts';
