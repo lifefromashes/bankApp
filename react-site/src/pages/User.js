@@ -52,11 +52,11 @@ export default class User extends Component {
             });
 
           }
-          
+
           var req2 = apiCall(null, 'GET', "CDOfferings", true);
           req2.addEventListener('load', () => {
             if(req2.status >= 200 && req2.status < 400){
-              
+
 
               var obj = JSON.parse(req2.responseText);
               this.state.obj = obj;
@@ -70,11 +70,11 @@ export default class User extends Component {
               }
               t.innerHTML = s;
 
-              
+
             }
           })
-      
-      
+
+
 
 
       }
@@ -118,7 +118,7 @@ export default class User extends Component {
   createAccount() {
 
     var amt = document.getElementById("amount").value;
-    if(amt < 0 || isNaN(amt)){ 
+    if(amt < 0 || isNaN(amt)){
       document.getElementById("amount").focus();
       return;
     }
@@ -132,14 +132,14 @@ export default class User extends Component {
     if(t == 4){ tString = "RegularIRA"; }
     if(t == 5){ tString = "RothIRA"; }
     if(t == 6){ tString = "RolloverIRA"; }
-    
+
 
 
     if(t != 3){
       var body = {balance: this.state.amount }
     } else {
       var body = {
-        balance: this.state.amount, 
+        balance: this.state.amount,
         interestRate: this.state.obj[this.state.cdoType].interestRate,
         term: this.state.obj[this.state.cdoType].term
       }
@@ -182,7 +182,7 @@ export default class User extends Component {
             </ul>
           </div>
 
-        
+
 
       <br></br> <br></br> <br></br>
 
@@ -230,9 +230,9 @@ export default class User extends Component {
 
 
         <br></br>
-        <button 
+        <button
           className={"closeButton2"}
-          id="closeButton" 
+          id="closeButton"
           onClick={this.manageAccount}
         >Manage Account</button>
 

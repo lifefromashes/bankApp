@@ -138,6 +138,7 @@ ul li.register a{
   width: 15%;
   color: white;
   display: inline;
+  float: right;
 }
 
 input.adminTool{
@@ -148,11 +149,11 @@ input.adminTool{
 .adminTool2{
   width: 20%;
   color: white;
-  display:
 }
 .adminTool2:hover{
   background-color: white;
   color:  rgba(50,148,188);
+
 }
 
 #printout{
@@ -207,6 +208,10 @@ input.adminTool{
   width: 20%;
   color: white;
 }
+.closeButton2:hover{
+  background-color: white;
+  color: rgba(50,148,188);
+}
 
 .hidden{
   display: none;
@@ -214,4 +219,18 @@ input.adminTool{
 
 .staticInfo{
   background-color: rgb(30, 145, 202);
+}
+@media only screen and (max-width: 768px){
+  .adminTool2{
+    font-size: 15px;
+    width: 50%;
+    margin-top: 50px;
+    padding-bottom: 10px;
+
+  }
+  .closeButton2{
+    width: 50%;
+    float: left;
+  }
+
 }
