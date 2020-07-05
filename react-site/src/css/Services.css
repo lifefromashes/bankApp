@@ -75,7 +75,7 @@ ul li.register a{
   transform: translate(-50%,-50%);
 }
 
-mpty-search {
+empty-search {
 text-align: center;
 text-transform: capitalize;
 margin: 3rem 0;
@@ -83,7 +83,7 @@ padding: 1rem;
 letter-spacing: var(--mainSpacing);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 760px) {
   .title {
     font-size: 10px;
   }
@@ -114,6 +114,7 @@ letter-spacing: var(--mainSpacing);
     border: 1px solid transparent;
   }
 }
+
 
 /* end of globals */
 
@@ -201,19 +202,16 @@ letter-spacing: var(--mainSpacing);
 @media only screen and (max-width: 768px) {
   .services-section{
     width: 85%;
-    height: 200%;
+    height: 145%;
     /* background-color: #3294bc; */
     background-color: rgba(50,148,188,0.7);
     margin-top: 1100px;
-    top: 20%;
+    top: -150px;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-55%);
   }
-  header{
-    height: 3000px;
 
-  }
   .border{
     width: 250px;
     height: 2px;

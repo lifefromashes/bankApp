@@ -168,9 +168,6 @@ h1{
   .loginbox{
     margin-top: 150px;
   }
-  header{
-    height: 500px; /*THIS IS TENTATIVE*/
-  }
   .main ul{
     list-style: none;
     position: absolute;
