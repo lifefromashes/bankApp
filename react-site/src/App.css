@@ -135,8 +135,13 @@ ul li.register a{
 
 /* temp stuff just to keep admin page buttons and text fields from being huge */
 .adminTool{
-  width: 10%;
+  width: 15%;
   color: white;
+}
+
+input.adminTool{
+  color: white;
+  font-weight: bold;
 }
 
 .adminTool2{

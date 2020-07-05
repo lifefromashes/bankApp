@@ -68,7 +68,7 @@ export default class Admin extends Component {
 
 
   getUsers() {
-    
+
     var req = apiCall(null, 'GET', "Admin/Users/" + document.getElementById("searchType").value, true);
 
     req.addEventListener('load', () => {
@@ -155,7 +155,7 @@ export default class Admin extends Component {
   }
 
   createTransaction() {
-    
+
 
 
 
@@ -193,7 +193,7 @@ export default class Admin extends Component {
     if(t == 4){ tString = "RegularIRA"; }
     if(t == 5){ tString = "RothIRA"; }
     if(t == 6){ tString = "RolloverIRA"; }
-    
+
     var id = parseInt(this.state.userID);
 
     var urlString = "Admin/" + id + "/" + tString;
@@ -233,7 +233,7 @@ export default class Admin extends Component {
         <link rel="stylesheet" type="text/css" href= "../App.css" />
       </head>
       <body>
-      
+
         <header>
           <div class="main">
             <div class="logo">
@@ -256,7 +256,7 @@ export default class Admin extends Component {
 
       &nbsp; &nbsp; User Account Number:
       <input
-        className="adminTool" 
+        className="adminTool"
         type="userID"
         name="userID"
         placeholder="ID#"
@@ -266,7 +266,7 @@ export default class Admin extends Component {
         required
       />
       <br></br>
-      
+
       &nbsp; &nbsp;
       <button className="adminTool" onClick={this.getUsers}>Get All Users</button>
 
@@ -282,9 +282,9 @@ export default class Admin extends Component {
           <option value="0">Search Active Accounts</option>
           <option value="1">Search Inactive Account</option>
         </select>
-        
-      
-      
+
+
+
 
       <br></br>
       <div>
@@ -306,7 +306,7 @@ export default class Admin extends Component {
 
         &nbsp; with a starting balance of &nbsp;
         <input
-          className="adminTool" 
+          className="adminTool"
           size="10"
           type="amount"
           name="amount"
@@ -320,7 +320,7 @@ export default class Admin extends Component {
         <label id="CDO lab" hidden={this.state.accountTypeSelected != 3}>  from CDO # </label>
         &nbsp;
         <input
-          className="adminTool" 
+          className="adminTool"
           hidden={this.state.accountTypeSelected != 3}
           id="CDO box"
           size="10"
@@ -342,7 +342,7 @@ export default class Admin extends Component {
         <button className="adminTool" onClick={this.createCDO}>Create New CDO</button>
         &nbsp; with an interest rate of &nbsp;
         <input
-          className="adminTool" 
+          className="adminTool"
           size="10"
           name="cdoRate"
           value={this.state.cdoRate}
@@ -352,7 +352,7 @@ export default class Admin extends Component {
         />
         &nbsp; and a term of &nbsp;
         <input
-          className="adminTool" 
+          className="adminTool"
           size="4"
           name="cdoTerm"
           value={this.state.cdoTerm}
@@ -369,48 +369,48 @@ export default class Admin extends Component {
         &nbsp; &nbsp; &nbsp; &nbsp;
         Bank Account Number:
         <input
-            className="adminTool" 
+            className="adminTool"
             size="10"
             name="transAccount"
             value={this.state.transAccount}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
           />
-          
+
 
         &nbsp; &nbsp;
         <button className="adminTool" onClick={this.createTransaction}>Adjust Funds</button>
         &nbsp; by $  &nbsp;
-        
+
         <input
-            className="adminTool" 
+            className="adminTool"
             size="10"
             name="transAmmount"
             value={this.state.transAmmount}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
           />
-        
+
         &nbsp; Memo: &nbsp;
 
         <input
-            className="adminTool" 
+            className="adminTool"
             name="transNote"
             value={this.state.transNote}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
           />
 
-        
+
         <button className="adminTool2" onClick={this.getHistory}>See Activity History</button>
 
       </div>
 
       <br></br>
 
-      
+
         <div id="printout" classname="consoleAdminTool"></div>
-      
+
 
       </header>
       </body>
