@@ -71,7 +71,7 @@ export default class ContactUs extends Component {
       <>
       <head>
         <title>LEARN MORE</title>
-        <link rel="stylesheet" type="text/css" href= "../ContactUs.css" />
+        <link rel="stylesheet" type="text/css" href= "../css/ContactUs.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossOrigin="anonymous"/>
       </head>
         <body>

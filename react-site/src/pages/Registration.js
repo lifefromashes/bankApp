@@ -95,7 +95,7 @@ export default class Registration extends Component {
       <>
         <head>
           <title>REGISTER</title>
-          <link rel="stylesheet" type="text/css" href= "../App.css" />
+          <link rel="stylesheet" type="text/css" href= "../css/Register.css" />
         </head>
           <body>
 
@@ -238,7 +238,7 @@ export default class Registration extends Component {
             </section>
           </header>
           </body>
-          
+
         </>
     );
   }
