@@ -137,6 +137,7 @@ ul li.register a{
 .adminTool{
   width: 15%;
   color: white;
+  display: inline;
 }
 
 input.adminTool{
@@ -147,6 +148,11 @@ input.adminTool{
 .adminTool2{
   width: 20%;
   color: white;
+  display:
+}
+.adminTool2:hover{
+  background-color: white;
+  color:  rgba(50,148,188)
 }
 
 #printout{
@@ -191,6 +197,10 @@ input.adminTool{
 
   width: 10%;
   color: white;
+}
+.closeButton:hover{
+  background-color: white;
+  color: rgba(50,148,188);
 }
 
 .closeButton2{
