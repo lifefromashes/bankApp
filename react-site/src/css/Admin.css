@@ -190,14 +190,14 @@ ul li.register a{
 .cdoCreate{
   width: 10%;
   color: white;
-  float: left;
-  margin-top: 10px;
-  margin-left: 5px;
+  margin-top: -20px;
+  float: center;
 }
 .cdoCreate:hover{
   background-color: white;
   color: rgba(50,148,188);
 }
+
 
 
 

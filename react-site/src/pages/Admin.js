@@ -317,7 +317,7 @@ export default class Admin extends Component {
         />
         &nbsp;
         <label id="CDO lab" hidden={this.state.accountTypeSelected != 3}>  from CDO # </label>
-        &nbsp;
+        &nbsp; <br />
         <input
           className="cdo"
           hidden={this.state.accountTypeSelected != 3}
@@ -337,7 +337,7 @@ export default class Admin extends Component {
       <div>
         &nbsp; &nbsp;
         <button className="cdoGet" onClick={this.getCDOs}>Get All CDOs</button>
-        &nbsp; &nbsp; <br /> <br />
+        &nbsp; &nbsp; <br />
         <button className="cdoCreate" onClick={this.createCDO}>Create New CDO</button>
         &nbsp; with an interest rate of &nbsp;
         <input
