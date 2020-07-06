@@ -72,6 +72,9 @@ ul li.register a{
 
 /* end of globals */
 
+
+
+
 /* account placard stuff */
 .accountBox{
 
@@ -134,22 +137,30 @@ ul li.register a{
 }
 
 /* temp stuff just to keep admin page buttons and text fields from being huge */
-.adminTool{
+.userAN{
+  width: 10%;
+}
+.admin{
   width: 15%;
   color: white;
-  display: block;
+  float: right;
+  padding-left: 20px;
 }
 
-input.adminTool{
+input.admin{
   color: white;
   font-weight: bold;
 }
+.admin:hover{
+  background-color: white;
+  color: rgba(50,148,188);
+}
 
-.adminTool2{
+.admin2{
   width: 20%;
   color: white;
-}
-.adminTool2:hover{
+  }
+.admin2:hover{
   background-color: white;
   color:  rgba(50,148,188);
 
@@ -211,7 +222,6 @@ input.adminTool{
   background-color: white;
   color: rgba(50,148,188);
 }
-
 .hidden{
   display: none;
 }
