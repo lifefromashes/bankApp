@@ -393,14 +393,14 @@ export default class Admin extends Component {
         &nbsp; Memo: &nbsp;
 
         <input
-            className="admin"
+            className="note"
             name="transNote"
             value={this.state.transNote}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
           />
 
-
+          <br />
         <button className="admin2" onClick={this.getHistory}>See Activity History</button>
 
       </div>

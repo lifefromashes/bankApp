@@ -226,7 +226,11 @@ input.adjamt{
   background-color: white;
   color: rgba(50,148,188);
 }
-
+input.note{
+  width: 20%;
+  color: white;
+  float: center;
+}
 
 
 
