@@ -210,9 +210,22 @@ input.term{
 input.acct{
   width: 5%;
   color: white;
-  float: center; 
+  float: center;
 }
-.acct{}
+input.adjamt{
+  width: 10%;
+  color: white;
+  float: center;
+}
+.adj{
+  width: 10%;
+  color: white;
+  float: center;
+}
+.adj:hover{
+  background-color: white;
+  color: rgba(50,148,188);
+}
 
 
 

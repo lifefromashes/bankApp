@@ -382,7 +382,7 @@ export default class Admin extends Component {
         &nbsp; by $  &nbsp;
 
         <input
-            className="admin"
+            className="adjamt"
             size="10"
             name="transAmmount"
             value={this.state.transAmmount}
