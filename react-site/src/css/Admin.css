@@ -232,6 +232,12 @@ input.note{
   float: center;
 }
 
+input.cdo{
+  width: 5%;
+  color: white;
+  float: center;
+}
+
 
 
 

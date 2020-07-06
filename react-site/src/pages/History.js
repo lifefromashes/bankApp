@@ -307,7 +307,7 @@ export default class History extends Component {
       <>
       <head>
         <title>MERIT BANK</title>
-        <link rel="stylesheet" type="text/css" href= "../App.css" />
+        <link rel="stylesheet" type="text/css" href= "../css/History.css" />
       </head>
       <body>
 

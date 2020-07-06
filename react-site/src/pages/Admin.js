@@ -317,7 +317,7 @@ export default class Admin extends Component {
         />
         &nbsp;
         <label id="CDO lab" hidden={this.state.accountTypeSelected != 3}>  from CDO # </label>
-        &nbsp; <br />
+        &nbsp; 
         <input
           className="cdo"
           hidden={this.state.accountTypeSelected != 3}
@@ -330,7 +330,7 @@ export default class Admin extends Component {
           required
         />
 
-
+<br />
 
       </div>
 
