@@ -337,11 +337,11 @@ export default class Admin extends Component {
       <div>
         &nbsp; &nbsp;
         <button className="cdoGet" onClick={this.getCDOs}>Get All CDOs</button>
-        &nbsp; &nbsp; <br />
+        &nbsp; &nbsp;
         <button className="cdoCreate" onClick={this.createCDO}>Create New CDO</button>
         &nbsp; with an interest rate of &nbsp;
         <input
-          className="admin"
+          className="int"
           size="10"
           name="cdoRate"
           value={this.state.cdoRate}
@@ -351,7 +351,7 @@ export default class Admin extends Component {
         />
         &nbsp; and a term of &nbsp;
         <input
-          className="admin"
+          className="term"
           size="4"
           name="cdoTerm"
           value={this.state.cdoTerm}
@@ -368,7 +368,7 @@ export default class Admin extends Component {
         &nbsp; &nbsp; &nbsp; &nbsp;
         Bank Account Number:
         <input
-            className="admin"
+            className="acct"
             size="10"
             name="transAccount"
             value={this.state.transAccount}
@@ -378,7 +378,7 @@ export default class Admin extends Component {
 
 
         &nbsp; &nbsp;
-        <button className="admin" onClick={this.createTransaction}>Adjust Funds</button>
+        <button className="adj" onClick={this.createTransaction}>Adjust Funds</button>
         &nbsp; by $  &nbsp;
 
         <input

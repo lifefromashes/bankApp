@@ -197,7 +197,22 @@ ul li.register a{
   background-color: white;
   color: rgba(50,148,188);
 }
-
+input.int{
+  width: 5%;
+  color: white;
+  float: center;
+}
+input.term{
+  width: 5%;
+  color: white;
+  float: center;
+}
+input.acct{
+  width: 5%;
+  color: white;
+  float: center; 
+}
+.acct{}
 
 
 
