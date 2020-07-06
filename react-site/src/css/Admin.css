@@ -139,7 +139,78 @@ ul li.register a{
 /* temp stuff just to keep admin page buttons and text fields from being huge */
 .userAN{
   width: 10%;
+  font-weight: bold;
+  color: white;
 }
+.userGet{
+  width: 10%;
+  color: white;
+  float: left;
+}
+.userGet:hover{
+  background-color: white;
+  color: rgba(50,148,188);
+}
+.userGA{
+  width: 20%;
+  color: white;
+  float: center;
+}
+.userGA:hover{
+  background-color: white;
+  color: rgba(50,148,188);
+}
+#searchType{
+}
+.create{
+  width: 10%;
+  color: white;
+  float: left;
+  margin-top: 10px;
+}
+.create:hover{
+  background-color: white;
+  color: rgba(50,148,188);
+}
+.start{
+  width: 10%;
+  font-weight: bold;
+  color: white;
+}
+.cdoGet{
+  width: 10%;
+  color: white;
+  float: left;
+  margin-top: 10px;
+}
+.cdoGet:hover{
+  background-color: white;
+  color: rgba(50,148,188);
+}
+.cdoCreate{
+  width: 10%;
+  color: white;
+  float: left;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+.cdoCreate:hover{
+  background-color: white;
+  color: rgba(50,148,188);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .admin{
   width: 15%;
   color: white;

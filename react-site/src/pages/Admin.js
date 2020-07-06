@@ -254,7 +254,7 @@ export default class Admin extends Component {
 
       <br></br><br></br><br></br>
 
-      &nbsp; &nbsp;<br /> User Account Number: 
+      &nbsp; &nbsp;<br /> User Account Number:
       <input
         className="userAN"
         type="userID"
@@ -268,10 +268,9 @@ export default class Admin extends Component {
       <br></br>
 
       &nbsp; &nbsp;
-      <button className="admin" onClick={this.getUsers}>Get All Users</button>
-
+      <button className="userGet" onClick={this.getUsers}>Get All Users</button>
       &nbsp; &nbsp;
-      <button className="admin2" onClick={this.getUserByID}>Get User by User Account Number</button>
+      <button className="userGA" onClick={this.getUserByID}>Get User by User Account Number</button>
 
       &nbsp; &nbsp;
       <select id="searchType"
@@ -289,7 +288,7 @@ export default class Admin extends Component {
       <br></br>
       <div>
         &nbsp; &nbsp;
-        <button className="admin" onClick={this.createAccount}>Create New</button>
+        <button className="create" onClick={this.createAccount}>Create New</button>
         &nbsp; &nbsp;
         <select id="accountType"
           value={this.state.accountTypeSelected}
@@ -306,7 +305,7 @@ export default class Admin extends Component {
 
         &nbsp; with a starting balance of &nbsp;
         <input
-          className="admin"
+          className="start"
           size="10"
           type="amount"
           name="amount"
@@ -320,7 +319,7 @@ export default class Admin extends Component {
         <label id="CDO lab" hidden={this.state.accountTypeSelected != 3}>  from CDO # </label>
         &nbsp;
         <input
-          className="admin"
+          className="cdo"
           hidden={this.state.accountTypeSelected != 3}
           id="CDO box"
           size="10"
@@ -337,9 +336,9 @@ export default class Admin extends Component {
 
       <div>
         &nbsp; &nbsp;
-        <button className="admin" onClick={this.getCDOs}>Get All CDOs</button>
-        &nbsp; &nbsp;
-        <button className="admin" onClick={this.createCDO}>Create New CDO</button>
+        <button className="cdoGet" onClick={this.getCDOs}>Get All CDOs</button>
+        &nbsp; &nbsp; <br /> <br />
+        <button className="cdoCreate" onClick={this.createCDO}>Create New CDO</button>
         &nbsp; with an interest rate of &nbsp;
         <input
           className="admin"
